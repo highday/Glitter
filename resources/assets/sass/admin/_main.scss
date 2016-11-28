@@ -1,0 +1,121 @@
+
+.main-section {
+    max-width: 3000px;
+    padding-bottom: 100px;
+
+    @include media-breakpoint-up('md') {
+        .drawer-nav ~ & {
+            padding-left: $drawer-nav-width;
+        }
+        .header-section ~ & {
+            padding-top: $header-section-height;
+        }
+    }
+
+    @include media-breakpoint-down('sm') {
+        .header-nav ~ & {
+            padding-top: $header-nav-height;
+        }
+        .header-nav ~ .header-section ~ & {
+            padding-top: 0;
+        }
+    }
+}
+
+.nav-wrapper {
+    position: fixed;
+    top: $header-section-height;
+    left: 0;
+    right: 0;
+    z-index: $zindex-navbar;
+    background-color: $brand-color4;
+    box-shadow: 0 2px 1px 0 rgba(0, 0, 0, 0.1), 0 3px 2px 2px rgba(0, 0, 0, 0.05);
+
+    @include media-breakpoint-up('md') {
+        .drawer-nav ~ .main-section & {
+            padding-left: $drawer-nav-width;
+        }
+    }
+
+    @include media-breakpoint-down('sm') {
+        position: static;
+    }
+
+    .nav {
+        padding-left: 1rem;
+        padding-right: 1rem;
+        font-size: 0;
+        white-space: nowrap;
+        overflow: auto;
+        .nav-item {
+            display: inline-block;
+            font-size: 0.875rem;
+            + .nav-item {
+                margin-left: 0.25rem;
+            }
+        }
+    }
+
+    .nav-link {
+        display: block;
+        padding: $nav-link-padding;
+        border-bottom: 2px solid transparent;
+        color: $gray;
+        @include border-top-radius($nav-tabs-border-radius);
+
+        @include hover-focus {
+            color: $gray-dark;
+            background-color: $gray-lighter;
+            border-color: grayscale($brand-primary);
+        }
+
+        &.disabled {
+            @include plain-hover-focus {
+                color: $nav-disabled-link-color;
+                background-color: inherit;
+                border-color: transparent;
+            }
+        }
+    }
+
+    .nav-link.active,
+    .nav-item.open .nav-link {
+        @include plain-hover-focus {
+            color: $gray-dark;
+            border-color: $brand-primary;
+        }
+    }
+
+    .badge {
+        display: inline-block;
+        margin-left: 0.25rem;
+        padding: 0.25rem 0.2125rem;
+        min-width: 1.3125rem;
+        height: 1.3125rem;
+        line-height: 0.8125rem;
+        border-radius: 0.65625rem;
+        background: $brand-danger;
+        color: #fff;
+        font-size: 0.6875rem;
+        font-style: normal;
+        text-align: center;
+        vertical-align: top;
+        // @include media-breakpoint-down('sm') {
+        //     height: 1.5rem;
+        //     padding: 0.34375rem 0.3rem;
+        //     font-size: 0.8125rem;
+        // }
+    }
+}
+
+.content-wrapper {
+    padding-top: 1rem;
+    padding-left: 1rem;
+    padding-right: 1rem;
+
+    @include media-breakpoint-up('md') {
+        .nav-wrapper ~ & {
+            padding-top: calc(#{$nav-wrapper-height} + 1rem);
+        }
+    }
+}
