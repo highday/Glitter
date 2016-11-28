@@ -1,6 +1,6 @@
 <?php
 
-namespace Highday\Glitter\Infrastructures\Providers;
+namespace Highday\Glitter\Infrastructure\Providers;
 
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Contracts\Routing\Registrar as Router;
