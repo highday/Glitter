@@ -14,7 +14,7 @@ return [
         'providers' => [
             'members' => [
                 'driver' => 'eloquent',
-                'model' => Highday\Glitter\Member::class,
+                'model' => Highday\Glitter\Infrastructure\Eloquents\Member::class,
             ],
         ],
 

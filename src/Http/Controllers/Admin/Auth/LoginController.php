@@ -53,6 +53,17 @@ class LoginController extends Controller
         }
     }
 
+    public function logout(Request $request)
+    {
+        $this->guard()->logout();
+
+        $request->session()->flush();
+
+        $request->session()->regenerate();
+
+        return redirect('/admin');
+    }
+
     protected function guard()
     {
         return $this->auth->guard('member');

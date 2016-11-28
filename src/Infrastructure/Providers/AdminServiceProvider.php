@@ -35,6 +35,20 @@ class AdminServiceProvider extends ServiceProvider
         $router->middleware('restriction', AccessRestrictionWithRemoteAddress::class);
         $router->middleware('outsider', RedirectIfMemberAuthenticated::class);
 
+        if ($this->app->runningInConsole()) {
+            $this->publishes([
+                __DIR__.'/../../../config/admin.php' => config_path('glitter-admin.php'),
+            ], 'glitter-admin');
+
+            $this->publishes([
+                __DIR__.'/../../../resources/views/admin' => resource_path('views/vendor/glitter/admin'),
+            ], 'glitter-admin');
+
+            $this->publishes([
+                __DIR__.'/../../../resources/lang/admin' => resource_path('lang/vendor/glitter/admin'),
+            ], 'glitter-admin');
+        }
+
         if (!$this->app->routesAreCached()) {
             $router->group([
                 'middleware' => ['web', 'restriction'],

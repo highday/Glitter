@@ -29,7 +29,7 @@ class RegisterController extends Controller
 
     public function showRegistrationForm()
     {
-        return view('glitter::admin.auth.register');
+        return view('glitter.admin::auth.register');
     }
 
     protected function validator(array $data)
