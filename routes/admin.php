@@ -10,7 +10,6 @@ $route->group([
         return view('glitter.admin::index');
     })->name('index');
 
-
-
-    $route->get('{path}', 'ErrorController@notfound')->where('path', '(.*)')->name('404');
 });
+
+$route->get('{path}', 'ErrorController@notfound')->where('path', '(.*)')->name('404');
