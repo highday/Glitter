@@ -1,0 +1,24 @@
+{
+    "name": "highday/glitter",
+    "description": "Trading management architecture for Laravel.",
+    "keywords": ["laravel", "e-commerce", "ecommerce", "trade", "cart", "chackout", "shop", "sales", "buy", "sell"],
+    "license": "GPL-3.0",
+    "support": {
+        "issues": "https://github.com/highday/glitter/issues",
+        "source": "https://github.com/highday/glitter"
+    },
+    "authors": [
+        {
+            "name": "Keisuke Nemoto",
+            "email": "n@on-lab.jp"
+        }
+    ],
+    "require": {
+        "php": ">=7.0.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "Highday\\Glitter\\": "src/"
+        }
+    }
+}
