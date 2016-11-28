@@ -1,0 +1,60 @@
+<?php
+
+namespace Highday\Glitter\Http\Controllers\Admin\Auth;
+
+use Highday\Glitter\Http\Controllers\Controller;
+use Illuminate\Http\Request;
+use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Illuminate\Contracts\Auth\Factory as Auth;
+use Illuminate\Translation\Translator as Lang;
+use Carbon\Carbon;
+
+class LoginController extends Controller
+{
+    use AuthenticatesUsers;
+
+    protected $auth;
+
+    protected $lang;
+
+    protected $redirectTo = '/admin';
+
+    public function __construct(Auth $auth, Lang $lang)
+    {
+        $this->auth = $auth;
+        $this->lang = $lang;
+
+        $this->middleware('outsider', ['except' => 'logout']);
+    }
+
+    public function showLoginForm()
+    {
+        return view('glitter.admin::auth.login');
+    }
+
+    protected function authenticated(Request $request, $member)
+    {
+        if ($member->active_store) {
+            $last_login_at = Carbon::now();
+            $member->activeStore()->updateExistingPivot($member->active_store->getKey(), compact('last_login_at'));
+            return redirect()->intended($this->redirectPath())
+                ->withFlashMessage([
+                    sprintf('<strong>おかえりなさい！</strong> %s さん', $member->name),
+                ]);
+        } else {
+            $this->guard()->logout();
+            $request->session()->flush();
+            $request->session()->regenerate();
+            return redirect()->back()
+                ->withInput($request->only($this->username(), 'remember'))
+                ->withErrors([
+                    $this->username() => $this->lang->get('auth.failed'),
+                ]);
+        }
+    }
+
+    protected function guard()
+    {
+        return $this->auth->guard('member');
+    }
+}
