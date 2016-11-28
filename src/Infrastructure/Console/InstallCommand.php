@@ -38,11 +38,14 @@ class InstallCommand extends Command
             'description' => '',
         ]);
 
-        $member = \Highday\Glitter\Infrastructure\Eloquents\Member::firstOrCreate([
+        $member = \Highday\Glitter\Infrastructure\Eloquents\Member::firstOrNew([
             'name' => 'member',
             'email' => 'member@example.com',
         ]);
-        $member->password = bcrypt('password');
+        if (! $member->exists) {
+            $member->password = bcrypt('password');
+            $member->save();
+        }
         $member->stores()->attach($store);
         $member->roles()->attach($role);
 
