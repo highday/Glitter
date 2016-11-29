@@ -8,10 +8,8 @@ before_script:
   - composer install --no-interaction --prefer-dist --optimize-autoloader
 
 script:
-  - ls -al
-  - ls -al ./*
-  - pwd
   - vendor/bin/phpunit
 
 notifications:
   slack: highday:9qVTVUwXr2PER5tUsvkN2X7A
+  webhooks: https://forge.laravel.com/servers/106521/sites/254209/deploy/http?token=c1J7hUvY1iuJiEUlih3GWmPzfyc2PqIEDoQHBMav
