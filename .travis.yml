@@ -12,7 +12,7 @@ script:
   - vendor/bin/phpunit --coverage-clover build/logs/clover.xml
 
 after_success:
-  - vendor/bin/coveralls
+  - php vendor/bin/coveralls
 
 notifications:
   slack: highday:9qVTVUwXr2PER5tUsvkN2X7A
