@@ -5,11 +5,19 @@ php:
 
 before_script:
   - composer self-update
-  - composer install --no-interaction --prefer-dist --optimize-autoloader
+  - composer install --dev --no-interaction
+  - composer require satooshi/php-coveralls --dev
 
 script:
-  - vendor/bin/phpunit
+  - vendor/bin/phpunit --coverage-clover build/logs/clover.xml
+
+after_success:
+  - vendor/bin/coveralls
 
 notifications:
   slack: highday:9qVTVUwXr2PER5tUsvkN2X7A
-  webhooks: https://forge.laravel.com/servers/106521/sites/254209/deploy/http?token=c1J7hUvY1iuJiEUlih3GWmPzfyc2PqIEDoQHBMav
+  webhooks:
+    urls:
+      - https://forge.laravel.com/servers/106521/sites/254209/deploy/http?token=c1J7hUvY1iuJiEUlih3GWmPzfyc2PqIEDoQHBMav
+    on_success: always
+    on_failure: never
