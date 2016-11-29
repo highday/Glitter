@@ -6,11 +6,9 @@ use Illuminate\Support\ServiceProvider;
 
 class GlitterServiceProvider extends ServiceProvider
 {
-
     public function boot()
     {
         if ($this->app->runningInConsole()) {
-
             $this->loadMigrationsFrom(__DIR__.'/../../../database/migrations');
 
             $this->publishes([
@@ -22,5 +20,4 @@ class GlitterServiceProvider extends ServiceProvider
             ]);
         }
     }
-
 }

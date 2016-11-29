@@ -6,7 +6,7 @@ return [
 
         'guards' => [
             'member' => [
-                'driver' => 'session',
+                'driver'   => 'session',
                 'provider' => 'members',
             ],
         ],
@@ -14,15 +14,15 @@ return [
         'providers' => [
             'members' => [
                 'driver' => 'eloquent',
-                'model' => Highday\Glitter\Infrastructure\Eloquents\Member::class,
+                'model'  => Highday\Glitter\Infrastructure\Eloquents\Member::class,
             ],
         ],
 
         'passwords' => [
             'member' => [
                 'provider' => 'members',
-                'table' => 'password_resets',
-                'expire' => 60,
+                'table'    => 'password_resets',
+                'expire'   => 60,
             ],
         ],
 

@@ -13,9 +13,8 @@ class Policy extends Model
     /**
      * ======================
      * Relationships
-     * ======================
+     * ======================.
      */
-
     protected $roleModel = Role::class;
 
     public function roles()

@@ -18,7 +18,8 @@ class ShareFlashMessagesFromSession
     /**
      * Create a new instance.
      *
-     * @param  \Illuminate\Contracts\View\Factory  $view
+     * @param \Illuminate\Contracts\View\Factory $view
+     *
      * @return void
      */
     public function __construct(ViewFactory $view)
@@ -29,8 +30,9 @@ class ShareFlashMessagesFromSession
     /**
      * Handle an incoming request.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \Closure  $next
+     * @param \Illuminate\Http\Request $request
+     * @param \Closure                 $next
+     *
      * @return mixed
      */
     public function handle($request, Closure $next)

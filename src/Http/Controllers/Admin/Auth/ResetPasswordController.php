@@ -3,10 +3,10 @@
 namespace Highday\Glitter\Http\Controllers\Admin\Auth;
 
 use Highday\Glitter\Http\Controllers\Controller;
-use Illuminate\Http\Request;
-use Illuminate\Foundation\Auth\ResetsPasswords;
 use Illuminate\Contracts\Auth\Factory as Auth;
 use Illuminate\Contracts\Auth\PasswordBrokerFactory as Password;
+use Illuminate\Foundation\Auth\ResetsPasswords;
+use Illuminate\Http\Request;
 
 class ResetPasswordController extends Controller
 {

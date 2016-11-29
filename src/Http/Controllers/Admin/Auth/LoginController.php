@@ -2,12 +2,12 @@
 
 namespace Highday\Glitter\Http\Controllers\Admin\Auth;
 
-use Highday\Glitter\Http\Controllers\Controller;
-use Illuminate\Http\Request;
-use Illuminate\Foundation\Auth\AuthenticatesUsers;
-use Illuminate\Contracts\Auth\Factory as Auth;
-use Illuminate\Translation\Translator as Lang;
 use Carbon\Carbon;
+use Highday\Glitter\Http\Controllers\Controller;
+use Illuminate\Contracts\Auth\Factory as Auth;
+use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Illuminate\Http\Request;
+use Illuminate\Translation\Translator as Lang;
 
 class LoginController extends Controller
 {
@@ -37,6 +37,7 @@ class LoginController extends Controller
         if ($member->active_store) {
             $last_login_at = Carbon::now();
             $member->activeStore()->updateExistingPivot($member->active_store->getKey(), compact('last_login_at'));
+
             return redirect()->intended($this->redirectPath())
                 ->withFlashMessage([
                     sprintf('<strong>おかえりなさい！</strong> %s さん', $member->name),
@@ -45,6 +46,7 @@ class LoginController extends Controller
             $this->guard()->logout();
             $request->session()->flush();
             $request->session()->regenerate();
+
             return redirect()->back()
                 ->withInput($request->only($this->username(), 'remember'))
                 ->withErrors([

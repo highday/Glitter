@@ -33,16 +33,16 @@ class InstallCommand extends Command
         ]);
 
         $role = \Highday\Glitter\Infrastructure\Eloquents\Role::firstOrCreate([
-            'store_id' => $store->getKey(),
-            'name' => 'Admin',
+            'store_id'    => $store->getKey(),
+            'name'        => 'Admin',
             'description' => '',
         ]);
 
         $member = \Highday\Glitter\Infrastructure\Eloquents\Member::firstOrNew([
-            'name' => 'member',
+            'name'  => 'member',
             'email' => 'member@example.com',
         ]);
-        if (! $member->exists) {
+        if (!$member->exists) {
             $member->password = bcrypt('password');
             $member->save();
         }

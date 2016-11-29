@@ -21,9 +21,8 @@ class Role extends Model
     /**
      * ======================
      * Relationships
-     * ======================
+     * ======================.
      */
-
     protected $memberModel = Member::class;
 
     protected $policyModel = Policy::class;

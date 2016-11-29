@@ -3,8 +3,8 @@
 namespace Highday\Glitter\Http\Controllers\Admin\Auth;
 
 use Highday\Glitter\Http\Controllers\Controller;
-use Illuminate\Foundation\Auth\SendsPasswordResetEmails;
 use Illuminate\Contracts\Auth\PasswordBrokerFactory as Password;
+use Illuminate\Foundation\Auth\SendsPasswordResetEmails;
 
 class ForgotPasswordController extends Controller
 {

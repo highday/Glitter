@@ -3,8 +3,8 @@
 namespace Highday\Glitter\Http\Controllers\Admin;
 
 use Highday\Glitter\Http\Controllers\Controller;
-use Illuminate\Http\Request;
 use Illuminate\Contracts\Auth\Factory as Auth;
+use Illuminate\Http\Request;
 
 class CustomersController extends Controller
 {
@@ -19,6 +19,7 @@ class CustomersController extends Controller
     {
         $me = $this->guard()->user();
         $customers = [];
+
         return view('glitter.admin::customers.index', compact('customers'));
     }
 
