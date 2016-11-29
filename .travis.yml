@@ -5,10 +5,13 @@ php:
 
 before_script:
   - composer self-update
-  - composer install --no-interaction
+  - composer install --no-interaction --prefer-dist --optimize-autoloader
 
 script:
-  - vendor/bin/phpunit -c phpunit.xml
+  - ls -al
+  - ls -al ./*
+  - pwd
+  - vendor/bin/phpunit
 
 notifications:
   slack: highday:9qVTVUwXr2PER5tUsvkN2X7A
