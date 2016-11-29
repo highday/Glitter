@@ -2,19 +2,15 @@
 
 namespace Highday\Glitter\Infrastructure\Providers;
 
-use Illuminate\Support\ServiceProvider;
+use Highday\Glitter\Http\Middleware\Admin\AccessRestrictionWithRemoteAddress;
+use Highday\Glitter\Http\Middleware\Admin\RedirectIfMemberAuthenticated;
+use Highday\Glitter\Http\Middleware\Admin\ShareAuthenticatedFromSession;
+use Highday\Glitter\Http\Middleware\Admin\ShareFlashMessagesFromSession;
 use Illuminate\Contracts\Routing\Registrar as Router;
-
-use Highday\Glitter\Http\Middleware\Admin\{
-    AccessRestrictionWithRemoteAddress,
-    ShareAuthenticatedFromSession,
-    ShareFlashMessagesFromSession,
-    RedirectIfMemberAuthenticated
-};
+use Illuminate\Support\ServiceProvider;
 
 class AdminServiceProvider extends ServiceProvider
 {
-
     public function boot(Router $router)
     {
         $config = require __DIR__.'/../../../config/admin.php';
@@ -60,5 +56,4 @@ class AdminServiceProvider extends ServiceProvider
             });
         }
     }
-
 }

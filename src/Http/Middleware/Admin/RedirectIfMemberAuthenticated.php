@@ -12,7 +12,8 @@ class RedirectIfMemberAuthenticated
     /**
      * Create a new instance.
      *
-     * @param  \Illuminate\Contracts\Auth\Factory  $auth
+     * @param \Illuminate\Contracts\Auth\Factory $auth
+     *
      * @return void
      */
     public function __construct(Auth $auth)
@@ -23,8 +24,9 @@ class RedirectIfMemberAuthenticated
     /**
      * Handle an incoming request.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \Closure  $next
+     * @param \Illuminate\Http\Request $request
+     * @param \Closure                 $next
+     *
      * @return mixed
      */
     public function handle($request, Closure $next)

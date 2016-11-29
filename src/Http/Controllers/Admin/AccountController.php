@@ -3,8 +3,8 @@
 namespace Highday\Glitter\Http\Controllers\Admin;
 
 use Highday\Glitter\Http\Controllers\Controller;
-use Illuminate\Http\Request;
 use Illuminate\Contracts\Auth\Factory as Auth;
+use Illuminate\Http\Request;
 
 class AccountController extends Controller
 {
@@ -23,12 +23,14 @@ class AccountController extends Controller
     public function profile(Request $request)
     {
         $me = $this->guard()->user();
+
         return view('glitter.admin::account.profile', compact('me'));
     }
 
     public function security(Request $request)
     {
         $me = $this->guard()->user();
+
         return view('glitter.admin::account.security', compact('me'));
     }
 

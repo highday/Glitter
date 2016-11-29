@@ -23,9 +23,8 @@ class Store extends Model
     /**
      * ======================
      * Relationships
-     * ======================
+     * ======================.
      */
-
     protected $memberModel = Member::class;
 
     // protected $productModel = Product::class;
@@ -48,7 +47,7 @@ class Store extends Model
     // }
 
 
-    /**
+    /*
      * ======================
      * Mutators
      * ======================

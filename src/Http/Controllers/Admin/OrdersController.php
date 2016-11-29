@@ -3,8 +3,8 @@
 namespace Highday\Glitter\Http\Controllers\Admin;
 
 use Highday\Glitter\Http\Controllers\Controller;
-use Illuminate\Http\Request;
 use Illuminate\Contracts\Auth\Factory as Auth;
+use Illuminate\Http\Request;
 
 class OrdersController extends Controller
 {
@@ -19,6 +19,7 @@ class OrdersController extends Controller
     {
         $me = $this->guard()->user();
         $orders = $me->active_store->orders;
+
         return view('glitter.admin::orders.index', compact('orders'));
     }
 

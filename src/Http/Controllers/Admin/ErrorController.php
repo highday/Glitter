@@ -13,7 +13,8 @@ class ErrorController extends Controller
     /**
      * Create a new instance.
      *
-     * @param  \Illuminate\Contracts\Auth\Factory  $auth
+     * @param \Illuminate\Contracts\Auth\Factory $auth
+     *
      * @return void
      */
     public function __construct(AuthFactory $auth)
