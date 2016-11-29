@@ -3,8 +3,8 @@
 namespace Highday\Glitter\Http\Controllers\Admin;
 
 use Highday\Glitter\Http\Controllers\Controller;
-use Illuminate\Http\Request;
 use Illuminate\Contracts\Auth\Factory as Auth;
+use Illuminate\Http\Request;
 
 class ProductsController extends Controller
 {
@@ -20,6 +20,7 @@ class ProductsController extends Controller
         $me = $this->guard()->user();
         $store = $me->active_store;
         $products = [];
+
         return view('glitter.admin::products.index', compact('store', 'products'));
     }
 

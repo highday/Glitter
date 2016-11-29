@@ -2,10 +2,8 @@
 
 namespace Highday\Glitter\Domain\Entities;
 
-use Mockery;
-use PHPUnit_Framework_TestCase;
-use InvalidArgumentException;
 use Highday\Glitter\Domain\ValueObjects\Web\EmailAddress;
+use PHPUnit_Framework_TestCase;
 
 class MemberTest extends PHPUnit_Framework_TestCase
 {
@@ -18,7 +16,7 @@ class MemberTest extends PHPUnit_Framework_TestCase
 
     public function testInstance()
     {
-        $name = $this->faker->lastName . ' ' . $this->faker->firstName;
+        $name = $this->faker->lastName.' '.$this->faker->firstName;
         $email = new EmailAddress($this->faker->email);
         $member = new Member($name, $email);
         $this->assertInstanceOf(Member::class, $member);

@@ -3,8 +3,8 @@
 namespace Highday\Glitter\Http\Controllers\Admin;
 
 use Highday\Glitter\Http\Controllers\Controller;
-use Illuminate\Http\Request;
 use Illuminate\Contracts\Auth\Factory as Auth;
+use Illuminate\Http\Request;
 
 class SettingsController extends Controller
 {
@@ -18,6 +18,7 @@ class SettingsController extends Controller
     public function index(Request $request)
     {
         $store = $this->guard()->user()->activeStore;
+
         return view('glitter.admin::settings.index', compact('store'));
     }
 
@@ -25,6 +26,7 @@ class SettingsController extends Controller
     {
         $store = $this->guard()->user()->activeStore;
         $members = $store->members;
+
         return view('glitter.admin::settings.members', compact('store', 'members'));
     }
 

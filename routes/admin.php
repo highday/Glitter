@@ -5,7 +5,6 @@ $route->auth();
 $route->group([
     'middleware'  => ['auth:member', 'glitter.admin'],
 ], function ($route) {
-
     $route->get('/', function () {
         return view('glitter.admin::index');
     })->name('index');
@@ -29,9 +28,9 @@ $route->group([
             $member->activeStore()->updateExistingPivot($store->getKey(), compact('last_login_at'));
             $message[] = sprintf('%s に切り替えました。', $store->name);
         }
+
         return redirect()->back()->withFlashMessage($message);
     })->name('store_switch');
-
 });
 
 $route->get('{path}', 'ErrorController@notfound')->where('path', '(.*)')->name('404');

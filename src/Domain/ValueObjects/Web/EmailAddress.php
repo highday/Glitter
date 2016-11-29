@@ -8,7 +8,7 @@ class EmailAddress implements Value
 {
     protected $value;
 
-    function __construct($value)
+    public function __construct($value)
     {
         $value = filter_var($value, FILTER_VALIDATE_EMAIL);
 
