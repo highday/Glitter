@@ -2,9 +2,9 @@
 
 namespace Highday\Glitter\Domain\ValueObjects\Web;
 
-use Highday\Glitter\Domain\ValueObjects\Value;
+use InvalidArgumentException;
 
-class EmailAddress implements Value
+class EmailAddress
 {
     protected $value;
 
@@ -13,7 +13,7 @@ class EmailAddress implements Value
         $value = filter_var($value, FILTER_VALIDATE_EMAIL);
 
         if ($value === false) {
-            throw new \InvalidArgumentException();
+            throw new InvalidArgumentException();
         }
 
         $this->value = $value;

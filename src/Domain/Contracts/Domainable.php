@@ -1,6 +1,6 @@
 <?php
 
-namespace Highday\Glitter\Domain\Entities;
+namespace Highday\Glitter\Domain\Contracts;
 
 interface Domainable
 {

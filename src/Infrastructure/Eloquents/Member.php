@@ -2,8 +2,8 @@
 
 namespace Highday\Glitter\Infrastructure\Eloquents;
 
-use Highday\Glitter\Domain\Entities\Domainable;
-use Highday\Glitter\Domain\Entities\Member as MemberEntity;
+use Highday\Glitter\Domain\Contracts\Domainable;
+use Highday\Glitter\Domain\Entities\Member as DomainEntity;
 use Highday\Glitter\Domain\ValueObjects\Web\EmailAddress;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -26,7 +26,7 @@ class Member extends Authenticatable implements Domainable
     /**
      * ======================
      * Relationships
-     * ======================.
+     * ======================
      */
     protected $storeModel = Store::class;
 
@@ -51,7 +51,7 @@ class Member extends Authenticatable implements Domainable
     /**
      * ======================
      * Mutators
-     * ======================.
+     * ======================
      */
     public function getActiveStoreAttribute()
     {
@@ -68,8 +68,8 @@ class Member extends Authenticatable implements Domainable
         return $this->roles()->where('roles.store_id', $this->active_store->getKey())->first();
     }
 
-    public function toDomain(): MemberEntity
+    public function toDomain(): DomainEntity
     {
-        return new MemberEntity($this->name, new EmailAddress($this->email));
+        return new DomainEntity($this->getKey(), $this->name, new EmailAddress($this->email));
     }
 }
