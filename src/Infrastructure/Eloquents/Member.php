@@ -26,7 +26,7 @@ class Member extends Authenticatable implements Domainable
     /**
      * ======================
      * Relationships
-     * ======================
+     * ======================.
      */
     protected $storeModel = Store::class;
 
@@ -51,7 +51,7 @@ class Member extends Authenticatable implements Domainable
     /**
      * ======================
      * Mutators
-     * ======================
+     * ======================.
      */
     public function getActiveStoreAttribute()
     {

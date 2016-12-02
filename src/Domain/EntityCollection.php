@@ -10,8 +10,9 @@ class EntityCollection extends BaseCollection
     /**
      * Find a entity in the collection by identifier.
      *
-     * @param  mixed  $identifier
-     * @param  mixed  $default
+     * @param mixed $identifier
+     * @param mixed $default
+     *
      * @return \Highday\Glitter\Domain\Entity
      */
     public function find($identifier, $default = null)
@@ -28,7 +29,8 @@ class EntityCollection extends BaseCollection
     /**
      * Add an item to the collection.
      *
-     * @param  mixed  $item
+     * @param mixed $item
+     *
      * @return $this
      */
     public function add($item)
@@ -41,8 +43,9 @@ class EntityCollection extends BaseCollection
     /**
      * Determine if a identifier exists in the collection.
      *
-     * @param  mixed  $identifier
-     * @param  mixed  $value
+     * @param mixed $identifier
+     * @param mixed $value
+     *
      * @return bool
      */
     public function contains($identifier, $value = null)
@@ -73,5 +76,4 @@ class EntityCollection extends BaseCollection
             return $entity->getIdentifier();
         }, $this->items);
     }
-
 }

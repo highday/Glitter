@@ -2,14 +2,14 @@
 
 namespace Highday\Glitter\Domain\ValueObjects;
 
-use ReflectionObject;
 use InvalidArgumentException;
+use ReflectionObject;
 
 abstract class Enum
 {
     private $scalar;
 
-    function __construct($value)
+    public function __construct($value)
     {
         if ($value instanceof self) {
             return $value;
@@ -18,35 +18,37 @@ abstract class Enum
         $ref = new ReflectionObject($this);
         $consts = $ref->getConstants();
 
-        if (! in_array($value, $consts, true)) {
+        if (!in_array($value, $consts, true)) {
             throw new InvalidArgumentException("{$ref->name}: '{$value}' is not defined.");
         }
 
         $this->scalar = $value;
     }
 
-    final function __call($label, $args)
+    final public function __call($label, $args)
     {
         $class = get_called_class();
         if (str_is('is*', $label)) {
             $label = preg_replace('/^is/', '', $label);
+
             return $this->raw() === constant("{$class}::{$label}");
         }
     }
 
-    final static function __callStatic($label, $args)
+    final public static function __callStatic($label, $args)
     {
         $class = get_called_class();
         $const = constant("{$class}::{$label}");
+
         return new $class($const);
     }
 
-    final function raw()
+    final public function raw()
     {
         return $this->scalar;
     }
 
-    final function __toString()
+    final public function __toString()
     {
         $class = class_basename(get_called_class());
         $raw = $this->raw();
@@ -75,6 +77,7 @@ abstract class Enum
         foreach (self::all() as $const) {
             $array[] = $const->raw();
         }
+
         return $array;
     }
 
@@ -86,6 +89,7 @@ abstract class Enum
         foreach ($ref->getConstants() as $const => $value) {
             $consts[] = $class::$const();
         }
+
         return $consts;
     }
 
@@ -93,5 +97,4 @@ abstract class Enum
     {
         return self::all();
     }
-
 }

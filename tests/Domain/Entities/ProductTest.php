@@ -24,28 +24,28 @@ class ProductTest extends TestCase
 
         $va1 = new Variant('sku1', [
             $op1->getValue('240ml'),
-            $op2->getValue('1本')
+            $op2->getValue('1本'),
         ], new Price(130));
 
         $va2 = new Variant('sku2', [
             $op1->getValue('500ml'),
-            $op2->getValue('1本')
+            $op2->getValue('1本'),
         ], new Price(150));
 
         $va3 = new Variant('sku3', [
             $op1->getValue('240ml'),
-            $op2->getValue('24本')
-        ], new Price(80*24, 130*24));
+            $op2->getValue('24本'),
+        ], new Price(80 * 24, 130 * 24));
 
         $va4 = new Variant('sku4', [
             $op1->getValue('500ml'),
-            $op2->getValue('24本')
-        ], new Price(90*24, 150*24));
+            $op2->getValue('24本'),
+        ], new Price(90 * 24, 150 * 24));
 
         $va5 = new Variant('sku5', [
             $op1->getValue('2L'),
-            $op2->getValue('24本')
-        ], new Price(110*24, 200*24));
+            $op2->getValue('24本'),
+        ], new Price(110 * 24, 200 * 24));
 
         $product = new Product($name, $description, [$va1, $va2, $va3, $va4]);
 

@@ -19,7 +19,7 @@ abstract class Entity
 
     public function equals($entity)
     {
-        if (! ($entity instanceof Entity)) {
+        if (!($entity instanceof self)) {
             return false;
         }
 

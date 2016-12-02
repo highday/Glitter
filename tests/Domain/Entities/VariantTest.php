@@ -24,7 +24,7 @@ class VariantTest extends TestCase
         $op2 = new Option('op2', ['op2']);
         $variant2 = new Variant('sku', [
             $op1->getValue('op1'),
-            $op2->getValue('op2')
+            $op2->getValue('op2'),
         ], new Price(100, 120));
         $this->assertInstanceOf(Variant::class, $variant2);
     }

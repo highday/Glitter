@@ -22,7 +22,7 @@ class Option extends Entity
 
     public function getValue(string $value)
     {
-        if (! in_array($value, $this->values)) {
+        if (!in_array($value, $this->values)) {
             throw new InvalidArgumentException();
         }
 
