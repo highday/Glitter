@@ -2,10 +2,10 @@
 
 namespace Highday\Glitter\Domain\Entities;
 
-use Highday\Glitter\Domain\ValueObjects\Web\EmailAddress;
-use PHPUnit_Framework_TestCase;
+use Highday\Glitter\Domain\ValueObjects\EmailAddress;
+use PHPUnit\Framework\TestCase;
 
-class MemberTest extends PHPUnit_Framework_TestCase
+class MemberTest extends TestCase
 {
     private $faker;
 

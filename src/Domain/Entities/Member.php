@@ -2,25 +2,36 @@
 
 namespace Highday\Glitter\Domain\Entities;
 
-use Highday\Glitter\Domain\ValueObjects\Web\EmailAddress;
+use Highday\Glitter\Domain\Entity;
+use Highday\Glitter\Domain\ValueObjects\EmailAddress;
 
-class Member
+class Member extends Entity
 {
     /** @var string */
-    protected $name;
+    public $name;
 
     /** @var EmailAddress */
-    protected $email;
+    public $email;
 
     public function __construct(string $name, EmailAddress $email)
     {
+        $this->setName($name);
+        $this->setEmail($email);
+    }
+
+    public function setName(string $name)
+    {
         $this->name = $name;
-        $this->email = $email;
     }
 
     public function getName(): string
     {
         return $this->name;
+    }
+
+    public function setEmail(EmailAddress $email)
+    {
+        $this->email = $email;
     }
 
     public function getEmail(): EmailAddress

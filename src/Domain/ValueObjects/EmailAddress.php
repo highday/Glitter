@@ -1,6 +1,6 @@
 <?php
 
-namespace Highday\Glitter\Domain\ValueObjects\Web;
+namespace Highday\Glitter\Domain\ValueObjects;
 
 use InvalidArgumentException;
 
