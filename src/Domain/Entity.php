@@ -2,17 +2,19 @@
 
 namespace Highday\Glitter\Domain;
 
+use Illuminate\Support\Str;
+
 abstract class Entity
 {
     /** @var int|string */
     protected $identifier;
 
-    public function setIdentifier($identifier)
+    public function setId($identifier)
     {
         $this->identifier = $identifier;
     }
 
-    public function getIdentifier()
+    public function getId()
     {
         return $this->identifier;
     }
@@ -39,5 +41,14 @@ abstract class Entity
     public function __clone()
     {
         //
+    }
+
+    public function __get($key)
+    {
+        $method = Str::camel("get_{$key}");
+
+        if (method_exists($this, $method)) {
+            return $this->$method();
+        }
     }
 }
