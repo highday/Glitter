@@ -2,10 +2,12 @@
 
 namespace Highday\Glitter\Infrastructure\Providers;
 
-use Highday\Glitter\Http\Middleware\Admin\AccessRestrictionWithRemoteAddress;
-use Highday\Glitter\Http\Middleware\Admin\RedirectIfMemberAuthenticated;
-use Highday\Glitter\Http\Middleware\Admin\ShareAuthenticatedFromSession;
-use Highday\Glitter\Http\Middleware\Admin\ShareFlashMessagesFromSession;
+use Highday\Glitter\Http\Middleware\Admin\{
+    AccessRestrictionWithRemoteAddress,
+    RedirectIfMemberAuthenticated,
+    ShareAdminVariables,
+    ShareFlashMessagesFromSession
+};
 use Illuminate\Contracts\Routing\Registrar as Router;
 use Illuminate\Support\ServiceProvider;
 
@@ -24,7 +26,7 @@ class AdminServiceProvider extends ServiceProvider
         $this->loadTranslationsFrom(__DIR__.'/../../../resources/lang/admin', 'glitter.admin');
 
         $router->middlewareGroup('glitter.admin', [
-            ShareAuthenticatedFromSession::class,
+            ShareAdminVariables::class,
             ShareFlashMessagesFromSession::class,
         ]);
 

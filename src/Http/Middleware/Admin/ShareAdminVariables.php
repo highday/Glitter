@@ -6,7 +6,7 @@ use Closure;
 use Illuminate\Contracts\Auth\Factory as AuthFactory;
 use Illuminate\Contracts\View\Factory as ViewFactory;
 
-class ShareAuthenticatedFromSession
+class ShareAdminVariables
 {
     /**
      * The auth factory implementation.
@@ -50,7 +50,9 @@ class ShareAuthenticatedFromSession
         $me = $this->auth->guard('member')->user();
         $store = $me->activeStore;
 
-        $this->view->share(compact('me', 'store'));
+        $extends = 'glitter.admin::layouts.admin-guest';
+
+        $this->view->share(compact('me', 'store', 'extends'));
 
         return $next($request);
     }
