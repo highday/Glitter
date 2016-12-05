@@ -2,7 +2,6 @@
 
 namespace Highday\Glitter\Infrastructure\Providers;
 
-use Illuminate\Support\ServiceProvider;
 use Highday\Glitter\Application\Commands\InstallCommand;
 use Highday\Glitter\Contracts\Repositories\{
     ProductRepository
@@ -10,6 +9,7 @@ use Highday\Glitter\Contracts\Repositories\{
 use Highday\Glitter\Infrastructure\Repositories\Eloquents\{
     ProductRepository as EloquentProductRepository
 };
+use Illuminate\Support\ServiceProvider;
 
 class GlitterServiceProvider extends ServiceProvider
 {

@@ -6,7 +6,6 @@ use Highday\Glitter\Contracts\Domain\Domainable;
 use Highday\Glitter\Domain\Entities\Product as ProductEntity;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 class Product extends Model implements Domainable
 {
@@ -34,6 +33,7 @@ class Product extends Model implements Domainable
     {
         $entity = new ProductEntity($this->name, $this->description);
         $entity->setId($this->getKey());
+
         return $entity;
     }
 }

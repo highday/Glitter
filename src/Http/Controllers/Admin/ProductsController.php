@@ -21,7 +21,7 @@ class ProductsController extends Controller
     public function products(Request $request)
     {
         return view('glitter.admin::products.products', [
-            'keyword' => $this->service->searchQuery($request),
+            'keyword'  => $this->service->searchQuery($request),
             'products' => $this->service->search($request),
         ]);
     }
@@ -41,6 +41,7 @@ class ProductsController extends Controller
     {
         try {
             $this->service->update($key, $request);
+
             return redirect()->back()
                 ->withFlashMessage(['OK!']);
         } catch (ValidationException $e) {

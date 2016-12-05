@@ -33,7 +33,7 @@ class ProductRepository implements Repository
 
         $total = $query->getCountForPagination();
 
-        $items = $total ? $query->forPage($page, $perPage)->get() : new Collection;
+        $items = $total ? $query->forPage($page, $perPage)->get() : new Collection();
 
         return $this->toDomainCollection($items);
         // return [
@@ -57,6 +57,7 @@ class ProductRepository implements Repository
     {
         $model = Product::findOrFail($id);
         $model->fill($attributes);
+
         return $model->save();
     }
 

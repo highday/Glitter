@@ -39,7 +39,7 @@ class ProductsService
     public function update($key, Request $request): bool
     {
         $validator = app(Validator::class)->make($request->input(), [
-            'name' => 'required',
+            'name'        => 'required',
             'description' => 'required',
         ]);
 
