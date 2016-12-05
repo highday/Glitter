@@ -14,6 +14,10 @@ class GlitterServiceProvider extends ServiceProvider
             $this->publishes([
                 __DIR__.'/../../../database/migrations' => database_path('migrations'),
             ], 'glitter');
+
+            $this->commands([
+                InstallCommand::class,
+            ]);
         }
     }
 }

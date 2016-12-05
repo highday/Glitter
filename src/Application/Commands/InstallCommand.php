@@ -1,6 +1,6 @@
 <?php
 
-namespace Highday\Glitter\Infrastructure\Console;
+namespace Highday\Glitter\Application\Commands;
 
 use Illuminate\Console\Command;
 
