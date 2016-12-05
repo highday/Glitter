@@ -14,7 +14,14 @@ $route->group([
     $route->get('account/security', 'AccountController@security')->name('account.security');
 
     $route->get('orders', 'OrdersController@index')->name('orders.index');
-    $route->get('products', 'ProductsController@index')->name('products.index');
+
+    $route->get('products', 'ProductsController@products')->name('products.products');
+    $route->get('products/edit/{key}', 'ProductsController@edit')->name('products.edit');
+    $route->post('products/edit/{key}', 'ProductsController@update')->name('products.update');
+    $route->get('products/transfers', 'ProductsController@products')->name('products.transfers');
+    $route->get('products/inventory', 'ProductsController@products')->name('products.inventory');
+    $route->get('products/collections', 'ProductsController@products')->name('products.collections');
+
     $route->get('customers', 'CustomersController@index')->name('customers.index');
     $route->get('settings', 'SettingsController@index')->name('settings.index');
     $route->get('settings/members', 'SettingsController@members')->name('settings.members');

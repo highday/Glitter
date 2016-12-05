@@ -110,8 +110,6 @@
 
 .content-wrapper {
     padding-top: 1rem;
-    padding-left: 1rem;
-    padding-right: 1rem;
 
     @include media-breakpoint-up('md') {
         .nav-wrapper ~ & {

@@ -30,11 +30,13 @@
         margin: 0;
         padding: 0.5625rem 1rem;
         font-size: 1.125rem;
+        font-weight: 500;
         line-height: 1;
+        color: $gray;
 
         a {
             @include plain-hover-focus {
-                color: $gray;
+                color: $gray-light;
             }
             @include hover-focus-active {
                 text-decoration: underline;

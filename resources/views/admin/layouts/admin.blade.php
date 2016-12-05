@@ -52,7 +52,7 @@ window.Laravel = <?php echo json_encode([
                 <a class="nav-link{{ Request::is('admin/orders*') ? ' active' : '' }}" href="{{ route('glitter.admin.orders.index') }}"><i class="fa fa-inbox fa-fw" aria-hidden="true"></i>受注管理<span class="badge">9,999</span></a>
             </li>
             <li class="nav-item">
-                <a class="nav-link{{ Request::is('admin/products*') ? ' active' : '' }}" href="{{ route('glitter.admin.products.index') }}"><i class="fa fa-tag fa-fw" aria-hidden="true"></i>商品管理</a>
+                <a class="nav-link{{ Request::is('admin/products*') ? ' active' : '' }}" href="{{ route('glitter.admin.products.products') }}"><i class="fa fa-tag fa-fw" aria-hidden="true"></i>商品管理</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link{{ Request::is('admin/customers*') ? ' active' : '' }}" href="{{ route('glitter.admin.customers.index') }}"><i class="fa fa-users fa-fw" aria-hidden="true"></i>顧客リスト</a>
@@ -97,7 +97,9 @@ window.Laravel = <?php echo json_encode([
 </div>{{-- /.nav-wrapper --}}
 @endif
 <div class="content-wrapper">
-{!! join(PHP_EOL, $flash_message->all()) !!}
+@if(!$flash_message->isEmpty())
+    <div class="container ml-0">{!! join($flash_message->all()) !!}</div>
+@endif
 @yield('content')
 </div>{{-- /.content-wrapper --}}
 </main>{{-- /.main-section --}}

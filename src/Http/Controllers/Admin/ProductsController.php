@@ -2,30 +2,53 @@
 
 namespace Highday\Glitter\Http\Controllers\Admin;
 
+use Highday\Glitter\Application\Services\Admin\ProductsService;
 use Highday\Glitter\Http\Controllers\Controller;
-use Illuminate\Contracts\Auth\Factory as Auth;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
+use Illuminate\Validation\ValidationException;
 
 class ProductsController extends Controller
 {
-    protected $auth;
+    /** @var ProductsService */
+    protected $service;
 
-    public function __construct(Auth $auth)
+    public function __construct(ProductsService $service)
     {
-        $this->auth = $auth;
+        $this->service = $service;
     }
 
-    public function index(Request $request)
+    public function products(Request $request)
     {
-        $me = $this->guard()->user();
-        $store = $me->active_store;
-        $products = [];
-
-        return view('glitter.admin::products.index', compact('store', 'products'));
+        return view('glitter.admin::products.products', [
+            'keyword' => $this->service->searchQuery($request),
+            'products' => $this->service->search($request),
+        ]);
     }
 
-    protected function guard()
+    public function edit($key)
     {
-        return $this->auth->guard('member');
+        try {
+            return view('glitter.admin::products.edit', [
+                'product' => $this->service->find($key),
+            ]);
+        } catch (ModelNotFoundException $e) {
+            return view('glitter.admin::errors.404');
+        }
+    }
+
+    public function update(Request $request, $key)
+    {
+        try {
+            $this->service->update($key, $request);
+            return redirect()->back()
+                ->withFlashMessage(['OK!']);
+        } catch (ValidationException $e) {
+            return redirect()->back()
+                ->withInput($request->input())
+                ->withErrors($e->validator->getMessages());
+        } catch (ModelNotFoundException $e) {
+            return view('glitter.admin::errors.404');
+        }
     }
 }

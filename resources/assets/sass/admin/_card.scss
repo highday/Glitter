@@ -41,3 +41,21 @@
         }
     }
 }
+
+.form-card {
+    & > .card-block + .card-block {
+        border-top: 1px solid $gray-lighter;
+    }
+
+    .card-title {
+        font-weight: 500;
+        font-size: 1rem;
+    }
+
+    .form-group {
+        margin-bottom: 0;
+    }
+    .form-group + .form-group {
+        margin-top: 1rem;
+    }
+}
