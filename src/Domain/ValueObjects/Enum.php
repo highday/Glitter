@@ -11,10 +11,6 @@ abstract class Enum
 
     public function __construct($value)
     {
-        if ($value instanceof self) {
-            return $value;
-        }
-
         $ref = new ReflectionObject($this);
         $consts = $ref->getConstants();
 
@@ -23,16 +19,6 @@ abstract class Enum
         }
 
         $this->scalar = $value;
-    }
-
-    final public function __call($label, $args)
-    {
-        $class = get_called_class();
-        if (str_is('is*', $label)) {
-            $label = preg_replace('/^is/', '', $label);
-
-            return $this->raw() === constant("{$class}::{$label}");
-        }
     }
 
     final public static function __callStatic($label, $args)
@@ -48,53 +34,8 @@ abstract class Enum
         return $this->scalar;
     }
 
-    final public function __toString()
+    final public function __toString(): string
     {
-        $class = class_basename(get_called_class());
-        $raw = $this->raw();
-
-        $key = "code.{$class}.{$raw}";
-        if (Lang::has($key)) {
-            return Lang::get($key);
-        }
-
-        $key = "code.{$class}.units";
-        if (is_numeric($raw) && Lang::has($key)) {
-            return Lang::get($key, ['value' => number_format($raw)]);
-        }
-
-        $key = "code.{$class}.format";
-        if (Lang::has($key)) {
-            return Lang::get($key, ['value' => $raw]);
-        }
-
-        return (string) $raw;
-    }
-
-    public static function toArray()
-    {
-        $array = [];
-        foreach (self::all() as $const) {
-            $array[] = $const->raw();
-        }
-
-        return $array;
-    }
-
-    public static function all()
-    {
-        $class = get_called_class();
-        $ref = new ReflectionClass($class);
-        $consts = [];
-        foreach ($ref->getConstants() as $const => $value) {
-            $consts[] = $class::$const();
-        }
-
-        return $consts;
-    }
-
-    public static function consts()
-    {
-        return self::all();
+        return (string) $this->scalar;
     }
 }
