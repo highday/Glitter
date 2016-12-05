@@ -46,7 +46,6 @@ class Store extends Model
     //     return $this->hasMany($this->pageModel);
     // }
 
-
     /*
      * ======================
      * Mutators
