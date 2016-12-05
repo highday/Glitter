@@ -2,19 +2,23 @@
 
 namespace Highday\Glitter\Domain\ValueObjects\Product;
 
+use Highday\Glitter\Domain\ValueObjects\Money;
+
 class Price
 {
+    /** @var Money */
     protected $selling;
 
+    /** @var Money|null */
     protected $reference;
 
-    public function __construct(float $selling, float $reference = null)
+    public function __construct(Money $selling, Money $reference = null)
     {
         $this->selling = $selling;
         $this->reference = $reference;
     }
 
-    public function getSelling(): float
+    public function getSelling(): Money
     {
         return $this->selling;
     }
@@ -24,13 +28,23 @@ class Price
         return $this->reference;
     }
 
-    public function getDifference(): float
+    public function getDifference(): Money
     {
-        return $this->reference > 0 ? $this->reference - $this->selling : 0;
+        if (is_null($this->reference)) {
+            return new Money(0);
+        }
+
+        return $this->reference->subtract($this->selling);
     }
 
     public function getDifferencePercentage(): float
     {
-        return $this->reference > 0 ? $this->getDifference() / $this->reference : 0;
+        if (is_null($this->reference) || $this->reference->getAmount() == 0) {
+            return 0;
+        }
+
+        $difference = $this->getDifference();
+
+        return $difference->getAmount() > 0 ? $difference->getAmount() / $this->reference->getAmount() : 0;
     }
 }
