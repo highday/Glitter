@@ -6,13 +6,10 @@ use Highday\Glitter\Contracts\Repositories\ProductRepository;
 use Highday\Glitter\Domain\Entity;
 use Highday\Glitter\Domain\EntityCollection;
 use Illuminate\Contracts\Validation\Factory as Validator;
-use Illuminate\Http\Request;
 use Illuminate\Validation\ValidationException;
 
 class ProductsService
 {
-    const SEARCH_QUERY_NAME = 'q';
-
     /** @var ProductRepository */
     private $repository;
 
@@ -21,14 +18,9 @@ class ProductsService
         $this->repository = $repository;
     }
 
-    public function searchQuery(Request $request): string
+    public function search(string $query): EntityCollection
     {
-        return (string) $request->input(self::SEARCH_QUERY_NAME, '');
-    }
-
-    public function search(Request $request): EntityCollection
-    {
-        return $this->repository->search($this->searchQuery($request));
+        return $this->repository->search($query);
     }
 
     public function find($key): Entity
@@ -36,9 +28,9 @@ class ProductsService
         return $this->repository->find($key);
     }
 
-    public function update($key, Request $request): bool
+    public function update($key, string $name, string $description): bool
     {
-        $validator = app(Validator::class)->make($request->input(), [
+        $validator = app(Validator::class)->make(compact('name', 'description'), [
             'name' => 'required',
             'description' => 'required',
         ]);
@@ -47,9 +39,6 @@ class ProductsService
             throw new ValidationException($validator);
         }
 
-        return $this->repository->update($key, $request->only([
-            'name',
-            'description',
-        ]));
+        return $this->repository->update($key, compact('name', 'description'));
     }
 }

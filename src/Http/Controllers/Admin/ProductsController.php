@@ -11,18 +11,19 @@ use Illuminate\Validation\ValidationException;
 class ProductsController extends Controller
 {
     /** @var ProductsService */
-    protected $service;
+    protected $productService;
 
-    public function __construct(ProductsService $service)
+    public function __construct(ProductsService $productService)
     {
-        $this->service = $service;
+        $this->productService = $productService;
     }
 
     public function products(Request $request)
     {
+        $query = $request->input('q');
         return view('glitter.admin::products.products', [
-            'keyword' => $this->service->searchQuery($request),
-            'products' => $this->service->search($request),
+            'keyword' => $query,
+            'products' => $this->productService->search($query),
         ]);
     }
 
@@ -30,7 +31,7 @@ class ProductsController extends Controller
     {
         try {
             return view('glitter.admin::products.edit', [
-                'product' => $this->service->find($key),
+                'product' => $this->productService->find($key),
             ]);
         } catch (ModelNotFoundException $e) {
             return view('glitter.admin::errors.404');
@@ -40,7 +41,9 @@ class ProductsController extends Controller
     public function update(Request $request, $key)
     {
         try {
-            $this->service->update($key, $request);
+            $name = $request->input('name');
+            $description = $request->input('description');
+            $this->productService->update($key, $name, $description);
             return redirect()->back()
                 ->withFlashMessage(['OK!']);
         } catch (ValidationException $e) {
