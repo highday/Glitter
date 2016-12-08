@@ -21,6 +21,7 @@ class ProductsController extends Controller
     public function products(Request $request)
     {
         $query = $request->input('q');
+
         return view('glitter.admin::products.products', [
             'keyword'  => $query,
             'products' => $this->productService->search($query),
