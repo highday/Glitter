@@ -12,4 +12,6 @@ interface ProductRepository
     public function search(string $keyword = ''): EntityCollection;
 
     public function searchPaginate(string $keyword = '', int $perPage = 100, int $page = 1): EntityCollection;
+
+    public function update($id, $attributes): bool;
 }
