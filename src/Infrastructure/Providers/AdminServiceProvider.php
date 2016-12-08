@@ -2,12 +2,10 @@
 
 namespace Highday\Glitter\Infrastructure\Providers;
 
-use Highday\Glitter\Http\Middleware\Admin\{
-    AccessRestrictionWithRemoteAddress,
-    RedirectIfMemberAuthenticated,
-    ShareAdminVariables,
-    ShareFlashMessagesFromSession
-};
+use Highday\Glitter\Http\Middleware\Admin\AccessRestrictionWithRemoteAddress;
+use Highday\Glitter\Http\Middleware\Admin\RedirectIfMemberAuthenticated;
+use Highday\Glitter\Http\Middleware\Admin\ShareAdminVariables;
+use Highday\Glitter\Http\Middleware\Admin\ShareFlashMessagesFromSession;
 use Illuminate\Contracts\Routing\Registrar as Router;
 use Illuminate\Support\ServiceProvider;
 

@@ -31,7 +31,7 @@ class ProductsService
     public function update($key, string $name, string $description): bool
     {
         $validator = app(Validator::class)->make(compact('name', 'description'), [
-            'name' => 'required',
+            'name'        => 'required',
             'description' => 'required',
         ]);
 

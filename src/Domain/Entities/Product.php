@@ -2,7 +2,8 @@
 
 namespace Highday\Glitter\Domain\Entities;
 
-use Highday\Glitter\Domain\{Entity, EntityCollection};
+use Highday\Glitter\Domain\Entity;
+use Highday\Glitter\Domain\EntityCollection;
 
 class Product extends Entity
 {

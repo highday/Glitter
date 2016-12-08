@@ -22,7 +22,7 @@ class ProductsController extends Controller
     {
         $query = $request->input('q');
         return view('glitter.admin::products.products', [
-            'keyword' => $query,
+            'keyword'  => $query,
             'products' => $this->productService->search($query),
         ]);
     }
@@ -44,6 +44,7 @@ class ProductsController extends Controller
             $name = $request->input('name');
             $description = $request->input('description');
             $this->productService->update($key, $name, $description);
+
             return redirect()->back()
                 ->withFlashMessage(['OK!']);
         } catch (ValidationException $e) {

@@ -2,9 +2,9 @@
 
 namespace Highday\Glitter\Domain\Entities;
 
+use Highday\Glitter\Domain\ValueObjects\Money;
 use Highday\Glitter\Domain\ValueObjects\Product\OptionValue;
 use Highday\Glitter\Domain\ValueObjects\Product\Price;
-use Highday\Glitter\Domain\ValueObjects\Money;
 use PHPUnit\Framework\TestCase;
 
 class VariantTest extends TestCase
