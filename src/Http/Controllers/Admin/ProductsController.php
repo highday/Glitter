@@ -8,7 +8,6 @@ use Highday\Glitter\Http\Controllers\Controller;
 use Illuminate\Database\DatabaseManager;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
-use Illuminate\Validation\ValidationException;
 
 class ProductsController extends Controller
 {
