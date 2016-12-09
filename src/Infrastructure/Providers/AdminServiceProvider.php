@@ -21,8 +21,6 @@ class AdminServiceProvider extends ServiceProvider
 
         $this->loadViewsFrom(__DIR__.'/../../../resources/views/admin', 'glitter.admin');
 
-        $this->loadTranslationsFrom(__DIR__.'/../../../resources/lang/admin', 'glitter.admin');
-
         $router->middlewareGroup('glitter.admin', [
             ShareAdminVariables::class,
             ShareFlashMessagesFromSession::class,

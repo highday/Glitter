@@ -11,6 +11,10 @@
 @import "error";
 @import "misc";
 
+label {
+    margin-bottom: 0.2rem;
+}
+
 .action-nav {
     position: fixed;
     left: $drawer-nav-width;

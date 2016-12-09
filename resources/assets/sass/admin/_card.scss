@@ -47,15 +47,28 @@
         border-top: 1px solid $gray-lighter;
     }
 
-    .card-title {
-        font-weight: 500;
+    h2.card-title {
+        font-weight: 600;
         font-size: 1rem;
+    }
+
+    h3.card-title {
+        font-weight: 600;
+        font-size: 0.875rem;
     }
 
     .form-group {
         margin-bottom: 0;
     }
-    .form-group + .form-group {
+    .form-group + .form-group,
+    .form-group + .row,
+    .row + .form-group,
+    .row + .row {
         margin-top: 1rem;
+    }
+
+    label {
+        font-weight: 400;
+        font-size: 0.875rem;
     }
 }

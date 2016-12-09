@@ -19,7 +19,7 @@ $route->group([
     $route->get('products/edit/{key}', 'ProductsController@edit')->name('products.edit');
     $route->post('products/edit/{key}', 'ProductsController@update')->name('products.update');
     $route->get('products/transfers', 'ProductsController@products')->name('products.transfers');
-    $route->get('products/inventory', 'ProductsController@products')->name('products.inventory');
+    $route->get('products/inventory', 'ProductsController@inventory')->name('products.inventory');
     $route->get('products/collections', 'ProductsController@products')->name('products.collections');
 
     $route->get('customers', 'CustomersController@index')->name('customers.index');
