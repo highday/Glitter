@@ -16,11 +16,12 @@ class MemberTest extends TestCase
 
     public function testInstance()
     {
-        $name = $this->faker->lastName.' '.$this->faker->firstName;
+        $firstName = $this->faker->firstName;
+        $lastName = $this->faker->lastName;
         $email = new EmailAddress($this->faker->email);
-        $member = new Member($name, $email);
+        $member = new Member($firstName, $lastName, $email);
         $this->assertInstanceOf(Member::class, $member);
-        $this->assertEquals($name, $member->getName());
+        $this->assertEquals("$firstName $lastName", $member->getName());
         $this->assertEquals($email, $member->getEmail());
     }
 }
