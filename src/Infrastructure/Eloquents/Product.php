@@ -21,7 +21,7 @@ class Product extends Model implements Domainable
     ];
 
     protected $dates = [
-        'deleted_at'
+        'deleted_at',
     ];
 
     public function store()

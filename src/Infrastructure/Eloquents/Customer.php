@@ -23,7 +23,7 @@ class Customer extends Authenticatable
     ];
 
     protected $dates = [
-        'deleted_at'
+        'deleted_at',
     ];
 
     public function stores()

@@ -26,7 +26,7 @@ class Member extends Authenticatable implements Domainable
     ];
 
     protected $dates = [
-        'deleted_at'
+        'deleted_at',
     ];
 
     public function stores()
@@ -46,7 +46,7 @@ class Member extends Authenticatable implements Domainable
 
     public function getNameAttribute()
     {
-        return $this->first_name . ' ' . $this->last_name;
+        return $this->first_name.' '.$this->last_name;
     }
 
     public function getActiveStoreAttribute()

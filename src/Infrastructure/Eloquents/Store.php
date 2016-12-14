@@ -18,7 +18,7 @@ class Store extends Model
     ];
 
     protected $dates = [
-        'deleted_at'
+        'deleted_at',
     ];
 
     public function members()
