@@ -10,15 +10,14 @@ class Policy extends Model
         'pivot',
     ];
 
-    /**
-     * ======================
-     * Relationships
-     * ======================.
-     */
-    protected $roleModel = Role::class;
+    protected $fillable = [
+        'store_id',
+        'name',
+        'description',
+    ];
 
     public function roles()
     {
-        return $this->belongsToMany($this->roleModel, 'role_policy');
+        return $this->belongsToMany(Role::class, 'role_policy');
     }
 }

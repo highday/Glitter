@@ -8,25 +8,29 @@ use Highday\Glitter\Domain\ValueObjects\EmailAddress;
 class Member extends Entity
 {
     /** @var string */
-    public $name;
+    public $first_name;
+
+    /** @var string */
+    public $last_name;
 
     /** @var EmailAddress */
     public $email;
 
-    public function __construct(string $name, EmailAddress $email)
+    public function __construct(string $first_name, string $last_name, EmailAddress $email)
     {
-        $this->setName($name);
+        $this->setName($first_name, $last_name);
         $this->setEmail($email);
     }
 
-    public function setName(string $name)
+    public function setName(string $first_name, string $last_name)
     {
-        $this->name = $name;
+        $this->first_name = $first_name;
+        $this->last_name = $last_name;
     }
 
     public function getName(): string
     {
-        return $this->name;
+        return $this->first_name . ' ' . $this->last_name;
     }
 
     public function setEmail(EmailAddress $email)

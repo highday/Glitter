@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateAddressesTable extends Migration
+class CreateCustomerAddressesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,18 +13,20 @@ class CreateAddressesTable extends Migration
      */
     public function up()
     {
-        Schema::create('addresses', function (Blueprint $table) {
+        Schema::create('customer_addresses', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('customer_id')->unsigned();
             $table->foreign('customer_id')->references('id')->on('customers')->onDelete('cascade');
-            $table->string('name');
-            $table->string('name_kana');
-            $table->string('postal_code');
-            $table->string('state_region');
-            $table->string('address_line1');
-            $table->string('address_line2');
-            $table->string('address_line3');
-            $table->string('phone_number');
+            $table->string('first_name');
+            $table->string('last_name');
+            $table->string('company');
+            $table->string('address1');
+            $table->string('address2');
+            $table->string('city');
+            $table->string('zip');
+            $table->string('country');
+            $table->string('province');
+            $table->string('phone');
             $table->timestamps();
         });
     }
@@ -36,6 +38,6 @@ class CreateAddressesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('addresses');
+        Schema::dropIfExists('customer_addresses');
     }
 }

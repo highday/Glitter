@@ -11,7 +11,7 @@ class InstallCommand extends Command
      *
      * @var string
      */
-    protected $signature = 'glitter:install';
+    protected $signature = 'glitter:seed';
 
     /**
      * The console command description.
@@ -28,31 +28,149 @@ class InstallCommand extends Command
     public function handle()
     {
         $store = \Highday\Glitter\Infrastructure\Eloquents\Store::firstOrCreate([
-            'slug' => 'my-store',
-            'name' => 'My Store',
+            'name'           => 'Highday Store',
+            'account_email'  => 'store@example.com',
+            'customer_email' => 'store@example.com',
+            'timezone'       => 'Asia/Tokyo',
+            'currency'       => 'JPY',
         ]);
 
         $role = \Highday\Glitter\Infrastructure\Eloquents\Role::firstOrCreate([
             'store_id'    => $store->getKey(),
-            'name'        => 'Admin',
-            'description' => '',
+            'name'        => 'Owner',
+            'description' => 'Store account owner.',
         ]);
 
+        $policy = \Highday\Glitter\Infrastructure\Eloquents\Policy::firstOrNew([
+            'store_id'    => $store->getKey(),
+            'name'        => 'Glitter Admin',
+            'description' => 'Access to Glitter Admin.',
+        ]);
+        if (!$policy->exists) {
+            $policy->save();
+            $role->policies()->attach($policy);
+        }
+
         $member = \Highday\Glitter\Infrastructure\Eloquents\Member::firstOrNew([
-            'name'  => 'member',
-            'email' => 'member@example.com',
+            'first_name' => 'Keisuke',
+            'last_name'  => 'Nemoto',
+            'email'      => 'member@example.com',
         ]);
         if (!$member->exists) {
             $member->password = bcrypt('password');
             $member->save();
+            $member->stores()->attach($store);
+            $member->roles()->attach($role);
         }
-        $member->stores()->attach($store);
-        $member->roles()->attach($role);
 
-        // $customer = \Highday\Glitter\Infrastructure\Eloquents\Customer::create([
-        //     'name' => 'nemooon',
-        //     'email' => 'n@on-lab.jp',
-        //     'password' => bcrypt('password'),
-        // ]);
+        $customer = \Highday\Glitter\Infrastructure\Eloquents\Customer::firstOrNew([
+            'first_name' => 'Keisuke',
+            'last_name'  => 'Nemoto',
+            'email'      => 'customer@example.com',
+        ]);
+        if (!$customer->exists) {
+            // $customer->password = bcrypt('password');
+            $customer->save();
+            $customer->stores()->attach($store);
+        }
+
+        $product = \Highday\Glitter\Infrastructure\Eloquents\Product::firstOrCreate([
+            'store_id'    => $store->getKey(),
+            'title'       => 'Highday original t-shirt',
+            'description' => 'My first sample product.',
+            'option1'     => 'Color',
+            'option2'     => 'Size',
+            'option3'     => null,
+        ]);
+
+        $variant[] = \Highday\Glitter\Infrastructure\Eloquents\Variant::firstOrCreate([
+            'product_id'           => $product->getKey(),
+            'option1'              => 'Black',
+            'option2'              => 'S',
+            'option3'              => null,
+            'sku'                  => null,
+            'barcode'              => null,
+            'price'                => 3000,
+            'reference_price'      => null,
+            'inventory_management' => 'glitter',
+            'inventory_quantity'   => 100,
+            'inventory_policy'     => 'deny',
+            'requires_shipping'    => true,
+        ]);
+
+        $variant[] = \Highday\Glitter\Infrastructure\Eloquents\Variant::firstOrCreate([
+            'product_id'           => $product->getKey(),
+            'option1'              => 'Black',
+            'option2'              => 'M',
+            'option3'              => null,
+            'sku'                  => null,
+            'barcode'              => null,
+            'price'                => 3000,
+            'reference_price'      => null,
+            'inventory_management' => 'glitter',
+            'inventory_quantity'   => 100,
+            'inventory_policy'     => 'deny',
+            'requires_shipping'    => true,
+        ]);
+
+        $variant[] = \Highday\Glitter\Infrastructure\Eloquents\Variant::firstOrCreate([
+            'product_id'           => $product->getKey(),
+            'option1'              => 'Black',
+            'option2'              => 'L',
+            'option3'              => null,
+            'sku'                  => null,
+            'barcode'              => null,
+            'price'                => 3000,
+            'reference_price'      => null,
+            'inventory_management' => 'glitter',
+            'inventory_quantity'   => 100,
+            'inventory_policy'     => 'deny',
+            'requires_shipping'    => true,
+        ]);
+
+        $variant[] = \Highday\Glitter\Infrastructure\Eloquents\Variant::firstOrCreate([
+            'product_id'           => $product->getKey(),
+            'option1'              => 'White',
+            'option2'              => 'S',
+            'option3'              => null,
+            'sku'                  => null,
+            'barcode'              => null,
+            'price'                => 3000,
+            'reference_price'      => null,
+            'inventory_management' => 'glitter',
+            'inventory_quantity'   => 100,
+            'inventory_policy'     => 'deny',
+            'requires_shipping'    => true,
+        ]);
+
+        $variant[] = \Highday\Glitter\Infrastructure\Eloquents\Variant::firstOrCreate([
+            'product_id'           => $product->getKey(),
+            'option1'              => 'White',
+            'option2'              => 'M',
+            'option3'              => null,
+            'sku'                  => null,
+            'barcode'              => null,
+            'price'                => 3000,
+            'reference_price'      => null,
+            'inventory_management' => 'glitter',
+            'inventory_quantity'   => 100,
+            'inventory_policy'     => 'deny',
+            'requires_shipping'    => true,
+        ]);
+
+        $variant[] = \Highday\Glitter\Infrastructure\Eloquents\Variant::firstOrCreate([
+            'product_id'           => $product->getKey(),
+            'option1'              => 'White',
+            'option2'              => 'L',
+            'option3'              => null,
+            'sku'                  => null,
+            'barcode'              => null,
+            'price'                => 3000,
+            'reference_price'      => null,
+            'inventory_management' => 'glitter',
+            'inventory_quantity'   => 100,
+            'inventory_policy'     => 'deny',
+            'requires_shipping'    => true,
+        ]);
     }
 }

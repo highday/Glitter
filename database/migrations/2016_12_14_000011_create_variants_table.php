@@ -17,14 +17,19 @@ class CreateVariantsTable extends Migration
             $table->increments('id');
             $table->integer('product_id')->unsigned();
             $table->foreign('product_id')->references('id')->on('products')->onDelete('cascade');
-            $table->string('variant_name');
+            $table->integer('image_id')->unsigned()->nullable();
+            $table->foreign('image_id')->references('id')->on('media')->onDelete('set null');
+            $table->string('option1')->nullable();
+            $table->string('option2')->nullable();
+            $table->string('option3')->nullable();
             $table->string('sku')->nullable();
-            $table->decimal('selling_price', 13, 3);
+            $table->string('barcode')->nullable();
+            $table->decimal('price', 13, 3);
             $table->decimal('reference_price', 13, 3)->nullable();
-            $table->integer('stock_quantity')->unsigned()->nullable();
-            $table->integer('limited_quantity')->unsigned()->nullable();
-            $table->string('status');
-            $table->string('order');
+            $table->string('inventory_management')->nullable();
+            $table->integer('inventory_quantity')->unsigned()->nullable();
+            $table->string('inventory_policy')->nullable();
+            $table->boolean('requires_shipping');
         });
     }
 

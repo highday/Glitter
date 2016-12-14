@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateTaxonomiesTable extends Migration
+class CreateSuppliersTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,17 +13,11 @@ class CreateTaxonomiesTable extends Migration
      */
     public function up()
     {
-        Schema::create('taxonomies', function (Blueprint $table) {
+        Schema::create('suppliers', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('store_id')->unsigned();
             $table->foreign('store_id')->references('id')->on('stores')->onDelete('cascade');
-            $table->string('taxonomy');
-            $table->string('slug');
-            $table->unique(['taxonomy', 'slug']);
-            $table->string('name');
-            $table->text('description')->nullable();
-            $table->integer('parent_id')->unsigned()->nullable();
-            $table->foreign('parent_id')->references('id')->on('taxonomies')->onDelete('set null');
+            $table->string('company_name');
         });
     }
 
@@ -34,6 +28,6 @@ class CreateTaxonomiesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('taxonomies');
+        Schema::dropIfExists('suppliers');
     }
 }

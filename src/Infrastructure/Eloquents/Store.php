@@ -10,50 +10,54 @@ class Store extends Model
     use SoftDeletes;
 
     protected $fillable = [
-        'slug', 'name',
+        'name',
+        'account_email',
+        'customer_email',
+        'timezone',
+        'currency',
     ];
 
-    protected $dates = ['deleted_at'];
-
-    public function getRouteKeyName()
-    {
-        return 'slug';
-    }
-
-    /**
-     * ======================
-     * Relationships
-     * ======================.
-     */
-    protected $memberModel = Member::class;
-
-    // protected $productModel = Product::class;
-
-    // protected $pageModel = Page::class;
+    protected $dates = [
+        'deleted_at'
+    ];
 
     public function members()
     {
-        return $this->belongsToMany($this->memberModel, 'store_member');
+        return $this->belongsToMany(Member::class, 'store_member');
     }
 
-    // public function products()
-    // {
-    //     return $this->hasMany($this->productModel);
-    // }
+    public function roles()
+    {
+        return $this->hasMany(Roles::class);
+    }
 
-    // public function pages()
-    // {
-    //     return $this->hasMany($this->pageModel);
-    // }
+    public function policies()
+    {
+        return $this->hasMany(Policy::class);
+    }
 
-    /*
-     * ======================
-     * Mutators
-     * ======================
-     */
+    public function products()
+    {
+        return $this->hasMany(Product::class);
+    }
 
-    // public function getPermalinkAttribute()
-    // {
-    //     return route('glitter.shop.front', ['store' => $this]);
-    // }
+    public function variants()
+    {
+        return $this->hasManyThrough(Variant::class, Product::class);
+    }
+
+    public function suppliers()
+    {
+        return $this->hasMany(Supplier::class);
+    }
+
+    public function transfers()
+    {
+        return $this->hasMany(Transfer::class);
+    }
+
+    public function customers()
+    {
+        return $this->belongsToMany(Customer::class, 'store_customer');
+    }
 }

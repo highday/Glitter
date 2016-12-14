@@ -13,15 +13,21 @@ class Member extends Authenticatable implements Domainable
 {
     use Notifiable, SoftDeletes;
 
-    protected $fillable = [
-        'name', 'email', 'password',
-    ];
-
     protected $hidden = [
-        'password', 'remember_token',
+        'password',
+        'remember_token',
     ];
 
-    protected $dates = ['deleted_at'];
+    protected $fillable = [
+        'first_name',
+        'last_name',
+        'email',
+        'password',
+    ];
+
+    protected $dates = [
+        'deleted_at'
+    ];
 
     public function stores()
     {
@@ -36,6 +42,11 @@ class Member extends Authenticatable implements Domainable
     public function roles()
     {
         return $this->belongsToMany(Role::class, 'member_role');
+    }
+
+    public function getNameAttribute()
+    {
+        return $this->first_name . ' ' . $this->last_name;
     }
 
     public function getActiveStoreAttribute()
@@ -55,6 +66,6 @@ class Member extends Authenticatable implements Domainable
 
     public function toDomain(): DomainEntity
     {
-        return new DomainEntity($this->getKey(), $this->name, new EmailAddress($this->email));
+        return new DomainEntity($this->getKey(), $this->first_name, $this->last_name, new EmailAddress($this->email));
     }
 }

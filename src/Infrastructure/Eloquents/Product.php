@@ -11,27 +11,37 @@ class Product extends Model implements Domainable
 {
     use SoftDeletes;
 
-    protected $appends = [
-        'taxonomies',
-        'types',
-        'options',
-    ];
-
     protected $fillable = [
-        'name',
+        'store_id',
+        'title',
         'description',
+        'option1',
+        'option2',
+        'option3',
     ];
 
-    protected $dates = ['deleted_at'];
+    protected $dates = [
+        'deleted_at'
+    ];
 
     public function store()
     {
         return $this->belongsTo(Store::class);
     }
 
+    public function media()
+    {
+        return $this->belongsToMany(Media::class, 'product_media');
+    }
+
+    public function variants()
+    {
+        return $this->hasMany(Variant::class);
+    }
+
     public function toDomain(): ProductEntity
     {
-        $entity = new ProductEntity($this->name, $this->description);
+        $entity = new ProductEntity($this->title, $this->description);
         $entity->setId($this->getKey());
 
         return $entity;
