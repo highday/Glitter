@@ -18,3 +18,7 @@ Add this to your composer.json file, in the require object:
 ```javascript
 "highday/glitter": "dev-master"
 ```
+
+<p align="center">
+  <img src="https://raw.githubusercontent.com/highday/logo/master/logo.png" />
+</p>
