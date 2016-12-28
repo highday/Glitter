@@ -3,8 +3,8 @@
 namespace Highday\Glitter\Http\Controllers\Admin;
 
 use Exception;
-use Highday\Glitter\Services\Admin\ProductsService;
 use Highday\Glitter\Http\Controllers\Controller;
+use Highday\Glitter\Services\Admin\ProductsService;
 use Illuminate\Database\DatabaseManager;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
