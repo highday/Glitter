@@ -1,11 +1,11 @@
 <?php
 
-namespace Highday\Glitter\Infrastructure\Repositories\Eloquents;
+namespace Highday\Glitter\Eloquents\Repositories;
 
 use Highday\Glitter\Contracts\Repositories\ProductRepository as Repository;
 use Highday\Glitter\Domain\Entity;
 use Highday\Glitter\Domain\EntityCollection;
-use Highday\Glitter\Infrastructure\Eloquents\Product;
+use Highday\Glitter\Eloquents\Models\Product;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
 

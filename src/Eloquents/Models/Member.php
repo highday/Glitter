@@ -1,6 +1,6 @@
 <?php
 
-namespace Highday\Glitter\Infrastructure\Eloquents;
+namespace Highday\Glitter\Eloquents\Models;
 
 use Highday\Glitter\Contracts\Domain\Domainable;
 use Highday\Glitter\Domain\Entities\Member as DomainEntity;

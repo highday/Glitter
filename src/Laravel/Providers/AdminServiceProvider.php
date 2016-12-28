@@ -1,6 +1,6 @@
 <?php
 
-namespace Highday\Glitter\Infrastructure\Providers;
+namespace Highday\Glitter\Laravel\Providers;
 
 use Highday\Glitter\Http\Middleware\Admin\AccessRestrictionWithRemoteAddress;
 use Highday\Glitter\Http\Middleware\Admin\RedirectIfMemberAuthenticated;

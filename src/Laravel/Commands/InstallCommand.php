@@ -1,6 +1,6 @@
 <?php
 
-namespace Highday\Glitter\Application\Commands;
+namespace Highday\Glitter\Laravel\Commands;
 
 use Illuminate\Console\Command;
 
@@ -27,7 +27,7 @@ class InstallCommand extends Command
      */
     public function handle()
     {
-        $store = \Highday\Glitter\Infrastructure\Eloquents\Store::firstOrCreate([
+        $store = \Highday\Glitter\Eloquents\Models\Store::firstOrCreate([
             'name'           => 'Highday Store',
             'account_email'  => 'store@example.com',
             'customer_email' => 'store@example.com',
@@ -35,13 +35,13 @@ class InstallCommand extends Command
             'currency'       => 'JPY',
         ]);
 
-        $role = \Highday\Glitter\Infrastructure\Eloquents\Role::firstOrCreate([
+        $role = \Highday\Glitter\Eloquents\Models\Role::firstOrCreate([
             'store_id'    => $store->getKey(),
             'name'        => 'Owner',
             'description' => 'Store account owner.',
         ]);
 
-        $policy = \Highday\Glitter\Infrastructure\Eloquents\Policy::firstOrNew([
+        $policy = \Highday\Glitter\Eloquents\Models\Policy::firstOrNew([
             'store_id'    => $store->getKey(),
             'name'        => 'Glitter Admin',
             'description' => 'Access to Glitter Admin.',
@@ -51,7 +51,7 @@ class InstallCommand extends Command
             $role->policies()->attach($policy);
         }
 
-        $member = \Highday\Glitter\Infrastructure\Eloquents\Member::firstOrNew([
+        $member = \Highday\Glitter\Eloquents\Models\Member::firstOrNew([
             'first_name' => 'Keisuke',
             'last_name'  => 'Nemoto',
             'email'      => 'member@example.com',
@@ -63,7 +63,7 @@ class InstallCommand extends Command
             $member->roles()->attach($role);
         }
 
-        $customer = \Highday\Glitter\Infrastructure\Eloquents\Customer::firstOrNew([
+        $customer = \Highday\Glitter\Eloquents\Models\Customer::firstOrNew([
             'first_name' => 'Keisuke',
             'last_name'  => 'Nemoto',
             'email'      => 'customer@example.com',
@@ -74,7 +74,7 @@ class InstallCommand extends Command
             $customer->stores()->attach($store);
         }
 
-        $product = \Highday\Glitter\Infrastructure\Eloquents\Product::firstOrCreate([
+        $product = \Highday\Glitter\Eloquents\Models\Product::firstOrCreate([
             'store_id'    => $store->getKey(),
             'title'       => 'Highday original t-shirt',
             'description' => 'My first sample product.',
@@ -83,7 +83,7 @@ class InstallCommand extends Command
             'option3'     => null,
         ]);
 
-        $variant[] = \Highday\Glitter\Infrastructure\Eloquents\Variant::firstOrCreate([
+        $variant[] = \Highday\Glitter\Eloquents\Models\Variant::firstOrCreate([
             'product_id'           => $product->getKey(),
             'option1'              => 'Black',
             'option2'              => 'S',
@@ -98,7 +98,7 @@ class InstallCommand extends Command
             'requires_shipping'    => true,
         ]);
 
-        $variant[] = \Highday\Glitter\Infrastructure\Eloquents\Variant::firstOrCreate([
+        $variant[] = \Highday\Glitter\Eloquents\Models\Variant::firstOrCreate([
             'product_id'           => $product->getKey(),
             'option1'              => 'Black',
             'option2'              => 'M',
@@ -113,7 +113,7 @@ class InstallCommand extends Command
             'requires_shipping'    => true,
         ]);
 
-        $variant[] = \Highday\Glitter\Infrastructure\Eloquents\Variant::firstOrCreate([
+        $variant[] = \Highday\Glitter\Eloquents\Models\Variant::firstOrCreate([
             'product_id'           => $product->getKey(),
             'option1'              => 'Black',
             'option2'              => 'L',
@@ -128,7 +128,7 @@ class InstallCommand extends Command
             'requires_shipping'    => true,
         ]);
 
-        $variant[] = \Highday\Glitter\Infrastructure\Eloquents\Variant::firstOrCreate([
+        $variant[] = \Highday\Glitter\Eloquents\Models\Variant::firstOrCreate([
             'product_id'           => $product->getKey(),
             'option1'              => 'White',
             'option2'              => 'S',
@@ -143,7 +143,7 @@ class InstallCommand extends Command
             'requires_shipping'    => true,
         ]);
 
-        $variant[] = \Highday\Glitter\Infrastructure\Eloquents\Variant::firstOrCreate([
+        $variant[] = \Highday\Glitter\Eloquents\Models\Variant::firstOrCreate([
             'product_id'           => $product->getKey(),
             'option1'              => 'White',
             'option2'              => 'M',
@@ -158,7 +158,7 @@ class InstallCommand extends Command
             'requires_shipping'    => true,
         ]);
 
-        $variant[] = \Highday\Glitter\Infrastructure\Eloquents\Variant::firstOrCreate([
+        $variant[] = \Highday\Glitter\Eloquents\Models\Variant::firstOrCreate([
             'product_id'           => $product->getKey(),
             'option1'              => 'White',
             'option2'              => 'L',

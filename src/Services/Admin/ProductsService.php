@@ -1,6 +1,6 @@
 <?php
 
-namespace Highday\Glitter\Application\Services\Admin;
+namespace Highday\Glitter\Services\Admin;
 
 use Highday\Glitter\Contracts\Repositories\ProductRepository;
 use Highday\Glitter\Domain\Entity;

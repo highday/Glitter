@@ -1,6 +1,6 @@
 <?php
 
-namespace Highday\Glitter\Infrastructure\Eloquents;
+namespace Highday\Glitter\Eloquents\Models;
 
 use Highday\Glitter\Domain\Entities\Member as DomainEntity;
 use PHPUnit_Framework_TestCase;

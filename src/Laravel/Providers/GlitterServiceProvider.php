@@ -1,14 +1,7 @@
 <?php
 
-namespace Highday\Glitter\Infrastructure\Providers;
+namespace Highday\Glitter\Laravel\Providers;
 
-use Highday\Glitter\Application\Commands\InstallCommand;
-use Highday\Glitter\Contracts\Repositories\{
-    ProductRepository
-};
-use Highday\Glitter\Infrastructure\Repositories\Eloquents\{
-    ProductRepository as EloquentProductRepository
-};
 use Illuminate\Support\ServiceProvider;
 
 class GlitterServiceProvider extends ServiceProvider
@@ -25,10 +18,13 @@ class GlitterServiceProvider extends ServiceProvider
             ], 'glitter');
 
             $this->commands([
-                InstallCommand::class,
+                \Highday\Glitter\Laravel\Commands\InstallCommand::class,
             ]);
         }
 
-        $this->app->bind(ProductRepository::class, EloquentProductRepository::class);
+        $this->app->bind(
+            \Highday\Glitter\Contracts\Repositories\ProductRepository::class,
+            \Highday\Glitter\Eloquents\Repositories\ProductRepository::class
+        );
     }
 }
