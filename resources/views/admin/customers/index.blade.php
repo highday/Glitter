@@ -49,8 +49,8 @@
                         <th class="chk"><input type="checkbox"></th>
                         <th>氏名</th>
                         <th>所在地</th>
-                        <th class="text-xs-center">受注回数</th>
-                        <th class="text-xs-center">最後の受注</th>
+                        <th class="text-center">受注回数</th>
+                        <th class="text-center">最後の受注</th>
                         <th class="text-xs-right">総支出</th>
                     </tr>
                 </thead>
@@ -59,24 +59,24 @@
                         <td class="chk"><input type="checkbox"></td>
                         <td><a href="#">根本 啓介</a></td>
                         <td>東京都</td>
-                        <td class="text-xs-center">1</td>
-                        <td class="text-xs-center"><a href="#">#1001</a></td>
+                        <td class="text-center">1</td>
+                        <td class="text-center"><a href="#">#1001</a></td>
                         <td class="text-xs-right">&yen; {{ number_format(1000000) }}</td>
                     </tr>
                     <tr>
                         <td class="chk"><input type="checkbox"></td>
                         <td><a href="#">根本 啓介</a></td>
                         <td>東京都</td>
-                        <td class="text-xs-center">0</td>
-                        <td class="text-xs-center">-</td>
+                        <td class="text-center">0</td>
+                        <td class="text-center">-</td>
                         <td class="text-xs-right">&yen; {{ number_format(1000000) }}</td>
                     </tr>
                     <tr>
                         <td class="chk"><input type="checkbox"></td>
                         <td><a href="#">根本 啓介</a></td>
                         <td>東京都</td>
-                        <td class="text-xs-center">0</td>
-                        <td class="text-xs-center">-</td>
+                        <td class="text-center">0</td>
+                        <td class="text-center">-</td>
                         <td class="text-xs-right">&yen; {{ number_format(1000000) }}</td>
                     </tr>
                 </tbody>

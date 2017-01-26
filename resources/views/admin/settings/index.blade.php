@@ -14,7 +14,7 @@
 
 @section('content')
 <div class="container ml-0">
-    <div class="row mb-2">
+    <div class="row mb-4">
         <div class="col-lg-3">
             <div class="pt-2">
                 <h5>基本設定</h5>
@@ -35,7 +35,7 @@
             </div>
         </div>
     </div>
-    <div class="row mb-2">
+    <div class="row mb-4">
         <div class="col-lg-3">
             <div class="pt-2">
                 <h5>受注設定</h5>

@@ -3,12 +3,12 @@
 @section('title', 'ホーム')
 
 @section('content')
-<div class="area mb-2">
+<div class="area mb-4">
     Chart report
 </div>
 <div class="row">
     <div class="col-lg-7">
-        <div class="lead text-muted mb-1">Timeline</div>
+        <div class="lead text-muted mb-3">Timeline</div>
         <div class="card">
             <div class="card-block">
                 <p class="card-text"><strong>やったー！🎉</strong><br>1件の新しい受注が入っています。</p>
@@ -32,9 +32,9 @@
         </div>
     </div>
     <div class="col-lg-5">
-        <div class="area mb-2">Widgets</div>
-        <div class="area mb-2">Widgets</div>
-        <div class="area mb-2">Widgets</div>
+        <div class="area mb-4">Widgets</div>
+        <div class="area mb-4">Widgets</div>
+        <div class="area mb-4">Widgets</div>
     </div>
 </div>
 @endsection

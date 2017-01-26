@@ -44,7 +44,7 @@ window.Laravel = <?php echo json_encode([
         </div>
     </div>
     <div class="drawer-nav-content">
-        <ul class="nav">
+        <ul class="nav flex-column">
             <li class="nav-item">
                 <a class="nav-link{{ Request::is('admin') ? ' active' : '' }}" href="{{ route('glitter.admin.index') }}"><i class="fa fa-home fa-fw" aria-hidden="true"></i>ホーム<span class="notify"></span></a>
             </li>
@@ -64,7 +64,7 @@ window.Laravel = <?php echo json_encode([
                 <a class="nav-link disabled" href="#"><i class="fa fa-scissors fa-fw" aria-hidden="true"></i>クーポン</a>
             </li>
         </ul>
-        <ul class="nav">
+        <ul class="nav flex-column">
             <li class="nav-item">
                 <a class="nav-link disabled" href="#"><i class="fa fa-globe fa-fw" aria-hidden="true"></i>オンラインストア</a>
             </li>
@@ -75,7 +75,7 @@ window.Laravel = <?php echo json_encode([
                 <a class="nav-link disabled" href="#"><i class="fa fa-wordpress fa-fw" aria-hidden="true"></i>WordPress</a>
             </li>
         </ul>
-        <ul class="nav">
+        <ul class="nav flex-column">
             <li class="nav-item">
                 <a class="nav-link{{ Request::is('admin/settings*') ? ' active' : '' }}" href="{{ route('glitter.admin.settings.index') }}"><i class="fa fa-cog fa-fw" aria-hidden="true"></i>ストア設定</a>
             </li>

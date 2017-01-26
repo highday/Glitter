@@ -10,8 +10,8 @@
 <div class="guest-content">
     <div class="row">
         <div class="offset-md-2 col-md-8">
-            <h1 class="text-xs-center" style="font-family: 'Allura', cursive;">{{ config('admin.name', 'Glitter Admin') }}</h1>
-            <p class="text-xs-center mb-2">Reset Password</p>
+            <h1 class="text-center" style="font-family: 'Allura', cursive;">{{ config('admin.name', 'Glitter Admin') }}</h1>
+            <p class="text-center mb-4">Reset Password</p>
 
             @if (session('status'))
                 <div class="alert alert-success">

@@ -18,14 +18,14 @@ window.Laravel = <?php echo json_encode([
 <div id="glitter-admin" class="admin-screen">
 
 <div class="container pt-3">
-    <div class="row">
-        <div class="col-md-9 col-xs-12">
+    <div class="row justify-content-between">
+        <div class="col-12 col-md-auto">
             <h3 class="mb-0" style="line-height: 38px;">
                 <img src="https://www.gravatar.com/avatar/{{ md5(strtolower(Auth::guard('member')->user()->email)) }}?s=76" class="rounded float-xs-left" style="width: 38px; margin-right: 0.5rem;">
                 {{ Auth::guard('member')->user()->name }}
             </h3>
         </div>
-        <div class="col-md-3 col-xs-12 text-xs-right">
+        <div class="col-12 col-md-auto text-right">
             <a class="btn btn-link" href="{{ route('glitter.admin.index') }}"><i class="fa fa-chevron-left fa-fw" aria-hidden="true"></i> ホームへ戻る</a>
         </div>
     </div>
@@ -33,7 +33,7 @@ window.Laravel = <?php echo json_encode([
 @section('main')
     <div class="row">
         <div class="col-lg-3 col-md-4 col-sm-5 col-xs-12">
-            <div class="list-group mb-1">
+            <div class="list-group mb-3">
                 <a class="list-group-item list-group-item-action{{ Request::is('admin/account/profile') ? ' active' : '' }}" href="{{ route('glitter.admin.account.profile') }}"><i class="fa fa-user-circle-o fa-fw" aria-hidden="true"></i> プロフィール</a>
                 <a class="list-group-item list-group-item-action{{ Request::is('admin/account/security') ? ' active' : '' }}" href="{{ route('glitter.admin.account.security') }}"><i class="fa fa-lock fa-fw" aria-hidden="true"></i> セキュリティ</a>
             </div>

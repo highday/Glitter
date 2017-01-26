@@ -38,7 +38,7 @@ class ShareFlashMessagesFromSession
     public function handle($request, Closure $next)
     {
         $flash_message = new MessageBag($request->session()->get('flash_message', []));
-        $flash_message->setFormat('<div class="alert alert-info alert-dismissible fade in" role="alert"><button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>:message</div>');
+        $flash_message->setFormat('<div class="alert alert-info alert-dismissible fade show" role="alert"><button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>:message</div>');
 
         $this->view->share(compact('flash_message'));
 

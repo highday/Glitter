@@ -18,14 +18,14 @@
 <form role="form" method="POST" action="{{ route('glitter.admin.products.update', $product->id) }}">
     <div class="container ml-0">
         <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
-            <div class="btn-group" role="group" aria-label="Basic example">
+            <div class="btn-group mr-2" role="group" aria-label="Basic example">
                 <button type="button" class="btn btn-secondary"><i class="fa fa-chevron-left" aria-hidden="true"></i></button>
                 <button type="button" class="btn btn-secondary"><i class="fa fa-chevron-right" aria-hidden="true"></i></button>
             </div>
-            <div class="btn-group" role="group" aria-label="Basic example">
+            <div class="btn-group mr-2" role="group" aria-label="Basic example">
                 <button type="button" class="btn btn-secondary">Duplicate</button>
             </div>
-            <div class="btn-group float-xs-right" role="group" aria-label="Basic example">
+            <div class="btn-group ml-auto" role="group" aria-label="Basic example">
                 <input type="submit" value="Save" class="btn btn-primary">
             </div>
         </div>
@@ -245,11 +245,11 @@
     </div>
     <hr>
     <div class="container ml-0">
-        <div class="row">
-            <div class="col-xs-6 text-xs-left">
+        <div class="d-flex justify-content-start">
+            <div class="">
                 <input type="button" name="delete" value="Delete product" class="btn btn-secondary">
             </div>
-            <div class="col-xs-6 text-xs-right">
+            <div class="ml-auto">
                 <input type="submit" value="Save" class="btn btn-primary">
             </div>
         </div>

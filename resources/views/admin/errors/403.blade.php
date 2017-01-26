@@ -5,7 +5,7 @@
 @section('content')
 <div class="error-screen">
     <div class="notfound">
-        <h1 class="display-4"><i class="fa fa-ban fa-2x text-muted mb-2" aria-hidden="true"></i><br>403</h1>
+        <h1 class="display-4"><i class="fa fa-ban fa-2x text-muted mb-4" aria-hidden="true"></i><br>403</h1>
         <hr class="my-2">
         <div class="lead px-1">アクセスが禁止されています</div>
     </div>
