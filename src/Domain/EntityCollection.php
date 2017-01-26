@@ -48,8 +48,12 @@ class EntityCollection extends BaseCollection
      *
      * @return bool
      */
-    public function contains($identifier, $value = null)
+    public function contains($identifier, $operator = null, $value = null)
     {
+        if (func_num_args() == 3) {
+            return parent::contains($identifier, $operator, $value);
+        }
+
         if (func_num_args() == 2) {
             return parent::contains($identifier, $value);
         }

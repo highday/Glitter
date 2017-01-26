@@ -26,8 +26,8 @@ class AdminServiceProvider extends ServiceProvider
             ShareFlashMessagesFromSession::class,
         ]);
 
-        $router->middleware('restriction', AccessRestrictionWithRemoteAddress::class);
-        $router->middleware('outsider', RedirectIfMemberAuthenticated::class);
+        $router->aliasMiddleware('restriction', AccessRestrictionWithRemoteAddress::class);
+        $router->aliasMiddleware('outsider', RedirectIfMemberAuthenticated::class);
 
         if ($this->app->runningInConsole()) {
             $this->publishes([
