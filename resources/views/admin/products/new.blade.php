@@ -5,7 +5,7 @@
 @section('header')
 <h1 class="title">
     <a href="{{ route('glitter.admin.products.products') }}"><i class="fa fa-tag fa-fw" aria-hidden="true"></i>商品管理</a>
-    / {{ $product->name }}
+    / Add product
 </h1>
 @endsection
 
@@ -15,7 +15,7 @@
 
 @section('content')
 @include('glitter.admin::partials.errors')
-<form role="form" method="POST" action="{{ route('glitter.admin.products.update', $product->id) }}">
+<form role="form" method="POST" action="{{ route('glitter.admin.products.store') }}">
     {{ csrf_field() }}
     <div class="container ml-0">
         <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
@@ -39,11 +39,11 @@
                     <div class="card-block">
                         <div class="form-group">
                             <label>{{ trans('glitter::admin.product.name') }}</label>
-                            <input type="text" name="name" value="{{ old('name', $product->name) }}" class="form-control">
+                            <input type="text" name="name" value="{{ old('name') }}" class="form-control">
                         </div>
                         <div class="form-group">
                             <label>{{ trans('glitter::admin.product.description') }}</label>
-                            <textarea name="description" class="form-control" rows="10">{{ old('description', $product->description) }}</textarea>
+                            <textarea name="description" class="form-control" rows="10">{{ old('description') }}</textarea>
                         </div>
                     </div>
                 </div>
@@ -65,7 +65,6 @@
                         </div>
                     </div>
                 </div>
-                @if(count($product->variants) == 1)
                 <div class="form-card card">
                     <div class="card-block">
                         <h2 class="card-title">{{ trans('glitter::admin.product.pricing') }}</h2>
@@ -184,54 +183,6 @@
                         <p class="small mb-0">{{ trans('glitter::admin.product.variants_description') }}</p>
                     </div>
                 </div>
-                @else
-                <div class="form-card card">
-                    <div class="card-block">
-                        <div class="row justify-content-between">
-                            <div class="col col-auto">
-                                <h2 class="card-title">{{ trans('glitter::admin.product.variants') }}</h2>
-                            </div>
-                            <div class="col col-auto">
-                                <nav class="nav nav-inline text-sm-right small">
-                                    <a class="nav-link pt-0" href="#">{{ trans('glitter::admin.product.reorder_variants') }}</a>
-                                    <a class="nav-link pt-0" href="#">{{ trans('glitter::admin.product.edit_options') }}</a>
-                                    <a class="nav-link pt-0" href="#">{{ trans('glitter::admin.product.add_variant') }}</a>
-                                </nav>
-                            </div>
-                        </div>
-                        <div>
-                            <table class="table table-sm">
-                                <thead>
-                                    <tr>
-                                        <th></th>
-                                        @foreach($product->options as $option)
-                                        <th>{{ $option }}</th>
-                                        @endforeach
-                                        <th>Inventory</th>
-                                        <th>Incoming</th>
-                                        <th>Price</th>
-                                        <th>SKU</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    @foreach($product->variants as $variant)
-                                    <tr>
-                                        <td>IMG</td>
-                                        @foreach($variant->options as $option)
-                                        <td>{{ $option->getValue() }}</td>
-                                        @endforeach
-                                        <td></td>
-                                        <td></td>
-                                        <td>{{ $variant->price->getSelling() }}</td>
-                                        <td>{{ $variant->sku }}</td>
-                                    </tr>
-                                    @endforeach
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                </div>
-                @endif
             </div>
             <div class="col-lg-4">
                 <div class="form-card card">

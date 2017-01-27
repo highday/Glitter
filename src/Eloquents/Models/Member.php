@@ -4,7 +4,6 @@ namespace Highday\Glitter\Eloquents\Models;
 
 use Highday\Glitter\Contracts\Domain\Domainable;
 use Highday\Glitter\Domain\Entities\Member as DomainEntity;
-use Highday\Glitter\Domain\ValueObjects\Web\EmailAddress;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -66,6 +65,6 @@ class Member extends Authenticatable implements Domainable
 
     public function toDomain(): DomainEntity
     {
-        return new DomainEntity($this->getKey(), $this->first_name, $this->last_name, new EmailAddress($this->email));
+        return new DomainEntity($this->getKey(), $this->first_name, $this->last_name, $this->email);
     }
 }

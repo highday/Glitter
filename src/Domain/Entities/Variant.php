@@ -4,7 +4,8 @@ namespace Highday\Glitter\Domain\Entities;
 
 use Highday\Glitter\Domain\Collection;
 use Highday\Glitter\Domain\Entity;
-use Highday\Glitter\Domain\ValueObjects\Product\Price;
+use Highday\Glitter\Domain\ValueObjects\Product\{ OptionValue, Price };
+use Highday\Glitter\Domain\ValueObjects\Money;
 
 class Variant extends Entity
 {
@@ -20,11 +21,13 @@ class Variant extends Entity
     // /** @var Stock */
     // protected $stock;
 
-    public function __construct(string $sku = '', array $options = [], Price $price = null)
+    public function __construct(string $sku, array $options, float $price, float $reference_price = null)
     {
         $this->sku = $sku;
-        $this->options = new Collection($options);
-        $this->price = $price;
+        $this->options = (new Collection($options))->map(function ($option) {
+            return new OptionValue($option[0], $option[1]);
+        });
+        $this->price = new Price(new Money($price), $reference_price ? new Money($reference_price) : null);
     }
 
     public function setSKU(string $sku)

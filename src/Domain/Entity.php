@@ -25,7 +25,7 @@ abstract class Entity
             return false;
         }
 
-        return $this->identifier === $entity->identifier;
+        return $this->getId() === $entity->getId();
     }
 
     public static function newCollection(array $entities = [])
@@ -47,8 +47,6 @@ abstract class Entity
     {
         $method = Str::camel("get_{$key}");
 
-        if (method_exists($this, $method)) {
-            return $this->$method();
-        }
+        return $this->{$method}();
     }
 }

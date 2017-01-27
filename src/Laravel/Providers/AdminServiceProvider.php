@@ -21,6 +21,14 @@ class AdminServiceProvider extends ServiceProvider
 
         $this->loadViewsFrom(__DIR__.'/../../../resources/views/admin', 'glitter.admin');
 
+        $this->app->bind(\Highday\Glitter\Domain\Entities\Member::class, function ($app) {
+            return call_user_func($app['auth']->userResolver(), 'member')->toDomain();
+        });
+
+        $this->app->bind(\Highday\Glitter\Domain\Entities\Store::class, function ($app) {
+            return call_user_func($app['auth']->userResolver(), 'member')->activeStore->toDomain();
+        });
+
         $router->middlewareGroup('glitter.admin', [
             ShareAdminVariables::class,
             ShareFlashMessagesFromSession::class,

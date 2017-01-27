@@ -20,7 +20,7 @@
             <button type="button" class="btn btn-secondary">エクスポート</button>
         </div>
         <div class="btn-group" role="group" aria-label="Third group">
-            <button type="button" class="btn btn-primary">新規商品</button>
+            <a href="{{ route('glitter.admin.products.new') }}" class="btn btn-primary">新規商品</a>
         </div>
     </div>
 </nav>

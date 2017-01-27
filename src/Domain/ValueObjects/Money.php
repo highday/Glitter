@@ -49,4 +49,9 @@ class Money
     {
         return new static($amount);
     }
+
+    public function __toString(): string
+    {
+        return number_format($this->amount);
+    }
 }

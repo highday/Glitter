@@ -22,6 +22,9 @@ class Product extends Entity
     /** @var Attachment[] */
     protected $attachments;
 
+    /** @var string[] */
+    protected $options;
+
     /** @var Variant[] */
     protected $variants;
 
@@ -34,12 +37,13 @@ class Product extends Entity
     /** @var Vendor */
     protected $vendor;
 
-    public function __construct(string $name, string $description = null, array $variants = [])
+    public function __construct(string $name, string $description = null, array $options = [], array $variants = [])
     {
         $this->name = $name;
         $this->description = $description;
         $this->thumbnail = $this->defaultThumbnail();
         $this->images = self::newCollection();
+        $this->options = $options;
         $this->variants = self::newCollection($variants);
         $this->inventory = new Inventory();
         $this->type = new Type('R-type');
@@ -79,6 +83,11 @@ class Product extends Entity
     public function getVendor(): Vendor
     {
         return $this->vendor;
+    }
+
+    public function getOptions(): array
+    {
+        return $this->options;
     }
 
     public function getVariants(): EntityCollection

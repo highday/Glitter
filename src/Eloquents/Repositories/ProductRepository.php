@@ -5,7 +5,9 @@ namespace Highday\Glitter\Eloquents\Repositories;
 use Highday\Glitter\Contracts\Repositories\ProductRepository as Repository;
 use Highday\Glitter\Domain\Entity;
 use Highday\Glitter\Domain\EntityCollection;
+use Highday\Glitter\Domain\Entities\Store;
 use Highday\Glitter\Eloquents\Models\Product;
+use Highday\Glitter\Eloquents\RepositoryException;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
 
@@ -53,12 +55,29 @@ class ProductRepository implements Repository
         return $query->where('name', 'like', "%{$keyword}%");
     }
 
-    public function update($id, $attributes): bool
+    public function store(Store $store, array $attributes): Entity
+    {
+        $model = new Product();
+        $model->fill($attributes);
+        $model->store()->associate($store->getId());
+
+        if ($model->save()) {
+            return $model->toDomain();
+        }
+
+        throw new RepositoryException('dame');
+    }
+
+    public function update($id, array $attributes): Entity
     {
         $model = Product::findOrFail($id);
         $model->fill($attributes);
 
-        return $model->save();
+        if ($model->save()) {
+            return $model->toDomain();
+        }
+
+        throw new RepositoryException('dame');
     }
 
     private function toDomainCollection(Collection $items): EntityCollection

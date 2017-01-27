@@ -16,10 +16,10 @@ class Member extends Entity
     /** @var EmailAddress */
     public $email;
 
-    public function __construct(string $first_name, string $last_name, EmailAddress $email)
+    public function __construct(string $first_name, string $last_name, string $email)
     {
         $this->setName($first_name, $last_name);
-        $this->setEmail($email);
+        $this->setEmail(new EmailAddress($email));
     }
 
     public function setName(string $first_name, string $last_name)

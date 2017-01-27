@@ -4,6 +4,7 @@ namespace Highday\Glitter\Contracts\Repositories;
 
 use Highday\Glitter\Domain\Entity;
 use Highday\Glitter\Domain\EntityCollection;
+use Highday\Glitter\Domain\Entities\Store;
 
 interface ProductRepository
 {
@@ -13,5 +14,7 @@ interface ProductRepository
 
     public function searchPaginate(string $keyword = '', int $perPage = 100, int $page = 1): EntityCollection;
 
-    public function update($id, $attributes): bool;
+    public function store(Store $store, array $attributes): Entity;
+
+    public function update($id, array $attributes): Entity;
 }

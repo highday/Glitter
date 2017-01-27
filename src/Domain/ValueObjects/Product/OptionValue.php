@@ -14,4 +14,9 @@ class OptionValue
 
         $this->value = $value;
     }
+
+    public function getValue()
+    {
+        return $this->value;
+    }
 }

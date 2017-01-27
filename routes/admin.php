@@ -16,8 +16,11 @@ $route->group([
     $route->get('orders', 'OrdersController@index')->name('orders.index');
 
     $route->get('products', 'ProductsController@products')->name('products.products');
+    $route->get('products/new', 'ProductsController@new')->name('products.new');
+    $route->post('products/new', 'ProductsController@store')->name('products.store');
     $route->get('products/edit/{key}', 'ProductsController@edit')->name('products.edit');
     $route->post('products/edit/{key}', 'ProductsController@update')->name('products.update');
+    $route->post('products/edit/{key}/attachments', 'ProductAttachmentsController@add')->name('products.attachments.add');
     $route->get('products/transfers', 'ProductsController@products')->name('products.transfers');
     $route->get('products/inventory', 'ProductsController@inventory')->name('products.inventory');
     $route->get('products/collections', 'ProductsController@products')->name('products.collections');

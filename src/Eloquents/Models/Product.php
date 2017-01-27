@@ -3,7 +3,7 @@
 namespace Highday\Glitter\Eloquents\Models;
 
 use Highday\Glitter\Contracts\Domain\Domainable;
-use Highday\Glitter\Domain\Entities\Product as ProductEntity;
+use Highday\Glitter\Domain\Entities\Product as DomainEntity;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
@@ -39,9 +39,19 @@ class Product extends Model implements Domainable
         return $this->hasMany(Variant::class);
     }
 
-    public function toDomain(): ProductEntity
+    public function getOptionsAttribute()
     {
-        $entity = new ProductEntity($this->title, $this->description);
+        return array_filter([ $this->option1, $this->option2, $this->option3 ]);
+    }
+
+    public function toDomain(): DomainEntity
+    {
+        $entity = new DomainEntity(
+            $this->title,
+            $this->description,
+            $this->options,
+            $this->variants->map->toDomain()->all()
+        );
         $entity->setId($this->getKey());
 
         return $entity;
