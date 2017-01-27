@@ -4,7 +4,7 @@ namespace Highday\Glitter\Domain\Entities;
 
 use Highday\Glitter\Domain\Entity;
 
-class Image extends Entity
+class Attachment extends Entity
 {
     /** @var string */
     public $url;

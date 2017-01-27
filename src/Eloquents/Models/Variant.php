@@ -30,6 +30,6 @@ class Variant extends Model
 
     public function image()
     {
-        return $this->belongsTo(Media::class, 'image_id');
+        return $this->belongsTo(Attachment::class, 'image_id');
     }
 }

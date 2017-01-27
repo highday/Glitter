@@ -31,7 +31,7 @@ class Product extends Model implements Domainable
 
     public function media()
     {
-        return $this->belongsToMany(Media::class, 'product_media');
+        return $this->belongsToMany(Attachment::class, 'product_media');
     }
 
     public function variants()

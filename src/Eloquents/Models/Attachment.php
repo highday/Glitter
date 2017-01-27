@@ -4,7 +4,7 @@ namespace Highday\Glitter\Eloquents\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Media extends Model
+class Attachment extends Model
 {
     protected $fillable = [
         'filename',

@@ -16,11 +16,11 @@ class Product extends Entity
     /** @var string */
     protected $description;
 
-    /** @var Image */
+    /** @var Attachment */
     protected $thumbnail;
 
-    /** @var Image[] */
-    protected $images;
+    /** @var Attachment[] */
+    protected $attachments;
 
     /** @var Variant[] */
     protected $variants;
@@ -56,9 +56,14 @@ class Product extends Entity
         return $this->description;
     }
 
-    public function getThumbnail(): Image
+    public function getThumbnail(): Attachment
     {
         return $this->thumbnail;
+    }
+
+    public function getAttachments(): EntityCollection
+    {
+        return $this->attachments;
     }
 
     public function getInventory(): Inventory
@@ -91,8 +96,8 @@ class Product extends Entity
         return $this->variants->count();
     }
 
-    public function defaultThumbnail(): Image
+    public function defaultThumbnail(): Attachment
     {
-        return new Image('http://placehold.jp/50x50.png');
+        return new Attachment('http://placehold.jp/50x50.png');
     }
 }
