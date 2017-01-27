@@ -37,7 +37,7 @@ class Variant extends Model implements Domainable
 
     public function getOptionsAttribute()
     {
-        return array_filter([ $this->option1, $this->option2, $this->option3 ]);
+        return array_filter([$this->option1, $this->option2, $this->option3]);
     }
 
     public function toDomain(): DomainEntity

@@ -3,9 +3,9 @@
 namespace Highday\Glitter\Eloquents\Repositories;
 
 use Highday\Glitter\Contracts\Repositories\ProductRepository as Repository;
+use Highday\Glitter\Domain\Entities\Store;
 use Highday\Glitter\Domain\Entity;
 use Highday\Glitter\Domain\EntityCollection;
-use Highday\Glitter\Domain\Entities\Store;
 use Highday\Glitter\Eloquents\Models\Product;
 use Highday\Glitter\Eloquents\RepositoryException;
 use Illuminate\Database\Eloquent\Builder;

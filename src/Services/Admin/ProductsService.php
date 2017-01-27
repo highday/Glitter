@@ -3,10 +3,9 @@
 namespace Highday\Glitter\Services\Admin;
 
 use Highday\Glitter\Contracts\Repositories\ProductRepository;
+use Highday\Glitter\Domain\Entities\Store;
 use Highday\Glitter\Domain\Entity;
 use Highday\Glitter\Domain\EntityCollection;
-use Highday\Glitter\Domain\Entities\Store;
-use Illuminate\Contracts\Auth\Factory as Auth;
 use Illuminate\Contracts\Validation\Factory as Validator;
 use Illuminate\Validation\ValidationException;
 

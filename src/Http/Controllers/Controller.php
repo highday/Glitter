@@ -13,7 +13,8 @@ class Controller extends BaseController
 {
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
 
-    public function transaction(Closure $callback) {
+    public function transaction(Closure $callback)
+    {
         return app(DatabaseManager::class)->transaction($callback);
     }
 }
