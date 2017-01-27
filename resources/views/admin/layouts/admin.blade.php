@@ -18,7 +18,7 @@ window.Laravel = <?php echo json_encode([
 <div id="glitter-admin" class="admin-screen">
 
 <nav class="header-nav navbar navbar-fixed-top navbar-dark hidden-md-up">
-    <a data-toggle="drawer" href="#" class="navbar-brand">
+    <a @click.prevent="toggleDrawer" href="#" class="navbar-brand">
         <i class="fa fa-bars fa-fw" aria-hidden="true"></i>
         {{ $store->name }}
     </a>
@@ -32,11 +32,11 @@ window.Laravel = <?php echo json_encode([
     </ul>
 </nav>{{-- /.header-nav --}}
 
-<nav id="drawer" class="drawer-nav">
+<nav class="drawer-nav" :class="{ in: drawerOpen }">
     <div class="drawer-nav-store dropdown hidden-sm-down">
         <a href="#" class="store-menu" data-toggle="dropdown">
-            <i class="fa fa-caret-down fa-fw float-xs-right" aria-hidden="true"></i>
-            <span class="store-name">{{ $store->name }}</span><br>
+            <span class="store-name">{{ $store->name }}</span>
+            <i class="fa fa-caret-down fa-fw" aria-hidden="true"></i><br>
             <small><i class="fa fa-user-circle-o fa-fw" aria-hidden="true"></i>{{ $me->name }}</small>
         </a>
         <div class="dropdown-menu">
@@ -91,22 +91,27 @@ window.Laravel = <?php echo json_encode([
 
 @section('main')
 <main class="main-section">
+
 @hasSection('nav')
 <div class="nav-wrapper">
 @yield('nav')
 </div>{{-- /.nav-wrapper --}}
 @endif
+
 <div class="content-wrapper">
 @if(!$flash_message->isEmpty())
     <div class="container ml-0">{!! join($flash_message->all()) !!}</div>
 @endif
 @yield('content')
 </div>{{-- /.content-wrapper --}}
+
 </main>{{-- /.main-section --}}
 @show
 
-</div>{{-- /.admin-screen --}}
 @include('glitter.admin::partials.logout-form')
+@yield('modal')
+</div>{{-- /.admin-screen --}}
+
 {{-- Scripts --}}
 <script src="{{ asset('/js/glitter-admin.js') }}"></script>
 @yield('scripts')

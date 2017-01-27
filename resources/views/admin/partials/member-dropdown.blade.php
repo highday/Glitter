@@ -15,4 +15,4 @@
 @endforeach
 <div class="dropdown-divider"></div>
 @endif
-<a class="dropdown-item" href="#logout">ログアウト</a>
+<a class="dropdown-item" href="#" @click.prevent="logout">ログアウト</a>

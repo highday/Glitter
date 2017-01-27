@@ -13,18 +13,19 @@ require('./bootstrap');
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
-// Vue.component('example', require('./components/Example.vue'));
+Vue.component('modal', require('./components/common/modal.vue'));
 
 const app = new Vue({
-    el: '#glitter-admin'
-});
-
-$('[data-toggle="drawer"]').on('click', function(e) {
-	e.preventDefault();
-	$('#drawer').toggleClass('in');
-});
-
-$('a[href="#logout"]').on('click', function(e) {
-    e.preventDefault();
-    $('form#logoutForm').submit();
+    el: '#glitter-admin',
+    data: {
+        drawerOpen: false,
+    },
+    methods: {
+        toggleDrawer: function () {
+            this.drawerOpen = !this.drawerOpen;
+        },
+        logout: function () {
+            $('form#logoutForm').submit();
+        },
+    },
 });
