@@ -15,10 +15,11 @@ require('./bootstrap');
 
 Vue.component('modal', require('./components/common/modal.vue'));
 
-const app = new Vue({
+window.app = new Vue({
     el: '#glitter-admin',
     data: {
         drawerOpen: false,
+        screen: {},
     },
     methods: {
         toggleDrawer: function () {

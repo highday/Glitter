@@ -77,7 +77,7 @@ window.Laravel = <?php echo json_encode([
         </ul>
         <ul class="nav flex-column">
             <li class="nav-item">
-                <a class="nav-link{{ Request::is('admin/settings*') ? ' active' : '' }}" href="{{ route('glitter.admin.settings.index') }}"><i class="fa fa-cog fa-fw" aria-hidden="true"></i>ストア設定</a>
+                <a class="nav-link{{ Request::is('admin/settings*') ? ' active' : '' }}" href="{{ route('glitter.admin.settings.index') }}"><i class="fa fa-cog fa-fw" aria-hidden="true"></i>ストア設定<span class="badge">NEW</span></a>
             </li>
         </ul>
     </div>
@@ -89,6 +89,12 @@ window.Laravel = <?php echo json_encode([
 </header>{{-- /.header-section --}}
 @endif
 
+<div class="fixed-top p-1">
+    <div class="d-flex justify-content-end">
+        <button class="btn btn-link text-muted" type="button"><i class="fa fa-bell" aria-hidden="true"></i></button>
+    </div>
+</div>
+
 @section('main')
 <main class="main-section">
 
@@ -99,11 +105,22 @@ window.Laravel = <?php echo json_encode([
 @endif
 
 <div class="content-wrapper">
+
 @if(!$flash_message->isEmpty())
-    <div class="container ml-0">{!! join($flash_message->all()) !!}</div>
+<div class="container">{!! join($flash_message->all()) !!}</div>
 @endif
+
 @yield('content')
+
 </div>{{-- /.content-wrapper --}}
+
+<div class="container">
+    <div class="row mt-5 py-3 justify-content-center">
+        <div class="col col-auto text-muted small">
+            Thanks for testing <a href="https://github.com/highday/glitter" target="_blank">Glitter</a> ✨️
+        </div>
+    </div>
+</div>
 
 </main>{{-- /.main-section --}}
 @show

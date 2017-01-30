@@ -2,10 +2,16 @@
 
 @section('title', '商品管理')
 
+@section('scripts')
+<script defer>
+Vue.set(app.$data.screen, 'name', '{{ old('name', $product->name) }}');
+</script>
+@endsection
+
 @section('header')
 <h1 class="title">
     <a href="{{ route('glitter.admin.products.products') }}"><i class="fa fa-tag fa-fw" aria-hidden="true"></i>商品管理</a>
-    / {{ $product->name }}
+    / <template v-if="screen.name">@{{ screen.name }}</template><template v-else>{{ $product->name }}</template>
 </h1>
 @endsection
 
@@ -17,7 +23,7 @@
 @include('glitter.admin::partials.errors')
 <form role="form" method="POST" action="{{ route('glitter.admin.products.update', $product->id) }}">
     {{ csrf_field() }}
-    <div class="container ml-0">
+    <div class="container">
         <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
             <div class="btn-group mr-2" role="group" aria-label="Basic example">
                 <button type="button" class="btn btn-secondary"><i class="fa fa-chevron-left" aria-hidden="true"></i></button>
@@ -32,14 +38,14 @@
         </div>
     </div>
     <hr>
-    <div class="container ml-0">
+    <div class="container">
         <div class="row">
             <div class="col-lg-8">
                 <div class="form-card card">
                     <div class="card-block">
                         <div class="form-group">
                             <label>{{ trans('glitter::admin.product.name') }}</label>
-                            <input type="text" name="name" value="{{ old('name', $product->name) }}" class="form-control">
+                            <input type="text" name="name" v-model.trim="screen.name" placeholder="{{ $product->name }}" class="form-control">
                         </div>
                         <div class="form-group">
                             <label>{{ trans('glitter::admin.product.description') }}</label>
@@ -65,7 +71,8 @@
                         </div>
                     </div>
                 </div>
-                @if(count($product->variants) == 1)
+                @if($product->variants->count() == 1)
+                @foreach($product->variants as $variant)
                 <div class="form-card card">
                     <div class="card-block">
                         <h2 class="card-title">{{ trans('glitter::admin.product.pricing') }}</h2>
@@ -75,7 +82,7 @@
                                     <label>{{ trans('glitter::admin.product.price') }}</label>
                                     <div class="input-group">
                                         <span class="input-group-addon">¥</span>
-                                        <input type="text" name="" value="" class="form-control">
+                                        <input type="text" name="variant[0][price]" value="{{ old('variant.0.price', $variant->price->getSelling()) }}" class="form-control">
                                     </div>
                                 </div>
                             </div>
@@ -84,14 +91,14 @@
                                     <label>{{ trans('glitter::admin.product.reference_price') }}</label>
                                     <div class="input-group">
                                         <span class="input-group-addon">¥</span>
-                                        <input type="text" name="" value="" class="form-control">
+                                        <input type="text" name="variant[0][reference_price]" value="{{ old('variant.0.reference_price', $variant->price->getReference()) }}" class="form-control">
                                     </div>
                                 </div>
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="custom-control custom-checkbox">
-                                <input type="checkbox" class="custom-control-input">
+                                <input type="checkbox" name="variant[0][taxes_included]" value="1" {{ old('variant.0.taxes_included') ? 'checked' : '' }} class="custom-control-input">
                                 <span class="custom-control-indicator"></span>
                                 <span class="custom-control-description">{{ trans('glitter::admin.product.taxes_included') }}</span>
                             </label>
@@ -105,13 +112,13 @@
                             <div class="col-sm">
                                 <div class="form-group">
                                     <label>{{ trans('glitter::admin.product.sku') }}</label>
-                                    <input type="text" name="" value="" class="form-control">
+                                    <input type="text" name="variant[0][sku]" value="{{ old('variant.0.sku') }}" class="form-control">
                                 </div>
                             </div>
                             <div class="col-sm">
                                 <div class="form-group">
                                     <label>{{ trans('glitter::admin.product.barcode') }}</label>
-                                    <input type="text" name="" value="" class="form-control">
+                                    <input type="text" name="variant[0][barcode]" value="{{ old('variant.0.barcode') }}" class="form-control">
                                 </div>
                             </div>
                         </div>
@@ -119,22 +126,22 @@
                             <div class="col-sm">
                                 <div class="form-group">
                                     <label>{{ trans('glitter::admin.product.inventory_policy') }}</label>
-                                    <select class="form-control">
-                                        <option>{{ trans('glitter::admin.product.dont_track_inventory') }}</option>
-                                        <option value="glitter">{{ trans('glitter::admin.product.glitter_track_inventory') }}</option>
+                                    <select class="form-control" name="variant[0][inventory_policy]">
+                                        <option value="deny" {{ old('variant.0.inventory_policy') == 'deny' ? 'selected' : '' }}>{{ trans('glitter::admin.product.dont_track_inventory') }}</option>
+                                        <option value="glitter" {{ old('variant.0.inventory_policy') == 'glitter' ? 'selected' : '' }}>{{ trans('glitter::admin.product.glitter_track_inventory') }}</option>
                                     </select>
                                 </div>
                             </div>
                             <div class="col-sm">
                                 <div class="form-group">
                                     <label>{{ trans('glitter::admin.product.quantity') }}</label>
-                                    <input type="number" name="" value="" class="form-control col-xs-4">
+                                    <input type="number" name="variant[0][quantity]" value="{{ old('variant.0.quantity') }}" class="form-control col-xs-4">
                                 </div>
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="custom-control custom-checkbox">
-                                <input type="checkbox" class="custom-control-input">
+                                <input type="checkbox" name="variant[0][out_of_stock_purchase]" value="1" {{ old('variant.0.out_of_stock_purchase') ? 'checked' : '' }} class="custom-control-input">
                                 <span class="custom-control-indicator"></span>
                                 <span class="custom-control-description">{{ trans('glitter::admin.product.out_of_stock_purchase') }}</span>
                             </label>
@@ -146,7 +153,7 @@
                         <h2 class="card-title">{{ trans('glitter::admin.product.shipping') }}</h2>
                         <div class="form-group">
                             <label class="custom-control custom-checkbox">
-                                <input type="checkbox" class="custom-control-input">
+                                <input type="checkbox" name="variant[0][requires_shipping]" value="1" {{ old('variant.0.requires_shipping') ? 'checked' : '' }} class="custom-control-input">
                                 <span class="custom-control-indicator"></span>
                                 <span class="custom-control-description">{{ trans('glitter::admin.product.requires_shipping') }}</span>
                             </label>
@@ -157,15 +164,15 @@
                         <p class="small text-muted">{{ trans('glitter::admin.product.weight_description') }}</p>
                         <div class="form-group">
                             <label>{{ trans('glitter::admin.product.weight') }}</label>
-                            <input type="text" name="" value="" class="form-control col-xs-4">
+                            <input type="text" name="variant[0][weight]" value="{{ old('variant.0.weight') }}" class="form-control col-xs-4">
                         </div>
                     </div>
                     <div class="card-block">
                         <h3 class="card-title">{{ trans('glitter::admin.product.fulfillment_service') }}</h3>
-                        <select class="form-control" style="width: auto;">
-                            <option>{{ trans('glitter::admin.product.fulfillment_manual') }}</option>
-                            <option>ヤマト運輸</option>
-                            <option>佐川急便</option>
+                        <select class="form-control" name="variant[0][fulfillment_service]" style="width: auto;">
+                            <option value="" {{ old('variant.0.weight') == '' ? 'selected' : '' }}>{{ trans('glitter::admin.product.fulfillment_manual') }}</option>
+                            <option value="ヤマト運輸" {{ old('variant.0.weight') == 'ヤマト運輸' ? 'selected' : '' }}>ヤマト運輸</option>
+                            <option value="佐川急便" {{ old('variant.0.weight') == '佐川急便' ? 'selected' : '' }}>佐川急便</option>
                         </select>
                     </div>
                 </div>
@@ -184,6 +191,7 @@
                         <p class="small mb-0">{{ trans('glitter::admin.product.variants_description') }}</p>
                     </div>
                 </div>
+                @endforeach
                 @else
                 <div class="form-card card">
                     <div class="card-block">
@@ -252,7 +260,7 @@
         </div>
     </div>
     <hr>
-    <div class="container ml-0">
+    <div class="container">
         <div class="d-flex justify-content-start">
             <div class="">
                 <input type="button" name="delete" value="Delete product" class="btn btn-secondary">

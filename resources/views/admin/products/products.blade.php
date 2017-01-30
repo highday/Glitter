@@ -13,17 +13,22 @@
 @stop
 
 @section('content')
-<nav class="action-nav">
-    <div class="btn-toolbar float-xs-right" role="toolbar" aria-label="Toolbar with button groups">
-        <div class="btn-group" role="group" aria-label="First group">
+<div class="container-fluid">
+    <div class="btn-toolbar" role="toolbar">
+        <div class="btn-group mr-2" role="group">
+            <a href="{{ route('glitter.admin.products.new') }}" class="btn btn-primary">新規商品</a>
+        </div>
+        <div class="btn-group" role="group">
             <button type="button" class="btn btn-secondary">インポート</button>
             <button type="button" class="btn btn-secondary">エクスポート</button>
         </div>
-        <div class="btn-group" role="group" aria-label="Third group">
-            <a href="{{ route('glitter.admin.products.new') }}" class="btn btn-primary">新規商品</a>
+        <div class="btn-group ml-auto" role="group">
+            <button type="button" class="btn btn-outline-secondary"><i class="fa fa-question" aria-hidden="true"></i></button>
         </div>
     </div>
-</nav>
+</div>
+
+<hr>
 
 <div class="container-fluid">
     <div class="list-card card">

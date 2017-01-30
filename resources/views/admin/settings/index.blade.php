@@ -13,7 +13,7 @@
 @stop
 
 @section('content')
-<div class="container ml-0">
+<div class="container">
     <div class="row mb-4">
         <div class="col-lg-3">
             <div class="pt-2">
