@@ -27,7 +27,7 @@ class Variant extends Model implements Domainable
     ];
 
     protected $cast = [
-        'taxes_included' => 'bool',
+        'taxes_included'    => 'bool',
         'requires_shipping' => 'bool',
     ];
 

@@ -5,7 +5,6 @@ namespace Highday\Glitter\Services\Admin;
 use Highday\Glitter\Contracts\Repositories\ProductRepository;
 use Highday\Glitter\Domain\Entities\Product;
 use Highday\Glitter\Domain\Entities\Store;
-use Highday\Glitter\Domain\Entities\Variant;
 use Highday\Glitter\Domain\EntityCollection;
 use Illuminate\Contracts\Validation\Factory as Validator;
 use Illuminate\Validation\ValidationException;

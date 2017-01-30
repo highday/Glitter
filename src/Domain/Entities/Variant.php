@@ -99,5 +99,4 @@ class Variant extends Entity
     {
         return $this->requires_shipping;
     }
-
 }

@@ -4,7 +4,6 @@ namespace Highday\Glitter\Contracts\Repositories;
 
 use Highday\Glitter\Domain\Entities\Product;
 use Highday\Glitter\Domain\Entities\Store;
-use Highday\Glitter\Domain\Entities\Variant;
 use Highday\Glitter\Domain\EntityCollection;
 
 interface ProductRepository
