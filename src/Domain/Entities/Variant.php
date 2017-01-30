@@ -51,9 +51,9 @@ class Variant extends Entity
 
         $this->barcode = (string) array_get($props, 'barcode');
 
-        $selling = new Money(array_get($props, 'price'));
-        $reference = array_has($props, 'reference_price') ? new Money(array_get($props, 'reference_price')) : null;
-        $taxes_included = array_get($props, 'taxes_included');
+        $selling = array_get($props, 'price') > 0 ? new Money(array_get($props, 'price')) : null;
+        $reference = array_get($props, 'reference_price') > 0 ? new Money(array_get($props, 'reference_price')) : null;
+        $taxes_included = (bool) array_get($props, 'taxes_included');
         $this->price = new Price($selling, $reference, $taxes_included);
 
         $this->inventory_management = (string) array_get($props, 'inventory_management');

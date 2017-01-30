@@ -263,7 +263,7 @@ Vue.set(app.$data.screen, 'name', '{{ old('name', $product->name) }}');
     <div class="container">
         <div class="d-flex justify-content-start">
             <div class="">
-                <input type="button" name="delete" value="Delete product" class="btn btn-secondary">
+                <input type="button" name="delete" value="Delete product" class="btn btn-outline-danger">
             </div>
             <div class="ml-auto">
                 <input type="submit" value="Save" class="btn btn-primary">

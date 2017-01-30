@@ -3,8 +3,10 @@
 @section('title', '商品管理')
 
 @section('scripts')
-<script defer>
+<script>
 Vue.set(app.$data.screen, 'name', '{{ old('name') }}');
+Vue.set(app.$data.screen, 'use_variant', false);
+Vue.set(app.$data.screen, 'variants', [['Size', '']]);
 </script>
 @endsection
 
@@ -26,14 +28,10 @@ Vue.set(app.$data.screen, 'name', '{{ old('name') }}');
     <div class="container">
         <div class="btn-toolbar" role="toolbar">
             <div class="btn-group mr-2" role="group">
-                <input type="submit" value="Save" class="btn btn-primary">
+                <a href="{{ route('glitter.admin.products.products') }}" class="btn btn-secondary">Cancel</a>
             </div>
             <div class="btn-group ml-auto" role="group">
-                <button type="button" class="btn btn-secondary">Duplicate</button>
-            </div>
-            <div class="btn-group ml-2" role="group">
-                <button type="button" class="btn btn-secondary"><i class="fa fa-chevron-left" aria-hidden="true"></i></button>
-                <button type="button" class="btn btn-secondary"><i class="fa fa-chevron-right" aria-hidden="true"></i></button>
+                <input type="submit" value="Save" class="btn btn-primary">
             </div>
         </div>
     </div>
@@ -62,7 +60,7 @@ Vue.set(app.$data.screen, 'name', '{{ old('name') }}');
                             <div class="col col-auto">
                                 <nav class="nav nav-inline text-sm-right small">
                                     <a class="nav-link pt-0" href="#" @click.prevent="$emit('modal', 'add_image_url')">{{ trans('glitter::admin.product.add_image_url') }}</a>
-                                    <a class="nav-link pt-0" href="#" @click.prevent="$emit('modal', 'aoaoao')">{{ trans('glitter::admin.product.add_image_file') }}</a>
+                                    <a class="nav-link pt-0" href="#">{{ trans('glitter::admin.product.add_image_file') }}</a>
                                 </nav>
                             </div>
                         </div>
@@ -182,11 +180,28 @@ Vue.set(app.$data.screen, 'name', '{{ old('name') }}');
                             </div>
                             <div class="col col-auto">
                                 <nav class="nav nav-inline text-sm-right small">
-                                    <a class="nav-link pt-0" href="#">{{ trans('glitter::admin.product.add_variant') }}</a>
+                                    <a class="nav-link pt-0" href="#" v-if="screen.use_variant" @click.prevent="screen.use_variant = false">{{ trans('glitter::admin.product.add_variant_cancel') }}</a>
+                                    <a class="nav-link pt-0" href="#" v-else @click.prevent="screen.use_variant = true">{{ trans('glitter::admin.product.add_variant') }}</a>
                                 </nav>
                             </div>
                         </div>
                         <p class="small mb-0">{{ trans('glitter::admin.product.variants_description') }}</p>
+                    </div>
+                    <div class="card-block" v-if="screen.use_variant">
+                        <div class="row no-gutters">
+                            <div class="col-4 pr-4">Option name</div>
+                            <div class="col">Option values</div>
+                        </div>
+                        <div class="row no-gutters flex-nowrap" v-for="(variant, index) in screen.variants">
+                            <div class="col-4 pr-4"><input type="text" name="" v-model.trim="screen.variants[index][0]" class="form-control"></div>
+                            <div class="col"><option-input name="" v-model.trim="screen.variants[index][1]"></div>
+                            <div class="col col-auto pl-4" v-if="screen.variants.length > 1"><button type="button" class="btn btn-secondary" @click="screen.variants.splice(index, 1)"><i class="fa fa-trash" aria-hidden="true"></i></button></div>
+                        </div>
+                        <div class="row" v-if="screen.variants.length < 3">
+                            <div class="col-12">
+                                <button type="button" class="btn btn-secondary" @click="screen.variants.push(['Color', ''])">Add another option</button>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -212,7 +227,7 @@ Vue.set(app.$data.screen, 'name', '{{ old('name') }}');
     <div class="container">
         <div class="d-flex justify-content-start">
             <div class="">
-                <input type="button" name="delete" value="Delete product" class="btn btn-secondary">
+                <a href="{{ route('glitter.admin.products.products') }}" class="btn btn-secondary">Cancel</a>
             </div>
             <div class="ml-auto">
                 <input type="submit" value="Save" class="btn btn-primary">
@@ -234,11 +249,6 @@ Vue.set(app.$data.screen, 'name', '{{ old('name') }}');
     <template slot="footer">
         <button type="button" class="btn btn-secondary" @click.prevent="$emit('modal-close')">Cancel</button>
         <button type="button" class="btn btn-primary">Add image</button>
-    </template>
-</modal>
-<modal name="aoaoao">
-    <template slot="body">
-        aoaoao
     </template>
 </modal>
 @endsection

@@ -13,7 +13,10 @@ require('./bootstrap');
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
+Vue.config.keyCodes.comma = 188
+
 Vue.component('modal', require('./components/common/modal.vue'));
+Vue.component('option-input', require('./components/products/option.vue'));
 
 window.app = new Vue({
     el: '#glitter-admin',
