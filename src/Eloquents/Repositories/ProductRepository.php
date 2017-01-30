@@ -3,24 +3,27 @@
 namespace Highday\Glitter\Eloquents\Repositories;
 
 use Highday\Glitter\Contracts\Repositories\ProductRepository as Repository;
+use Highday\Glitter\Domain\Entities\Product;
 use Highday\Glitter\Domain\Entities\Store;
-use Highday\Glitter\Domain\Entity;
+use Highday\Glitter\Domain\Entities\Variant;
 use Highday\Glitter\Domain\EntityCollection;
-use Highday\Glitter\Eloquents\Models\Product;
-use Highday\Glitter\Eloquents\RepositoryException;
+use Highday\Glitter\Eloquents\Models\Store as StoreModel;
+use Highday\Glitter\Eloquents\Models\Product as ProductModel;
+use Highday\Glitter\Eloquents\Models\Variant as VariantModel;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
+use RuntimeException;
 
 class ProductRepository implements Repository
 {
-    public function find($id): Entity
+    public function find($id): Product
     {
-        return Product::findOrFail($id)->toDomain();
+        return ProductModel::findOrFail($id)->toDomain();
     }
 
     public function search(string $keyword = ''): EntityCollection
     {
-        $query = Product::query();
+        $query = ProductModel::query();
         $query = $this->getKeywordQuery($query, $keyword);
 
         $items = $query->get();
@@ -30,7 +33,7 @@ class ProductRepository implements Repository
 
     public function searchPaginate(string $keyword = '', int $perPage = -1, int $page = 1): EntityCollection
     {
-        $query = Product::query();
+        $query = ProductModel::query();
         $query = $this->getKeywordQuery($query, $keyword);
 
         $total = $query->getCountForPagination();
@@ -55,29 +58,31 @@ class ProductRepository implements Repository
         return $query->where('name', 'like', "%{$keyword}%");
     }
 
-    public function store(Store $store, array $attributes): Entity
+    public function store(Store $store, array $attributes): Product
     {
-        $model = new Product();
-        $model->fill($attributes);
-        $model->store()->associate($store->getId());
+        $_store = StoreModel::findOrFail($store->getId());
 
-        if ($model->save()) {
-            return $model->toDomain();
-        }
+        $product = new ProductModel(array_only($attributes, ['title', 'description']));
+        $_store->products()->save($product);
 
-        throw new RepositoryException('dame');
+        $variants = array_map(function ($attributes) {
+            return new VariantModel($attributes);
+        }, array_get($attributes, 'variants'));
+        $product->variants()->saveMany($variants);
+
+        return $product->toDomain();
     }
 
-    public function update($id, array $attributes): Entity
+    public function update($id, array $attributes): Product
     {
-        $model = Product::findOrFail($id);
+        $model = ProductModel::findOrFail($id);
         $model->fill($attributes);
 
-        if ($model->save()) {
-            return $model->toDomain();
+        if ($model->save() !== true) {
+            throw new RuntimeException('Can not save model.');
         }
 
-        throw new RepositoryException('dame');
+        return $model->toDomain();
     }
 
     private function toDomainCollection(Collection $items): EntityCollection

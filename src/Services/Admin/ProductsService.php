@@ -3,8 +3,9 @@
 namespace Highday\Glitter\Services\Admin;
 
 use Highday\Glitter\Contracts\Repositories\ProductRepository;
+use Highday\Glitter\Domain\Entities\Product;
 use Highday\Glitter\Domain\Entities\Store;
-use Highday\Glitter\Domain\Entity;
+use Highday\Glitter\Domain\Entities\Variant;
 use Highday\Glitter\Domain\EntityCollection;
 use Illuminate\Contracts\Validation\Factory as Validator;
 use Illuminate\Validation\ValidationException;
@@ -29,16 +30,27 @@ class ProductsService
         return $this->repository->search($query);
     }
 
-    public function find(int $key): Entity
+    public function find(int $key): Product
     {
         return $this->repository->find($key);
     }
 
-    public function store(array $attributes)
+    public function store(array $attributes): Product
     {
         $validator = app(Validator::class)->make($attributes, [
-            'title'       => 'required',
-            'description' => 'required',
+            'title'                            => 'required',
+            'description'                      => 'nullable',
+            'variants.*.price'                 => 'nullable|numeric',
+            'variants.*.reference_price'       => 'nullable|numeric',
+            'variants.*.taxes_included'        => 'nullable|boolean',
+            'variants.*.sku'                   => 'nullable',
+            'variants.*.barcode'               => 'nullable',
+            'variants.*.inventory_policy'      => 'nullable',
+            'variants.*.quantity'              => 'nullable|integer',
+            'variants.*.out_of_stock_purchase' => 'nullable|boolean',
+            'variants.*.requires_shipping'     => 'nullable|boolean',
+            'variants.*.weight'                => 'nullable|numeric',
+            'variants.*.fulfillment_service'   => 'nullable',
         ]);
 
         if ($validator->fails()) {

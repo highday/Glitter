@@ -40,15 +40,30 @@ class ProductsController extends Controller
         try {
             $product = $this->transaction(function () use ($request, $service) {
                 return $service->store([
-                    'title'       => $request->input('name'),
-                    'description' => $request->input('description'),
+                    'title'                 => $request->input('name'),
+                    'description'           => $request->input('description'),
+                    'variants'              => array_map(function ($input) {
+                        return [
+                            'price'                 => (float) array_get($input, 'price'),
+                            'reference_price'       => (float) array_get($input, 'reference_price'),
+                            'taxes_included'        => (bool) array_get($input, 'taxes_included'),
+                            'sku'                   => array_get($input, 'sku'),
+                            'barcode'               => array_get($input, 'barcode'),
+                            'inventory_policy'      => array_get($input, 'inventory_policy'),
+                            'inventory_quantity'    => (int) array_get($input, 'inventory_quantity'),
+                            'out_of_stock_purchase' => (bool) array_get($input, 'out_of_stock_purchase'),
+                            'requires_shipping'     => (bool) array_get($input, 'requires_shipping'),
+                            'weight'                => (float) array_get($input, 'weight'),
+                            'fulfillment_service'   => array_get($input, 'fulfillment_service'),
+                        ];
+                    }, $request->input('variants')),
                 ]);
             });
 
             return redirect()->route('glitter.admin.products.edit', $product->getId())
                 ->withFlashMessage([trans('glitter::admin.save.success')]);
         } catch (ValidationException $e) {
-            return redirect()->back()->withErrors($e->validator);
+            return redirect()->back()->withInput()->withErrors($e->validator);
         }
     }
 

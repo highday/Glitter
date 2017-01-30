@@ -19,10 +19,16 @@ class Variant extends Model implements Domainable
         'barcode',
         'price',
         'reference_price',
+        'taxes_included',
         'inventory_management',
         'inventory_quantity',
         'inventory_policy',
         'requires_shipping',
+    ];
+
+    protected $cast = [
+        'taxes_included' => 'bool',
+        'requires_shipping' => 'bool',
     ];
 
     public function product()
@@ -47,12 +53,19 @@ class Variant extends Model implements Domainable
             $options[] = [$name, isset($this->options[$i]) ? $this->options[$i] : ''];
         }
 
-        $entity = new DomainEntity(
-            $this->sku ?: '',
-            $options,
-            $this->price,
-            $this->reference_price
-        );
+        $entity = new DomainEntity([
+            'image'                => $this->image ? $this->image->toDomain() : null,
+            'options'              => $options,
+            'sku'                  => $this->sku,
+            'barcode'              => $this->barcode,
+            'price'                => $this->price,
+            'reference_price'      => $this->reference_price,
+            'taxes_included'       => true,
+            'inventory_management' => $this->inventory_management,
+            'inventory_quantity'   => $this->inventory_quantity,
+            'inventory_policy'     => $this->inventory_policy,
+            'requires_shipping'    => $this->requires_shipping,
+        ]);
         $entity->setId($this->getKey());
 
         return $entity;

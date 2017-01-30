@@ -12,10 +12,14 @@ class Price
     /** @var Money|null */
     protected $reference;
 
-    public function __construct(Money $selling, Money $reference = null)
+    /** @var bool */
+    protected $taxes_included;
+
+    public function __construct(Money $selling, Money $reference = null, bool $taxes_included = true)
     {
         $this->selling = $selling;
         $this->reference = $reference;
+        $this->taxes_included = $taxes_included;
     }
 
     public function getSelling(): Money
@@ -46,5 +50,10 @@ class Price
         $difference = $this->getDifference();
 
         return $difference->getAmount() > 0 ? $difference->getAmount() / $this->reference->getAmount() : 0;
+    }
+
+    public function getTaxesIncluded(): bool
+    {
+        return $this->taxes_included;
     }
 }
