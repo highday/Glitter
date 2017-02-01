@@ -9,7 +9,7 @@
 [![Latest Unstable Version](https://poser.pugx.org/highday/glitter/v/unstable)](//packagist.org/packages/highday/glitter)
 [![License](https://poser.pugx.org/highday/glitter/license)](https://packagist.org/packages/highday/glitter)
 
-Trading management architecture for Laravel. ✨
+Commerce management system for Laravel. ✨
 
 ## Installation
 

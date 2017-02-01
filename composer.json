@@ -1,6 +1,6 @@
 {
     "name": "highday/glitter",
-    "description": "Trading management architecture for Laravel.",
+    "description": "Commerce management system for Laravel.",
     "keywords": ["laravel", "e-commerce", "ecommerce", "trade", "cart", "chackout", "shop", "sales", "buy", "sell"],
     "license": "GPL-3.0",
     "support": {
