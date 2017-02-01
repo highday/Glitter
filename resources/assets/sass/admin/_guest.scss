@@ -24,7 +24,7 @@
     @include media-breakpoint-up('lg') {
         flex-grow: 0;
         flex-shrink: 1;
-        flex-basis: 60%;
+        flex-basis: 62.5%;
         justify-content: center;
     }
 }
@@ -32,7 +32,7 @@
 .guest-content:first-child {
     flex-grow: 0;
     @include media-breakpoint-up('lg') {
-        flex-basis: 40%;
+        flex-basis: 37.5%;
     }
 }
 
@@ -62,6 +62,7 @@
     border-radius: 0;
     box-shadow: 0 1px 3px 0px rgba(0, 0, 0, 0.125);
     @include media-breakpoint-up('lg') {
-        width: 500px;
+        width: 60%;
+        min-width: 500px;
     }
 }
