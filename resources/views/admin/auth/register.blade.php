@@ -3,16 +3,23 @@
 @section('title', 'Register')
 
 @push('styles')
-<link href="https://fonts.googleapis.com/css?family=Allura" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Martel+Sans:700" rel="stylesheet">
 @endpush
 
 @section('content')
-<div class="guest-content">
-    <div class="row">
-        <div class="offset-md-2 col-md-8">
-            <h1 class="text-center" style="font-family: 'Allura', cursive;">{{ config('admin.name', 'Glitter Admin') }}</h1>
-            <p class="text-center mb-4">Register</p>
+<div class="guest-content py-5 bg-glitter">
+    <h1><span style="font-family: 'Martel Sans', cursive;">{{ config('admin.name', 'Glitter') }}</span></h1>
+    <p class="small">Commerce management system for Laravel. ✨</p>
+    <nav class="nav mt-4">
+        <a class="nav-link" href="#" target="_blank">Documentation</a>
+        <a class="nav-link" href="https://github.com/highday/glitter" target="_blank">Github</a>
+    </nav>
+</div>
+<div class="guest-content py-5">
+    <h2 class="text-center mb-4">Register</h2>
 
+    <div class="card">
+        <div class="card-block">
             <form role="form" method="POST" action="{{ url('/admin/register') }}">
                 {{ csrf_field() }}
 
@@ -55,6 +62,11 @@
                 </div>
             </form>
         </div>
+    </div>
+    <div class="mt-3">
+        <a class="btn btn-link btn-block" href="{{ url('/admin/login') }}">
+            Cancel
+        </a>
     </div>
 </div>
 @endsection
