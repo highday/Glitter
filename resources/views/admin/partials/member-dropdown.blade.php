@@ -1,10 +1,13 @@
 <h4 class="dropdown-header">
-    <div class="user-banner clearfix">
-        <img src="https://www.gravatar.com/avatar/{{ md5(strtolower($me->email)) }}?s=64" class="rounded float-xs-left" style="width: 32px; margin-right: 0.5rem;">
-        <div class="user-name">{{ $me->name }}</div>
-        <div class="user-role">{{ $me->activeStoreRole->name }}</div>
+    <div class="user-banner d-flex">
+        <img src="https://www.gravatar.com/avatar/{{ md5(strtolower($me->email)) }}?s=64" class="rounded" style="width: 32px; height: 32px;">
+        <div class="ml-2">
+            <div class="user-name">{{ $me->name }}</div>
+            <div class="user-role">{{ $me->activeStoreRole->name }}</div>
+        </div>
     </div>
 </h4>
+<div class="dropdown-divider"></div>
 <a class="dropdown-item" href="{{ route('glitter.admin.account.profile') }}">プロフィール</a>
 <a class="dropdown-item" href="{{ route('glitter.admin.account.security') }}">セキュリティ</a>
 <div class="dropdown-divider"></div>

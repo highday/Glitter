@@ -4,14 +4,14 @@
 
 @section('scripts')
 <script defer>
-Vue.set(app.$data.screen, 'name', '{{ old('name', $product->name) }}');
+Vue.set(app.$data.screen, 'title', '{{ old('title', $product->name) }}');
 </script>
 @endsection
 
 @section('header')
 <h1 class="title">
     <a href="{{ route('glitter.admin.products.products') }}"><i class="fa fa-tag fa-fw" aria-hidden="true"></i>商品管理</a>
-    / <template v-if="screen.name">@{{ screen.name }}</template><template v-else>{{ $product->name }}</template>
+    / <template v-if="screen.title">@{{ screen.title }}</template><template v-else>{{ $product->name }}</template>
 </h1>
 @endsection
 
@@ -44,8 +44,8 @@ Vue.set(app.$data.screen, 'name', '{{ old('name', $product->name) }}');
                 <div class="form-card card">
                     <div class="card-block">
                         <div class="form-group">
-                            <label>{{ trans('glitter::admin.product.name') }}</label>
-                            <input type="text" name="name" v-model.trim="screen.name" placeholder="{{ $product->name }}" class="form-control">
+                            <label>{{ trans('glitter::admin.product.title') }}</label>
+                            <input type="text" name="title" v-model.trim="screen.title" placeholder="{{ $product->name }}" class="form-control">
                         </div>
                         <div class="form-group">
                             <label>{{ trans('glitter::admin.product.description') }}</label>

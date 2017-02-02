@@ -142,6 +142,11 @@
     -webkit-overflow-scrolling: touch;
 }
 
+.drawer-nav-backdrop {
+    @extend .modal-backdrop;
+    z-index: $zindex-navbar;
+}
+
 .store-menu {
     display: block;
     padding: 1rem 1rem 0.5rem;
@@ -190,6 +195,7 @@
 }
 
 .user-banner {
+    min-width: 240px;
     color: $body-color;
     .user-name {
         margin-bottom: 0.25rem;

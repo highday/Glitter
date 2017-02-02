@@ -39,7 +39,7 @@ class ProductsService
         $validator = app(Validator::class)->make($attributes, [
             'title'                            => 'required',
             'description'                      => 'nullable',
-            'variants.*.price'                 => 'nullable|numeric',
+            'variants.*.price'                 => 'required|numeric',
             'variants.*.reference_price'       => 'nullable|numeric',
             'variants.*.taxes_included'        => 'nullable|boolean',
             'variants.*.sku'                   => 'nullable',

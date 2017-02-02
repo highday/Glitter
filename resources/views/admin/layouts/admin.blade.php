@@ -17,12 +17,13 @@ window.Laravel = <?php echo json_encode([
 
 <div id="glitter-admin" class="admin-screen">
 
-<nav class="header-nav navbar navbar-fixed-top navbar-dark hidden-md-up">
-    <a @click.prevent="toggleDrawer" href="#" class="navbar-brand">
-        <i class="fa fa-bars fa-fw" aria-hidden="true"></i>
+<nav class="header-nav navbar navbar-inverse fixed-top flex-row hidden-md-up">
+    <a @click.prevent="toggleDrawer" href="#" class="navbar-brand mr-auto">
+        <i v-if="!drawerOpen" class="fa fa-bars fa-fw" aria-hidden="true"></i>
+        <i v-else class="fa fa-window-close fa-fw" aria-hidden="true"></i>
         {{ $store->name }}
     </a>
-    <ul class="nav navbar-nav float-xs-right">
+    <ul class="navbar-nav">
         <li class="nav-item">
             <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">{{ $me->name }}</a>
             <div class="dropdown-menu dropdown-menu-right">
@@ -35,6 +36,7 @@ window.Laravel = <?php echo json_encode([
 <nav class="drawer-nav" :class="{ in: drawerOpen }">
     <div class="drawer-nav-store dropdown hidden-sm-down">
         <a href="#" class="store-menu" data-toggle="dropdown">
+            <i class="fa fa-bell fa-fw float-right" aria-hidden="true"></i>
             <span class="store-name">{{ $store->name }}</span>
             <i class="fa fa-caret-down fa-fw" aria-hidden="true"></i><br>
             <small><i class="fa fa-user-circle-o fa-fw" aria-hidden="true"></i>{{ $me->name }}</small>
@@ -82,19 +84,22 @@ window.Laravel = <?php echo json_encode([
         </ul>
     </div>
 </nav>{{-- /.drawer-nav --}}
+<transition name="modal-backdrop">
+    <div v-if="drawerOpen" @click="toggleDrawer" class="drawer-nav-backdrop"></div>
+</transition>
 
 @hasSection('header')
 <header class="header-section">
 @yield('header')
 </header>{{-- /.header-section --}}
 @endif
-
+{{--
 <div class="fixed-top p-1">
     <div class="d-flex justify-content-end">
         <button class="btn btn-link text-muted" type="button"><i class="fa fa-bell" aria-hidden="true"></i></button>
     </div>
 </div>
-
+ --}}
 @section('main')
 <main class="main-section">
 

@@ -44,16 +44,16 @@ class ProductsController extends Controller
                     'description'           => $request->input('description'),
                     'variants'              => array_map(function ($input) {
                         return [
-                            'price'                 => (float) array_get($input, 'price'),
-                            'reference_price'       => (float) array_get($input, 'reference_price'),
-                            'taxes_included'        => (bool) array_get($input, 'taxes_included'),
+                            'price'                 => array_get($input, 'price'),
+                            'reference_price'       => array_get($input, 'reference_price'),
+                            'taxes_included'        => array_get($input, 'taxes_included'),
                             'sku'                   => array_get($input, 'sku'),
                             'barcode'               => array_get($input, 'barcode'),
                             'inventory_policy'      => array_get($input, 'inventory_policy'),
-                            'inventory_quantity'    => (int) array_get($input, 'inventory_quantity'),
-                            'out_of_stock_purchase' => (bool) array_get($input, 'out_of_stock_purchase'),
-                            'requires_shipping'     => (bool) array_get($input, 'requires_shipping'),
-                            'weight'                => (float) array_get($input, 'weight'),
+                            'inventory_quantity'    => array_get($input, 'inventory_quantity'),
+                            'out_of_stock_purchase' => array_get($input, 'out_of_stock_purchase'),
+                            'requires_shipping'     => array_get($input, 'requires_shipping'),
+                            'weight'                => array_get($input, 'weight'),
                             'fulfillment_service'   => array_get($input, 'fulfillment_service'),
                         ];
                     }, $request->input('variants')),

@@ -4,7 +4,7 @@ return [
 
     'product' => [
 
-        'name'        => 'Name',
+        'title'       => 'Title',
         'description' => 'Description',
 
         'images'         => 'Images',
@@ -30,6 +30,7 @@ return [
 
         'weight'              => 'Weight',
         'weight_description'  => 'Used to calculate shipping rates for your customers at checkout.',
+        'weight_unit'         => 'Weight Unit',
         'fulfillment_service' => 'Fulfillment service',
         'fulfillment_manual'  => 'Manual',
 
@@ -38,6 +39,7 @@ return [
         'reorder_variants'     => 'Reorder Variants',
         'edit_options'         => 'Edit Options',
         'add_variant'          => 'Add Variant',
+        'add_variant_cancel'   => 'Cancel',
 
     ],
 

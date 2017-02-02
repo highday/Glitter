@@ -4,7 +4,7 @@ return [
 
     'product' => [
 
-        'name'        => '商品名',
+        'title'       => '商品名',
         'description' => '商品説明',
 
         'images'         => '商品画像',
@@ -30,14 +30,16 @@ return [
 
         'weight'              => '重量',
         'weight_description'  => '購入時にお客様の配送料金を計算するために使用されます。',
-        'fulfillment_service' => '配送業者',
-        'fulfillment_manual'  => '自分で配送',
+        'weight_unit'         => '重量の単位',
+        'fulfillment_service' => '配送サービス',
+        'fulfillment_manual'  => 'マニュアル',
 
         'variants'             => 'バリエーション',
         'variants_description' => 'この商品がサイズや色が異なる複数のバリエーションで提供されている場合は、バリエーションを追加してください。',
         'reorder_variants'     => '並び替え',
         'edit_options'         => 'オプションを編集',
         'add_variant'          => 'バリエーションを追加',
+        'add_variant_cancel'   => 'キャンセル',
 
     ],
 
