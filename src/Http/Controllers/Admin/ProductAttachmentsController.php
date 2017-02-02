@@ -24,7 +24,7 @@ class ProductAttachmentsController extends Controller
         try {
             $this->transaction(function () use ($request, $key) {
                 $this->productService->addAttachment($key, [
-                    'url' => $request->input('attachment_url'),
+                    'url'  => $request->input('attachment_url'),
                     'file' => $request->file('attachment_file'),
                 ]);
             });
