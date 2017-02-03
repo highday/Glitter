@@ -85,7 +85,7 @@ window.Laravel = <?php echo json_encode([
     </div>
 </nav>{{-- /.drawer-nav --}}
 <transition name="modal-backdrop">
-    <div v-if="drawerOpen" @click="toggleDrawer" class="drawer-nav-backdrop"></div>
+    <div v-if="drawerOpen" v-cloak @click="toggleDrawer" class="drawer-nav-backdrop"></div>
 </transition>
 
 @hasSection('header')
