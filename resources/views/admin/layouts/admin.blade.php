@@ -17,24 +17,8 @@ window.Laravel = <?php echo json_encode([
 
 <div id="glitter-admin" class="admin-screen">
 
-<nav class="header-nav navbar navbar-inverse fixed-top flex-row hidden-md-up">
-    <a @click.prevent="toggleDrawer" href="#" class="navbar-brand mr-auto">
-        <i v-if="!drawerOpen" class="fa fa-bars fa-fw" aria-hidden="true"></i>
-        <i v-else class="fa fa-window-close fa-fw" aria-hidden="true"></i>
-        {{ $store->name }}
-    </a>
-    <ul class="navbar-nav">
-        <li class="nav-item">
-            <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">{{ $me->name }}</a>
-            <div class="dropdown-menu dropdown-menu-right">
-                @include('glitter.admin::partials.member-dropdown')
-            </div>
-        </li>
-    </ul>
-</nav>{{-- /.header-nav --}}
-
 <nav class="drawer-nav" :class="{ in: drawerOpen }">
-    <div class="drawer-nav-store dropdown hidden-sm-down">
+    <div class="drawer-nav-store dropdown">
         <a href="#" class="store-menu" data-toggle="dropdown">
             <i class="fa fa-bell fa-fw float-right" aria-hidden="true"></i>
             <span class="store-name">{{ $store->name }}</span>
@@ -91,6 +75,10 @@ window.Laravel = <?php echo json_encode([
 @hasSection('header')
 <header class="header-section">
 @yield('header')
+<a @click.prevent="toggleDrawer" href="#" class="drawer-nav-toggle">
+    <i v-if="!drawerOpen" class="fa fa-bars fa-fw" aria-hidden="true"></i>
+    <i v-else class="fa fa-window-close fa-fw" aria-hidden="true"></i>
+</a>
 </header>{{-- /.header-section --}}
 @endif
 {{--
@@ -119,7 +107,7 @@ window.Laravel = <?php echo json_encode([
 
 </div>{{-- /.content-wrapper --}}
 
-<div class="container">
+<div class="footer-container container">
     <div class="row mt-5 py-3 justify-content-center">
         <div class="col col-auto text-muted small">
             Thanks for testing <a href="https://github.com/highday/glitter" target="_blank">Glitter</a> ✨️

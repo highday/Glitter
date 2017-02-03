@@ -6,6 +6,8 @@
     right: 0;
     z-index: $zindex-navbar - 10;
 
+    display: flex;
+
     padding-top: 0.375rem;
     padding-bottom: 0.375rem;
     background: $brand-color4;
@@ -16,11 +18,14 @@
         .drawer-nav ~ & {
             padding-left: $drawer-nav-width;
         }
+        .drawer-nav-toggle {
+            display: none;
+        }
     }
 
     @include media-breakpoint-down('sm') {
         position: static;
-        margin-top: $header-nav-height;
+        // margin-top: $header-nav-height;
         // .header-nav ~ & {
         //     top: $header-nav-height;
         // }
@@ -45,6 +50,19 @@
 
         .fa {
             margin-right: 0.25rem;
+            color: $gray-light;
+        }
+    }
+
+    .drawer-nav-toggle {
+        margin-left: auto;
+        padding: 0.5625rem 1rem;
+        font-size: 1.125rem;
+        font-weight: 500;
+        line-height: 1;
+        color: $gray;
+
+        .fa {
             color: $gray-light;
         }
     }
