@@ -2,7 +2,7 @@
 .main-section {
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    justify-content: flex-start;
 
     max-width: 3000px;
     min-height: 100vh;
@@ -121,4 +121,8 @@
             padding-top: calc(#{$nav-wrapper-height} + 1rem);
         }
     }
+}
+
+.footer-container {
+    margin-top: auto;
 }
