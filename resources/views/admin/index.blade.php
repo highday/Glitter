@@ -2,6 +2,12 @@
 
 @section('title', 'ホーム')
 
+@section('header')
+<h1 class="title">
+    <i class="fa fa-tag fa-fw" aria-hidden="true"></i>ホーム
+</h1>
+@endsection
+
 @section('content')
 <div class="container-fluid">
     <div class="area mb-4">Chart</div>

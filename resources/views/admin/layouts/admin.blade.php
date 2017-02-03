@@ -72,22 +72,19 @@ window.Laravel = <?php echo json_encode([
     <div v-if="drawerOpen" v-cloak @click="toggleDrawer" class="drawer-nav-backdrop"></div>
 </transition>
 
-@hasSection('header')
 <header class="header-section">
+@hasSection('header')
 @yield('header')
+@else
+<h1 class="title">
+    <i class="fa fa-file-o fa-fw" aria-hidden="true"></i>@yield('title')
+</h1>
+@endif
 <a @click.prevent="toggleDrawer" href="#" class="drawer-nav-toggle">
     <i v-if="!drawerOpen" class="fa fa-bars fa-fw" aria-hidden="true"></i>
     <i v-else class="fa fa-window-close fa-fw" aria-hidden="true"></i>
 </a>
 </header>{{-- /.header-section --}}
-@endif
-{{--
-<div class="fixed-top p-1">
-    <div class="d-flex justify-content-end">
-        <button class="btn btn-link text-muted" type="button"><i class="fa fa-bell" aria-hidden="true"></i></button>
-    </div>
-</div>
- --}}
 @section('main')
 <main class="main-section">
 
