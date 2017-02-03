@@ -18,24 +18,30 @@ class VariantTest extends TestCase
 
     public function testInstance()
     {
-        $variant1 = new Variant();
+        $variant1 = new Variant([]);
         $this->assertInstanceOf(Variant::class, $variant1);
 
-        $op1 = new Option('op1', ['op1']);
-        $op2 = new Option('op2', ['op2']);
-        $variant2 = new Variant('sku', [
-            $op1->getValue('op1'),
-            $op2->getValue('op2'),
-        ], new Price(new Money(100), new Money(120)));
+        $variant2 = new Variant([
+            'sku' => 'sku',
+            'options' => [
+                ['op1', 'op1'],
+                ['op2', 'op2'],
+            ],
+            'price' => 100,
+            'reference_price' => 120,
+        ]);
         $this->assertInstanceOf(Variant::class, $variant2);
     }
 
     public function testGetVariantOptions()
     {
-        $variant = new Variant('sku', [
-            new OptionValue('name1', 'value1'),
-            new OptionValue('name2', 'value2'),
-            new OptionValue('name3', 'value3'),
+        $variant = new Variant([
+            'sku' => 'sku',
+            'options' =>  [
+                ['name1', 'value1'],
+                ['name2', 'value2'],
+                ['name3', 'value3'],
+            ],
         ]);
         $options = $variant->getOptions();
         foreach ($options as $option) {
@@ -43,16 +49,14 @@ class VariantTest extends TestCase
         }
     }
 
-    public function testSetVariantPrice()
-    {
-        $variant = new Variant();
-        $variant->setPrice(new Price(new Money(100)));
-        $this->assertInstanceOf(Price::class, $variant->getPrice());
-    }
-
     public function testGetVariantPrice()
     {
-        $variant = new Variant('sku', [], new Price(new Money(100), new Money(120)));
+        $variant = new Variant([
+            'sku' => 'sku',
+            'options' => [],
+            'price' => 100,
+            'reference_price' => 120,
+        ]);
         $price = $variant->getPrice();
         $this->assertInstanceOf(Price::class, $price);
     }
