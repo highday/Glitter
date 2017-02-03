@@ -2,7 +2,6 @@
 
 namespace Highday\Glitter\Domain\Entities;
 
-use Highday\Glitter\Domain\ValueObjects\Money;
 use Highday\Glitter\Domain\ValueObjects\Product\OptionValue;
 use Highday\Glitter\Domain\ValueObjects\Product\Price;
 use PHPUnit\Framework\TestCase;
@@ -22,12 +21,12 @@ class VariantTest extends TestCase
         $this->assertInstanceOf(Variant::class, $variant1);
 
         $variant2 = new Variant([
-            'sku' => 'sku',
+            'sku'     => 'sku',
             'options' => [
                 ['op1', 'op1'],
                 ['op2', 'op2'],
             ],
-            'price' => 100,
+            'price'           => 100,
             'reference_price' => 120,
         ]);
         $this->assertInstanceOf(Variant::class, $variant2);
@@ -36,8 +35,8 @@ class VariantTest extends TestCase
     public function testGetVariantOptions()
     {
         $variant = new Variant([
-            'sku' => 'sku',
-            'options' =>  [
+            'sku'     => 'sku',
+            'options' => [
                 ['name1', 'value1'],
                 ['name2', 'value2'],
                 ['name3', 'value3'],
@@ -52,9 +51,9 @@ class VariantTest extends TestCase
     public function testGetVariantPrice()
     {
         $variant = new Variant([
-            'sku' => 'sku',
-            'options' => [],
-            'price' => 100,
+            'sku'             => 'sku',
+            'options'         => [],
+            'price'           => 100,
             'reference_price' => 120,
         ]);
         $price = $variant->getPrice();
