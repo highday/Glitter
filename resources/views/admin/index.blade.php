@@ -4,7 +4,7 @@
 
 @section('header')
 <h1 class="title">
-    <i class="fa fa-tag fa-fw" aria-hidden="true"></i>ホーム
+    <i class="fa fa-home fa-fw" aria-hidden="true"></i>ホーム
 </h1>
 @endsection
 
