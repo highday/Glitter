@@ -62,15 +62,15 @@ Vue.set(app.$data.screen, 'variants', [['Size', '']]);
                 </div>
                 <div class="form-card card">
                     <div class="card-block">
-                        <div class="row justify-content-between">
-                            <div class="col col-auto">
+                        <div class="row">
+                            <div class="col col-auto mr-auto">
                                 <h2 class="card-title">{{ trans('glitter::admin.product.images') }}</h2>
                             </div>
                             <div class="col col-auto">
-                                <nav class="nav nav-inline text-sm-right small">
-                                    <a class="nav-link pt-0" href="#" @click.prevent="$emit('modal', 'add_image_url')">{{ trans('glitter::admin.product.add_image_url') }}</a>
-                                    <a class="nav-link pt-0" href="#">{{ trans('glitter::admin.product.add_image_file') }}</a>
-                                </nav>
+                                <form-card-nav v-cloak>
+                                    <a class="nav-link" href="#" @click.prevent="$emit('modal', 'add_image_url')">{{ trans('glitter::admin.product.add_image_url') }}</a>
+                                    <a class="nav-link" href="#">{{ trans('glitter::admin.product.add_image_file') }}</a>
+                                </form-card-nav>
                             </div>
                         </div>
                         <div class="p-5 text-center text-muted">
@@ -240,15 +240,15 @@ Vue.set(app.$data.screen, 'variants', [['Size', '']]);
                 </div>
                 <div class="form-card card">
                     <div class="card-block">
-                        <div class="row justify-content-between">
-                            <div class="col col-auto">
+                        <div class="row">
+                            <div class="col col-auto mr-auto">
                                 <h2 class="card-title">{{ trans('glitter::admin.product.variants') }}</h2>
                             </div>
                             <div class="col col-auto">
-                                <nav class="nav nav-inline text-sm-right small">
-                                    <a class="nav-link pt-0" href="#" v-if="screen.use_variant" @click.prevent="screen.use_variant = false">{{ trans('glitter::admin.product.add_variant_cancel') }}</a>
-                                    <a class="nav-link pt-0" href="#" v-else @click.prevent="screen.use_variant = true">{{ trans('glitter::admin.product.add_variant') }}</a>
-                                </nav>
+                                <form-card-nav v-cloak>
+                                    <a class="nav-link" href="#" v-if="screen.use_variant" @click.prevent="screen.use_variant = false">{{ trans('glitter::admin.product.add_variant_cancel') }}</a>
+                                    <a class="nav-link" href="#" v-else @click.prevent="screen.use_variant = true">{{ trans('glitter::admin.product.add_variant') }}</a>
+                                </form-card-nav>
                             </div>
                         </div>
                         <p class="small mb-0">{{ trans('glitter::admin.product.variants_description') }}</p>

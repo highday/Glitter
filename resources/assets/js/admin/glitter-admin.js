@@ -16,6 +16,7 @@ require('./bootstrap');
 Vue.config.keyCodes.comma = 188
 
 Vue.component('modal', require('./components/common/modal.vue'));
+Vue.component('form-card-nav', require('./components/common/form-card-nav.vue'));
 Vue.component('input-money', require('./components/common/input-money.vue'));
 Vue.component('input-option', require('./components/products/input-option.vue'));
 

@@ -74,3 +74,86 @@
         font-size: 0.875rem;
     }
 }
+
+.form-card-nav {
+    position: relative;
+    margin-top: -0.5rem;
+
+    @include media-breakpoint-up('md') {
+        font-size: $small-font-size;
+        font-weight: $font-weight-normal;
+    }
+
+    @include media-breakpoint-down('sm') {
+        .nav {
+            display: none;
+            &.active {
+                display: block;
+            }
+            position: absolute;
+            top: 100%;
+            right: 0;
+            flex-direction: column;
+            padding: $dropdown-padding-y 0;
+            margin: $dropdown-margin-top 0 0;
+            min-width: $dropdown-min-width;
+            font-size: $font-size-base;
+            color: $body-color;
+            text-align: left;
+            list-style: none;
+            background-color: $dropdown-bg;
+            background-clip: padding-box;
+            border: $dropdown-border-width solid $dropdown-border-color;
+            @include border-radius($border-radius);
+            @include box-shadow($dropdown-box-shadow);
+        }
+        .nav-link {
+            display: block;
+            width: 100%; // For `<button>`s
+            padding: 3px $dropdown-item-padding-x;
+            clear: both;
+            font-weight: $font-weight-normal;
+            color: $dropdown-link-color;
+            text-align: inherit; // For `<button>`s
+            white-space: nowrap; // prevent links from randomly breaking onto new lines
+            background: none; // For `<button>`s
+            border: 0; // For `<button>`s
+
+            @include hover-focus {
+                color: $dropdown-link-hover-color;
+                text-decoration: none;
+                background-color: $dropdown-link-hover-bg;
+            }
+
+            &.active,
+            &:active {
+                color: $dropdown-link-active-color;
+                text-decoration: none;
+                background-color: $dropdown-link-active-bg;
+            }
+
+            &.disabled,
+            &:disabled {
+                color: $dropdown-link-disabled-color;
+                cursor: $cursor-disabled;
+                background-color: transparent;
+                // Remove CSS gradients if they're enabled
+                @if $enable-gradients {
+                    background-image: none;
+                }
+            }
+        }
+    }
+}
+
+.form-card-nav-toggle {
+    display: inline-block;
+    padding: 0;
+    border: none;
+    background-color: transparent;
+    color: $gray-light;
+
+    @include media-breakpoint-up('md') {
+        display: none;
+    }
+}
