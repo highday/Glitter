@@ -225,15 +225,15 @@ Vue.set(app.$data.screen, 'variants', [['Size', '']]);
                     </div>
                     <div class="card-block">
                         <h3 class="card-title">{{ trans('glitter::admin.product.fulfillment_service') }}</h3>
-                        <div class="form-group{{ $errors->has('variants.0.fulfillment_manual') ? ' has-danger' : '' }}">
+                        <div class="form-group{{ $errors->has('variants.0.fulfillment_service') ? ' has-danger' : '' }}">
                             <select class="form-control" name="variants[0][fulfillment_service]" style="width: auto;">
                                 <option value="manual" {{ old('variants.0.fulfillment_service') == 'manual' ? 'selected' : '' }}>{{ trans('glitter::admin.product.fulfillment_manual') }}</option>
-                                <option value="ヤマト運輸" {{ old('variants.0.fulfillment_manual') == 'ヤマト運輸' ? 'selected' : '' }}>ヤマト運輸</option>
-                                <option value="佐川急便" {{ old('variants.0.fulfillment_manual') == '佐川急便' ? 'selected' : '' }}>佐川急便</option>
+                                <option value="ヤマト運輸" {{ old('variants.0.fulfillment_service') == 'ヤマト運輸' ? 'selected' : '' }}>ヤマト運輸</option>
+                                <option value="佐川急便" {{ old('variants.0.fulfillment_service') == '佐川急便' ? 'selected' : '' }}>佐川急便</option>
                             </select>
 
-                            @if ($errors->has('variants.0.fulfillment_manual'))
-                                <div class="form-control-feedback">{{ $errors->first('variants.0.fulfillment_manual') }}</div>
+                            @if ($errors->has('variants.0.fulfillment_service'))
+                                <div class="form-control-feedback">{{ $errors->first('variants.0.fulfillment_service') }}</div>
                             @endif
                         </div>
                     </div>
