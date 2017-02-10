@@ -71,10 +71,10 @@ class ProductTest extends TestCase
         ]);
 
         $product = new Product([
-            'name' => $name,
+            'name'        => $name,
             'description' => $description,
-            'options' => ['容器・容量', '本数'],
-            'variants' => [$va1, $va2, $va3, $va4],
+            'options'     => ['容器・容量', '本数'],
+            'variants'    => [$va1, $va2, $va3, $va4],
         ]);
 
         $product->addVariant($va5);

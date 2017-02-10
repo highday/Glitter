@@ -103,6 +103,7 @@ class ProductRepository implements Repository
 
         $variantModels = array_map(function ($attributes) {
             $variantModel = VariantModel::findOrFail(array_get($attributes, 'id'));
+
             return $variantModel->fill(array_only($attributes, [
                 'sku',
                 'barcode',

@@ -2,8 +2,6 @@
 
 namespace Highday\Glitter\Domain\ValueObjects\Product;
 
-use Highday\Glitter\Domain\ValueObjects\Money;
-
 class Weight
 {
     /** @var float */

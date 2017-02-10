@@ -2,8 +2,8 @@
 
 namespace Highday\Glitter\Domain;
 
-use Illuminate\Support\Str;
 use DomainException;
+use Illuminate\Support\Str;
 
 abstract class Entity
 {
