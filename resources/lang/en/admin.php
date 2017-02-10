@@ -19,10 +19,10 @@ return [
         'inventory'               => 'Inventory',
         'sku'                     => 'SKU (Stock Keeping Unit)',
         'barcode'                 => 'Barcode (ISBN, UPC, GTIN, etc.)',
-        'inventory_policy'        => 'Inventory policy',
+        'inventory_management'    => 'Inventory Management',
         'dont_track_inventory'    => 'Don\'t track inventory.',
         'glitter_track_inventory' => 'Glitter tracks this product\'s inventory.',
-        'quantity'                => 'Quantity',
+        'inventory_quantity'      => 'Quantity',
         'out_of_stock_purchase'   => 'Allow customers to purchase this product when it\'s out of stock',
 
         'shipping'          => 'Shipping',

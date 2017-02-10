@@ -59,29 +59,69 @@ class ProductRepository implements Repository
 
     public function store(Store $store, array $attributes): Product
     {
-        $_store = StoreModel::findOrFail($store->getId());
+        $storeModel = StoreModel::findOrFail($store->getId());
 
-        $product = new ProductModel(array_only($attributes, ['title', 'description']));
-        $_store->products()->save($product);
+        $productModel = new ProductModel(array_only($attributes, [
+            'title',
+            'description',
+        ]));
+        $storeModel->products()->save($productModel);
 
-        $variants = array_map(function ($attributes) {
-            return new VariantModel($attributes);
+        $variantModels = array_map(function ($attributes) {
+            return new VariantModel(array_only($attributes, [
+                'sku',
+                'barcode',
+                'price',
+                'reference_price',
+                'taxes_included',
+                'inventory_management',
+                'inventory_quantity',
+                'out_of_stock_purchase',
+                'requires_shipping',
+                'weight',
+                'weight_unit',
+                'fulfillment_service',
+                'options',
+            ]));
         }, array_get($attributes, 'variants'));
-        $product->variants()->saveMany($variants);
+        $productModel->variants()->saveMany($variantModels);
 
-        return $product->toDomain();
+        return $productModel->toDomain();
     }
 
     public function update($id, array $attributes): Product
     {
-        $model = ProductModel::findOrFail($id);
-        $model->fill($attributes);
+        $productModel = ProductModel::findOrFail($id);
+        $productModel->fill(array_only($attributes, [
+            'title',
+            'description',
+        ]));
 
-        if ($model->save() !== true) {
+        if ($productModel->save() !== true) {
             throw new RuntimeException('Can not save model.');
         }
 
-        return $model->toDomain();
+        $variantModels = array_map(function ($attributes) {
+            $variantModel = VariantModel::findOrFail(array_get($attributes, 'id'));
+            return $variantModel->fill(array_only($attributes, [
+                'sku',
+                'barcode',
+                'price',
+                'reference_price',
+                'taxes_included',
+                'inventory_management',
+                'inventory_quantity',
+                'out_of_stock_purchase',
+                'requires_shipping',
+                'weight',
+                'weight_unit',
+                'fulfillment_service',
+                'options',
+            ]));
+        }, array_get($attributes, 'variants'));
+        $productModel->variants()->saveMany($variantModels);
+
+        return $productModel->toDomain();
     }
 
     private function toDomainCollection(Collection $items): EntityCollection

@@ -7,6 +7,8 @@ use Highday\Glitter\Domain\Entity;
 use Highday\Glitter\Domain\ValueObjects\Money;
 use Highday\Glitter\Domain\ValueObjects\Product\OptionValue;
 use Highday\Glitter\Domain\ValueObjects\Product\Price;
+use Highday\Glitter\Domain\ValueObjects\Product\Weight;
+use Illuminate\Support\Arr;
 use InvalidArgumentException;
 
 class Variant extends Entity
@@ -29,40 +31,52 @@ class Variant extends Entity
     /** @var int */
     protected $inventory_quantity;
 
-    /** @var string */
-    protected $inventory_policy;
+    /** @var bool */
+    protected $out_of_stock_purchase;
 
     /** @var bool */
     protected $requires_shipping;
 
+    /** @var Weight */
+    protected $weight;
+
+    /** @var string */
+    protected $fulfillment_service;
+
     public function __construct(array $props)
     {
-        $this->image = array_get($props, 'image');
+        $props = array_filter($props);
+
+        $this->image = Arr::get($props, 'image');
         if ($this->image instanceof Attachemnt) {
             throw new InvalidArgumentException();
         }
 
-        $options = new Collection(array_get($props, 'options'));
+        $options = new Collection(Arr::get($props, 'options', []));
         $this->options = $options->map(function ($option) {
             return new OptionValue($option[0], $option[1]);
         });
 
-        $this->sku = (string) array_get($props, 'sku');
+        $this->sku = Arr::get($props, 'sku', '');
+        $this->barcode = Arr::get($props, 'barcode', '');
 
-        $this->barcode = (string) array_get($props, 'barcode');
+        $this->price = new Price(
+            new Money(Arr::get($props, 'price', 0)),
+            Arr::exists($props, 'reference_price')
+                ? new Money(Arr::get($props, 'reference_price', 0))
+                : null,
+            Arr::get($props, 'taxes_included', false)
+        );
 
-        $selling = array_get($props, 'price') > 0 ? new Money(array_get($props, 'price')) : null;
-        $reference = array_get($props, 'reference_price') > 0 ? new Money(array_get($props, 'reference_price')) : null;
-        $taxes_included = (bool) array_get($props, 'taxes_included');
-        $this->price = new Price($selling, $reference, $taxes_included);
-
-        $this->inventory_management = (string) array_get($props, 'inventory_management');
-
-        $this->inventory_quantity = (int) array_get($props, 'inventory_quantity');
-
-        $this->inventory_policy = (string) array_get($props, 'inventory_policy');
-
-        $this->requires_shipping = (bool) array_get($props, 'requires_shipping');
+        $this->inventory_management = Arr::get($props, 'inventory_management', '');
+        $this->inventory_quantity = Arr::get($props, 'inventory_quantity', 0);
+        $this->out_of_stock_purchase = Arr::get($props, 'out_of_stock_purchase', false);
+        $this->requires_shipping = Arr::get($props, 'requires_shipping', false);
+        $this->weight = new Weight(
+            Arr::get($props, 'weight', 0),
+            Arr::get($props, 'weight_unit', '')
+        );
+        $this->fulfillment_service = Arr::get($props, 'fulfillment_service', '');
     }
 
     public function getSKU(): string
@@ -90,13 +104,23 @@ class Variant extends Entity
         return $this->inventory_quantity;
     }
 
-    public function getInventoryPolicy(): string
+    public function getOutOfStockPurchase(): bool
     {
-        return $this->inventory_policy;
+        return $this->out_of_stock_purchase;
     }
 
     public function getRequiresShipping(): bool
     {
         return $this->requires_shipping;
+    }
+
+    public function getWeight(): Weight
+    {
+        return $this->weight;
+    }
+
+    public function getFulfillmentService(): string
+    {
+        return $this->fulfillment_service;
     }
 }

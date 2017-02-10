@@ -44,12 +44,13 @@ class ProductsService
             'variants.*.taxes_included'        => 'nullable|boolean',
             'variants.*.sku'                   => 'nullable',
             'variants.*.barcode'               => 'nullable',
-            'variants.*.inventory_policy'      => 'nullable',
-            'variants.*.quantity'              => 'nullable|integer',
+            'variants.*.inventory_management'  => 'nullable',
+            'variants.*.inventory_quantity'    => 'nullable|integer',
             'variants.*.out_of_stock_purchase' => 'nullable|boolean',
             'variants.*.requires_shipping'     => 'nullable|boolean',
-            'variants.*.weight'                => 'nullable|numeric',
+            'variants.*.weight'                => 'nullable',
             'variants.*.fulfillment_service'   => 'nullable',
+            'variants.*.options'               => 'nullable|array',
         ]);
 
         if ($validator->fails()) {
@@ -62,8 +63,21 @@ class ProductsService
     public function update(int $key, array $attributes)
     {
         $validator = app(Validator::class)->make($attributes, [
-            'title'       => 'required',
-            'description' => 'required',
+            'title'                            => 'required',
+            'description'                      => 'nullable',
+            'variants.*.price'                 => 'required|numeric',
+            'variants.*.reference_price'       => 'nullable|numeric',
+            'variants.*.taxes_included'        => 'nullable|boolean',
+            'variants.*.sku'                   => 'nullable',
+            'variants.*.barcode'               => 'nullable',
+            'variants.*.inventory_management'  => 'nullable',
+            'variants.*.inventory_quantity'    => 'nullable|integer',
+            'variants.*.out_of_stock_purchase' => 'nullable|boolean',
+            'variants.*.requires_shipping'     => 'nullable|boolean',
+            'variants.*.weight'                => 'nullable',
+            'variants.*.weight_unit'           => 'nullable',
+            'variants.*.fulfillment_service'   => 'nullable',
+            'variants.*.options'               => 'nullable|array',
         ]);
 
         if ($validator->fails()) {

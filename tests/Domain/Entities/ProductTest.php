@@ -70,7 +70,12 @@ class ProductTest extends TestCase
             'reference_price' => 200 * 24,
         ]);
 
-        $product = new Product($name, $description, ['容器・容量', '本数'], [$va1, $va2, $va3, $va4]);
+        $product = new Product([
+            'name' => $name,
+            'description' => $description,
+            'options' => ['容器・容量', '本数'],
+            'variants' => [$va1, $va2, $va3, $va4],
+        ]);
 
         $product->addVariant($va5);
 

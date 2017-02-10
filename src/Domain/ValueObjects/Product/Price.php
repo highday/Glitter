@@ -15,7 +15,7 @@ class Price
     /** @var bool */
     protected $taxes_included;
 
-    public function __construct(Money $selling = null, Money $reference = null, bool $taxes_included = true)
+    public function __construct(Money $selling, Money $reference = null, bool $taxes_included = true)
     {
         $this->selling = $selling;
         $this->reference = $reference;

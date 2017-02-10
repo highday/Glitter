@@ -40,23 +40,24 @@ class ProductsController extends Controller
         try {
             $product = $this->transaction(function () use ($request, $service) {
                 return $service->store([
-                    'title'                 => $request->input('name'),
-                    'description'           => $request->input('description'),
+                    'title'                 => $request->input('title'),
+                    'description'           => $request->input('description') ?: '',
                     'variants'              => array_map(function ($input) {
                         return [
                             'price'                 => array_get($input, 'price'),
                             'reference_price'       => array_get($input, 'reference_price'),
-                            'taxes_included'        => array_get($input, 'taxes_included'),
+                            'taxes_included'        => array_get($input, 'taxes_included') ?: false,
                             'sku'                   => array_get($input, 'sku'),
                             'barcode'               => array_get($input, 'barcode'),
-                            'inventory_policy'      => array_get($input, 'inventory_policy'),
-                            'inventory_quantity'    => array_get($input, 'inventory_quantity'),
-                            'out_of_stock_purchase' => array_get($input, 'out_of_stock_purchase'),
-                            'requires_shipping'     => array_get($input, 'requires_shipping'),
+                            'inventory_management'  => array_get($input, 'inventory_management') ?: 'none',
+                            'inventory_quantity'    => array_get($input, 'inventory_quantity') ?: 0,
+                            'out_of_stock_purchase' => array_get($input, 'out_of_stock_purchase') ?: false,
+                            'requires_shipping'     => array_get($input, 'requires_shipping') ?: false,
                             'weight'                => array_get($input, 'weight'),
                             'fulfillment_service'   => array_get($input, 'fulfillment_service'),
+                            'options'               => array_get($input, 'options', []),
                         ];
-                    }, $request->input('variants')),
+                    }, $request->input('variants', [])),
                 ]);
             });
 
@@ -83,8 +84,26 @@ class ProductsController extends Controller
         try {
             $product = $this->transaction(function () use ($request, $service, $key) {
                 return $service->update($key, [
-                    'title'       => $request->input('name'),
-                    'description' => $request->input('description'),
+                    'title'                 => $request->input('title'),
+                    'description'           => $request->input('description') ?: '',
+                    'variants'              => array_map(function ($input) {
+                        return [
+                            'id'                    => array_get($input, 'id'),
+                            'price'                 => array_get($input, 'price'),
+                            'reference_price'       => array_get($input, 'reference_price'),
+                            'taxes_included'        => array_get($input, 'taxes_included') ?: false,
+                            'sku'                   => array_get($input, 'sku'),
+                            'barcode'               => array_get($input, 'barcode'),
+                            'inventory_management'  => array_get($input, 'inventory_management') ?: 'none',
+                            'inventory_quantity'    => array_get($input, 'inventory_quantity'),
+                            'out_of_stock_purchase' => array_get($input, 'out_of_stock_purchase') ?: false,
+                            'requires_shipping'     => array_get($input, 'requires_shipping') ?: false,
+                            'weight'                => array_get($input, 'weight'),
+                            'weight_unit'           => array_get($input, 'weight_unit'),
+                            'fulfillment_service'   => array_get($input, 'fulfillment_service'),
+                            'options'               => array_get($input, 'options', []),
+                        ];
+                    }, $request->input('variants', [])),
                 ]);
             });
 

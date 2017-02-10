@@ -3,6 +3,7 @@
 namespace Highday\Glitter\Domain;
 
 use Illuminate\Support\Str;
+use DomainException;
 
 abstract class Entity
 {
@@ -46,6 +47,10 @@ abstract class Entity
     public function __get($key)
     {
         $method = Str::camel("get_{$key}");
+
+        if (method_exists($this, $method) == false) {
+            throw new DomainException("Unknown entity property : {$key}");
+        }
 
         return $this->{$method}();
     }

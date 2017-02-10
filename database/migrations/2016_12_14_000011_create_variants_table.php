@@ -26,10 +26,14 @@ class CreateVariantsTable extends Migration
             $table->string('barcode')->nullable();
             $table->decimal('price', 13, 3);
             $table->decimal('reference_price', 13, 3)->nullable();
+            $table->boolean('taxes_included');
             $table->string('inventory_management')->nullable();
             $table->integer('inventory_quantity')->unsigned()->nullable();
-            $table->string('inventory_policy')->nullable();
+            $table->boolean('out_of_stock_purchase');
             $table->boolean('requires_shipping');
+            $table->decimal('weight', 13, 3)->nullable();
+            $table->string('weight_unit')->nullable();
+            $table->string('fulfillment_service');
         });
     }
 

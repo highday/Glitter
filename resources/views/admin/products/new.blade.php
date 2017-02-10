@@ -5,7 +5,7 @@
 @section('scripts')
 <script>
 Vue.set(app.$data.screen, 'title', '{{ old('title') }}');
-Vue.set(app.$data.screen, 'inventory_policy', '{{ old('variants.0.inventory_policy') }}');
+Vue.set(app.$data.screen, 'inventory_management', '{{ old('variants.0.inventory_management') }}');
 Vue.set(app.$data.screen, 'requires_shipping', {{ old('variants.0.requires_shipping') ? 'true' : 'false' }});
 Vue.set(app.$data.screen, 'use_variant', false);
 Vue.set(app.$data.screen, 'variants', [['Size', '']]);
@@ -143,21 +143,21 @@ Vue.set(app.$data.screen, 'variants', [['Size', '']]);
                         </div>
                         <div class="row flex-items-xs-between">
                             <div class="col-sm-6">
-                                <div class="form-group{{ $errors->has('variants.0.inventory_policy') ? ' has-danger' : '' }}">
-                                    <label class="form-control-label">{{ trans('glitter::admin.product.inventory_policy') }}</label>
-                                    <select class="form-control" name="variants[0][inventory_policy]" v-model="screen.inventory_policy">
-                                        <option value="">{{ trans('glitter::admin.product.dont_track_inventory') }}</option>
+                                <div class="form-group{{ $errors->has('variants.0.inventory_management') ? ' has-danger' : '' }}">
+                                    <label class="form-control-label">{{ trans('glitter::admin.product.inventory_management') }}</label>
+                                    <select class="form-control" name="variants[0][inventory_management]" v-model="screen.inventory_management">
+                                        <option value="none">{{ trans('glitter::admin.product.dont_track_inventory') }}</option>
                                         <option value="glitter">{{ trans('glitter::admin.product.glitter_track_inventory') }}</option>
                                     </select>
 
-                                    @if ($errors->has('variants.0.inventory_policy'))
-                                        <div class="form-control-feedback">{{ $errors->first('variants.0.inventory_policy') }}</div>
+                                    @if ($errors->has('variants.0.inventory_management'))
+                                        <div class="form-control-feedback">{{ $errors->first('variants.0.inventory_management') }}</div>
                                     @endif
                                 </div>
                             </div>
-                            <div class="col-sm-6" v-if="screen.inventory_policy != ''">
+                            <div class="col-sm-6" v-if="screen.inventory_management != 'none'">
                                 <div class="form-group{{ $errors->has('variants.0.inventory_quantity') ? ' has-danger' : '' }}">
-                                    <label class="form-control-label">{{ trans('glitter::admin.product.quantity') }}</label>
+                                    <label class="form-control-label">{{ trans('glitter::admin.product.inventory_quantity') }}</label>
                                     <input type="number" name="variants[0][inventory_quantity]" value="{{ old('variants.0.inventory_quantity') }}" class="form-control col-xs-4">
 
                                     @if ($errors->has('variants.0.inventory_quantity'))
@@ -166,7 +166,7 @@ Vue.set(app.$data.screen, 'variants', [['Size', '']]);
                                 </div>
                             </div>
                         </div>
-                        <div class="form-group{{ $errors->has('variants.0.out_of_stock_purchase') ? ' has-danger' : '' }}" v-if="screen.inventory_policy != ''">
+                        <div class="form-group{{ $errors->has('variants.0.out_of_stock_purchase') ? ' has-danger' : '' }}" v-if="screen.inventory_management != 'none'">
                             <label class="custom-control custom-checkbox">
                                 <input type="checkbox" name="variants[0][out_of_stock_purchase]" value="1" {{ old('variants.0.out_of_stock_purchase') ? 'checked' : '' }} class="custom-control-input">
                                 <span class="custom-control-indicator"></span>
@@ -212,8 +212,8 @@ Vue.set(app.$data.screen, 'variants', [['Size', '']]);
                                 <div class="form-group{{ $errors->has('variants.0.weight_unit') ? ' has-danger' : '' }}">
                                     <label class="form-control-label">{{ trans('glitter::admin.product.weight_unit') }}</label>
                                     <select name="variants[0][weight_unit]" class="form-control">
-                                        <option>kg</option>
-                                        <option>g</option>
+                                        <option value="kg" {{ old('variants.0.weight_unit') == 'kg' ? 'selected' : '' }}>kg</option>
+                                        <option value="g" {{ old('variants.0.weight_unit') == 'g' ? 'selected' : '' }}>g</option>
                                     </select>
 
                                     @if ($errors->has('variants.0.weight_unit'))
@@ -227,7 +227,7 @@ Vue.set(app.$data.screen, 'variants', [['Size', '']]);
                         <h3 class="card-title">{{ trans('glitter::admin.product.fulfillment_service') }}</h3>
                         <div class="form-group{{ $errors->has('variants.0.fulfillment_manual') ? ' has-danger' : '' }}">
                             <select class="form-control" name="variants[0][fulfillment_service]" style="width: auto;">
-                                <option>{{ trans('glitter::admin.product.fulfillment_manual') }}</option>
+                                <option value="manual" {{ old('variants.0.fulfillment_service') == 'manual' ? 'selected' : '' }}>{{ trans('glitter::admin.product.fulfillment_manual') }}</option>
                                 <option value="ヤマト運輸" {{ old('variants.0.fulfillment_manual') == 'ヤマト運輸' ? 'selected' : '' }}>ヤマト運輸</option>
                                 <option value="佐川急便" {{ old('variants.0.fulfillment_manual') == '佐川急便' ? 'selected' : '' }}>佐川急便</option>
                             </select>

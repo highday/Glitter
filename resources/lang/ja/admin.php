@@ -19,10 +19,10 @@ return [
         'inventory'               => '在庫',
         'sku'                     => 'SKU （単品管理）',
         'barcode'                 => 'バーコード (ISBN, UPC, GTIN, etc.)',
-        'inventory_policy'        => '在庫管理',
+        'inventory_management'    => '在庫管理',
         'dont_track_inventory'    => '在庫数を追跡しない',
         'glitter_track_inventory' => 'Glitterで在庫数を管理する',
-        'quantity'                => '在庫数',
+        'inventory_quantity'      => '在庫数',
         'out_of_stock_purchase'   => '在庫切れの状態でもお客様による購入を可能にする',
 
         'shipping'          => '配送',

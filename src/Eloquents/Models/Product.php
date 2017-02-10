@@ -46,12 +46,12 @@ class Product extends Model implements Domainable
 
     public function toDomain(): DomainEntity
     {
-        $entity = new DomainEntity(
-            $this->title,
-            $this->description,
-            $this->options,
-            $this->variants->map->toDomain()->all()
-        );
+        $entity = new DomainEntity([
+            'title' => $this->title,
+            'description' => $this->description,
+            'options' => $this->options,
+            'variants' => $this->variants->map->toDomain()->all(),
+        ]);
         $entity->setId($this->getKey());
 
         return $entity;

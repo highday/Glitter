@@ -4,6 +4,7 @@ namespace Highday\Glitter\Domain\Entities;
 
 use Highday\Glitter\Domain\Entity;
 use Highday\Glitter\Domain\EntityCollection;
+use Illuminate\Support\Arr;
 
 class Product extends Entity
 {
@@ -11,7 +12,7 @@ class Product extends Entity
     protected $store;
 
     /** @var string */
-    protected $name;
+    protected $title;
 
     /** @var string */
     protected $description;
@@ -28,6 +29,9 @@ class Product extends Entity
     /** @var Variant[] */
     protected $variants;
 
+    /** @var Customize[] */
+    protected $customizes;
+
     /** @var Inventory */
     protected $inventory;
 
@@ -37,22 +41,27 @@ class Product extends Entity
     /** @var Vendor */
     protected $vendor;
 
-    public function __construct(string $name, string $description = null, array $options = [], array $variants = [])
+    public function __construct(array $props)
     {
-        $this->name = $name;
-        $this->description = $description;
-        $this->thumbnail = $this->defaultThumbnail();
-        $this->images = self::newCollection();
-        $this->options = $options;
-        $this->variants = self::newCollection($variants);
+        $props = array_filter($props);
+
+        $this->title = Arr::get($props, 'title', '');
+        $this->description = Arr::get($props, 'description', '');
+        $this->thumbnail = Arr::exists($props, 'thumbnail')
+            ? new Attachment(Arr::get($props, 'thumbnail'))
+            : $this->defaultThumbnail();
+        $this->images = self::newCollection(Arr::get($props, 'images', []));
+        $this->options = Arr::get($props, 'options', []);
+        $this->variants = self::newCollection(Arr::get($props, 'variants', []));
+        $this->customizes = self::newCollection(Arr::get($props, 'customizes', []));
         $this->inventory = new Inventory();
         $this->type = new Type('R-type');
         $this->vendor = new Vendor('ven ven dor');
     }
 
-    public function getName(): string
+    public function getTitle(): string
     {
-        return $this->name;
+        return $this->title;
     }
 
     public function getDescription(): string
@@ -103,6 +112,11 @@ class Product extends Entity
     public function countVariants(): int
     {
         return $this->variants->count();
+    }
+
+    public function getCustomizes(): EntityCollection
+    {
+        return $this->customizes;
     }
 
     public function defaultThumbnail(): Attachment
