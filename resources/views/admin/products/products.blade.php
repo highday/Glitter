@@ -77,7 +77,7 @@
                             <td class="chk"><input type="checkbox"></td>
                             <td class="media"><img src="{{ $product->thumbnail->url }}" width="50" height="50" class="rounded"></td>
                             <td class="title"><a href="{{ route('glitter.admin.products.edit', $product->id) }}">{{ $product->title }}</a></td>
-                            <td>{{ $product->inventory->summary }}</td>
+                            <td>@if($product->stock()){{ $product->stock() }}@else<span class="text-muted">N/A</span>@endif</td>
                             <td>{{ $product->type->name }}</td>
                             <td>{{ $product->vendor->name }}</td>
                         </tr>

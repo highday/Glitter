@@ -114,6 +114,21 @@ class Product extends Entity
         return $this->variants->count();
     }
 
+    public function stock()
+    {
+        $inventory_variants = $this->variants->filter(function ($variant) {
+            return $variant->getInventoryManagement() != '';
+        });
+
+        if ($inventory_variants->count() > 0) {
+            $quantity = $inventory_variants->map->getInventoryQuantity()->sum();
+            $count = $this->variants->count();
+            return "{$quantity} in stock for {$count} variants";
+        } else {
+            return null;
+        }
+    }
+
     public function getCustomizes(): EntityCollection
     {
         return $this->customizes;
