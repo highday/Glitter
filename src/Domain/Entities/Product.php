@@ -123,9 +123,10 @@ class Product extends Entity
         if ($inventory_variants->count() > 0) {
             $quantity = $inventory_variants->map->getInventoryQuantity()->sum();
             $count = $this->variants->count();
+
             return "{$quantity} in stock for {$count} variants";
         } else {
-            return null;
+            return;
         }
     }
 
