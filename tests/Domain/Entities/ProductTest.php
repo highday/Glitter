@@ -16,7 +16,7 @@ class ProductTest extends TestCase
 
     public function testInstance()
     {
-        $name = 'お茶';
+        $title = 'お茶';
         $description = 'ペットボトルに入ったお茶です。';
 
         // $op1 = new Option('容器・容量', ['240ml', '500ml', '2L']);
@@ -71,7 +71,7 @@ class ProductTest extends TestCase
         ]);
 
         $product = new Product([
-            'name'        => $name,
+            'title'       => $title,
             'description' => $description,
             'options'     => ['容器・容量', '本数'],
             'variants'    => [$va1, $va2, $va3, $va4],
@@ -80,7 +80,7 @@ class ProductTest extends TestCase
         $product->addVariant($va5);
 
         $this->assertInstanceOf(Product::class, $product);
-        $this->assertEquals($name, $product->getName());
+        $this->assertEquals($title, $product->getTitle());
         $this->assertEquals($description, $product->getDescription());
 
         return $product;
