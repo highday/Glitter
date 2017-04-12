@@ -2,7 +2,7 @@
 
 namespace Highday\Glitter\Domain\Entities;
 
-use Highday\Glitter\Domain\ValueObjects\EmailAddress;
+use Highday\Glitter\Domain\Values\EmailAddress;
 use PHPUnit\Framework\TestCase;
 
 class MemberTest extends TestCase

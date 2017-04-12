@@ -2,6 +2,7 @@
 
 namespace Highday\Glitter\Domain;
 
+use Highday\Glitter\Domain\Collection;
 use DomainException;
 use Illuminate\Support\Str;
 
@@ -31,7 +32,7 @@ abstract class Entity
 
     public static function newCollection(array $entities = [])
     {
-        return new EntityCollection($entities);
+        return new Collection($entities);
     }
 
     public function clone()

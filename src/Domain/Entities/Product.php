@@ -3,7 +3,7 @@
 namespace Highday\Glitter\Domain\Entities;
 
 use Highday\Glitter\Domain\Entity;
-use Highday\Glitter\Domain\EntityCollection;
+use Highday\Glitter\Domain\Collection;
 use Illuminate\Support\Arr;
 
 class Product extends Entity
@@ -74,7 +74,7 @@ class Product extends Entity
         return $this->thumbnail;
     }
 
-    public function getAttachments(): EntityCollection
+    public function getAttachments(): Collection
     {
         return $this->attachments;
     }
@@ -99,7 +99,7 @@ class Product extends Entity
         return $this->options;
     }
 
-    public function getVariants(): EntityCollection
+    public function getVariants(): Collection
     {
         return $this->variants;
     }
@@ -130,7 +130,7 @@ class Product extends Entity
         }
     }
 
-    public function getCustomizes(): EntityCollection
+    public function getCustomizes(): Collection
     {
         return $this->customizes;
     }

@@ -32,6 +32,17 @@ window.axios.defaults.headers.common = {
 };
 
 /**
+ * Chart.js
+ */
+window.Chart = require('chart.js');
+
+/**
+ * Moment.js
+ */
+window.moment = require('moment');
+window.moment.locale('ja');
+
+/**
  * Echo exposes an expressive API for subscribing to channels and listening
  * for events that are broadcast by Laravel. Echo and event broadcasting
  * allows your team to easily build robust real-time web applications.

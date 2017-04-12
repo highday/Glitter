@@ -4,10 +4,10 @@ namespace Highday\Glitter\Domain\Entities;
 
 use Highday\Glitter\Domain\Collection;
 use Highday\Glitter\Domain\Entity;
-use Highday\Glitter\Domain\ValueObjects\Money;
-use Highday\Glitter\Domain\ValueObjects\Product\OptionValue;
-use Highday\Glitter\Domain\ValueObjects\Product\Price;
-use Highday\Glitter\Domain\ValueObjects\Product\Weight;
+use Highday\Glitter\Domain\Values\Money;
+use Highday\Glitter\Domain\Values\Product\OptionValue;
+use Highday\Glitter\Domain\Values\Product\Price;
+use Highday\Glitter\Domain\Values\Product\Weight;
 use Illuminate\Support\Arr;
 use InvalidArgumentException;
 

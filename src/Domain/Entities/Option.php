@@ -3,7 +3,7 @@
 namespace Highday\Glitter\Domain\Entities;
 
 use Highday\Glitter\Domain\Entity;
-use Highday\Glitter\Domain\ValueObjects\Product\OptionValue;
+use Highday\Glitter\Domain\Values\Product\OptionValue;
 use InvalidArgumentException;
 
 class Option extends Entity

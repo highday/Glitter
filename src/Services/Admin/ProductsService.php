@@ -5,9 +5,10 @@ namespace Highday\Glitter\Services\Admin;
 use Highday\Glitter\Contracts\Repositories\ProductRepository;
 use Highday\Glitter\Domain\Entities\Product;
 use Highday\Glitter\Domain\Entities\Store;
-use Highday\Glitter\Domain\EntityCollection;
 use Illuminate\Contracts\Validation\Factory as Validator;
 use Illuminate\Validation\ValidationException;
+use Illuminate\Pagination\Paginator;
+use Illuminate\Pagination\LengthAwarePaginator;
 
 class ProductsService
 {
@@ -24,9 +25,19 @@ class ProductsService
         $this->store = $store;
     }
 
-    public function search(string $query): EntityCollection
+    public function paginate(string $keyword, int $perPage = null, string $pageName = 'page', int $page = null): LengthAwarePaginator
     {
-        return $this->repository->search($query);
+        $page = $page ?: Paginator::resolveCurrentPage($pageName);
+
+        $perPage = $perPage ?: 1;
+
+        $total = $this->repository->getCountForPagination($keyword);
+        $results = $this->repository->search($keyword, $perPage, $page);
+
+        return new LengthAwarePaginator($results, $total, $perPage, $page, [
+            'path' => Paginator::resolveCurrentPath(),
+            'pageName' => $pageName,
+        ]);
     }
 
     public function find(int $key): Product

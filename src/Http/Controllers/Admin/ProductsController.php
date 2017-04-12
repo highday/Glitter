@@ -12,21 +12,21 @@ class ProductsController extends Controller
 {
     public function products(Request $request, ProductsService $service)
     {
-        $query = $request->input('q', '');
+        $keyword = $request->input('keyword');
+        $products = $service->paginate($keyword ?: '');
 
-        return view('glitter.admin::products.products', [
-            'keyword'  => $query,
-            'products' => $service->search($query),
-        ]);
+        return view('glitter.admin::products.products', compact('keyword', 'products'));
     }
 
     public function inventory(Request $request, ProductsService $service)
     {
-        $query = $request->input('q', '');
+        $keyword = $request->input('keyword');
+        $perPage = 2;
+        $page = $request->input('page', 1);
 
         return view('glitter.admin::products.inventory', [
-            'keyword'  => $query,
-            'products' => $service->search($query),
+            'keyword'  => $keyword,
+            'products' => $service->search($keyword ?: '', $perPage, $page ?: 1),
         ]);
     }
 

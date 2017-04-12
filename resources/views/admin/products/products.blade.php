@@ -55,7 +55,7 @@
                                 <a class="dropdown-item" href="#">Separated link</a>
                             </div>
                         </div>
-                        <input type="search" class="form-control" name="q" value="{{ $keyword }}" placeholder="キーワード検索">
+                        <input type="search" class="form-control" name="keyword" value="{{ $keyword }}" placeholder="キーワード検索">
                     </div>
                 </div>
             </form>
@@ -85,6 +85,9 @@
                     </tbody>
                 </table>
             </div>
+        </div>
+        <div class="card-footer">
+{{ $products->appends(compact('keyword'))->links('glitter.admin::partials.pagination') }}
         </div>
     </div>
 </div>

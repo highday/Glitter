@@ -1,8 +1,8 @@
 <?php
 
-namespace Highday\Glitter\Domain\ValueObjects\Product;
+namespace Highday\Glitter\Domain\Values\Product;
 
-use Highday\Glitter\Domain\ValueObjects\Money;
+use Highday\Glitter\Domain\Values\Money;
 use PHPUnit\Framework\TestCase;
 
 class PriceTest extends TestCase
