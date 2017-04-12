@@ -2,9 +2,9 @@
 
 namespace Highday\Glitter\Contracts\Repositories;
 
+use Highday\Glitter\Domain\Collection;
 use Highday\Glitter\Domain\Entities\Product;
 use Highday\Glitter\Domain\Entities\Store;
-use Highday\Glitter\Domain\Collection;
 
 interface ProductRepository
 {

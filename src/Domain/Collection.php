@@ -2,9 +2,8 @@
 
 namespace Highday\Glitter\Domain;
 
-use Highday\Glitter\Domain\Entity;
-use Illuminate\Support\Collection as BaseCollection;
 use Illuminate\Support\Arr;
+use Illuminate\Support\Collection as BaseCollection;
 
 class Collection extends BaseCollection
 {

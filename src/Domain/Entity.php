@@ -2,7 +2,6 @@
 
 namespace Highday\Glitter\Domain;
 
-use Highday\Glitter\Domain\Collection;
 use DomainException;
 use Illuminate\Support\Str;
 

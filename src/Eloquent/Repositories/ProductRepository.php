@@ -3,9 +3,9 @@
 namespace Highday\Glitter\Eloquent\Repositories;
 
 use Highday\Glitter\Contracts\Repositories\ProductRepository as Repository;
+use Highday\Glitter\Domain\Collection;
 use Highday\Glitter\Domain\Entities\Product;
 use Highday\Glitter\Domain\Entities\Store;
-use Highday\Glitter\Domain\Collection;
 use Highday\Glitter\Eloquent\Models\Product as ProductModel;
 use Highday\Glitter\Eloquent\Models\Store as StoreModel;
 use Highday\Glitter\Eloquent\Models\Variant as VariantModel;
@@ -24,6 +24,7 @@ class ProductRepository implements Repository
     {
         $query = ProductModel::query();
         $query = $this->getKeywordQuery($query, $keyword);
+
         return $query->toBase()->getCountForPagination();
     }
 
