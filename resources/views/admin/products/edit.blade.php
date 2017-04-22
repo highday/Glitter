@@ -85,7 +85,7 @@ Vue.set(app.$data.screen, 'variants', [['Size', '']]);
                 </div>
                 @if($product->variants->count() == 1)
                 @foreach($product->variants as $variant)
-                <input type="hidden" name="variants[0][id]" value="{{ $variant->getId() }}">
+                <input type="hidden" name="variants[0][id]" value="{{ $variant->getKey() }}">
                 <div class="form-card card">
                     <div class="card-block">
                         <h2 class="card-title">{{ trans('glitter::admin.product.pricing') }}</h2>
@@ -93,7 +93,7 @@ Vue.set(app.$data.screen, 'variants', [['Size', '']]);
                             <div class="col-sm">
                                 <div class="form-group{{ $errors->has('variants.0.price') ? ' has-danger' : '' }}">
                                     <label class="form-control-label">{{ trans('glitter::admin.product.price') }}</label>
-                                    <input-money unit="¥" point="0" name="variants[0][price]" value="{{ old('variants.0.price', $variant->price->getSelling()) }}">
+                                    <input-money unit="¥" point="0" name="variants[0][price]" value="{{ old('variants.0.price', $variant->price) }}">
 
                                     @if ($errors->has('variants.0.price'))
                                         <div class="form-control-feedback">{{ $errors->first('variants.0.price') }}</div>
@@ -103,7 +103,7 @@ Vue.set(app.$data.screen, 'variants', [['Size', '']]);
                             <div class="col-sm">
                                 <div class="form-group{{ $errors->has('variants.0.reference_price') ? ' has-danger' : '' }}">
                                     <label class="form-control-label">{{ trans('glitter::admin.product.reference_price') }}</label>
-                                    <input-money unit="¥" point="0" nullable name="variants[0][reference_price]" value="{{ old('variants.0.reference_price', $variant->price->getReference()) }}">
+                                    <input-money unit="¥" point="0" nullable name="variants[0][reference_price]" value="{{ old('variants.0.reference_price', $variant->price) }}">
 
                                     @if ($errors->has('variants.0.reference_price'))
                                         <div class="form-control-feedback">{{ $errors->first('variants.0.reference_price') }}</div>
@@ -113,7 +113,7 @@ Vue.set(app.$data.screen, 'variants', [['Size', '']]);
                         </div>
                         <div class="form-group{{ $errors->has('variants.0.taxes_included') ? ' has-danger' : '' }}">
                             <label class="custom-control custom-checkbox">
-                                <input type="checkbox" name="variants[0][taxes_included]" value="1" {{ old('variants.0.taxes_included', $variant->price->getTaxesIncluded()) ? 'checked' : '' }} class="custom-control-input">
+                                <input type="checkbox" name="variants[0][taxes_included]" value="1" {{ old('variants.0.taxes_included', $variant->price) ? 'checked' : '' }} class="custom-control-input">
                                 <span class="custom-control-indicator"></span>
                                 <span class="custom-control-description">{{ trans('glitter::admin.product.taxes_included') }}</span>
                             </label>
@@ -209,7 +209,7 @@ Vue.set(app.$data.screen, 'variants', [['Size', '']]);
                             <div class="col-sm">
                                 <div class="form-group{{ $errors->has('variants.0.weight') ? ' has-danger' : '' }}">
                                     <label class="form-control-label">{{ trans('glitter::admin.product.weight') }}</label>
-                                    <input type="text" name="variants[0][weight]" value="{{ old('variants.0.weight', $variant->weight->getAmount()) }}" class="form-control col-xs-4">
+                                    <input type="text" name="variants[0][weight]" value="{{ old('variants.0.weight', $variant->weight) }}" class="form-control col-xs-4">
 
                                     @if ($errors->has('variants.0.weight'))
                                         <div class="form-control-feedback">{{ $errors->first('variants.0.weight') }}</div>
@@ -220,8 +220,8 @@ Vue.set(app.$data.screen, 'variants', [['Size', '']]);
                                 <div class="form-group{{ $errors->has('variants.0.weight_unit') ? ' has-danger' : '' }}">
                                     <label class="form-control-label">{{ trans('glitter::admin.product.weight_unit') }}</label>
                                     <select name="variants[0][weight_unit]" class="form-control">
-                                        <option value="kg" {{ old('variants.0.weight_unit', $variant->weight->getUnit()) == 'kg' ? 'selected' : '' }}>kg</option>
-                                        <option value="g" {{ old('variants.0.weight_unit', $variant->weight->getUnit()) == 'g' ? 'selected' : '' }}>g</option>
+                                        <option value="kg" {{ old('variants.0.weight_unit', $variant->weight) == 'kg' ? 'selected' : '' }}>kg</option>
+                                        <option value="g" {{ old('variants.0.weight_unit', $variant->weight) == 'g' ? 'selected' : '' }}>g</option>
                                     </select>
 
                                     @if ($errors->has('variants.0.weight_unit'))
@@ -296,11 +296,11 @@ Vue.set(app.$data.screen, 'variants', [['Size', '']]);
                                     <tr>
                                         <td>IMG</td>
                                         @foreach($variant->options as $option)
-                                        <td>{{ $option->getValue() }}</td>
+                                        <td>{{ $option }}</td>
                                         @endforeach
                                         <td></td>
                                         <td></td>
-                                        <td>{{ $variant->price->getSelling() }}</td>
+                                        <td>{{ $variant->price }}</td>
                                         <td>{{ $variant->sku }}</td>
                                     </tr>
                                     @endforeach

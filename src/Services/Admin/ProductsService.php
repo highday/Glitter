@@ -2,47 +2,37 @@
 
 namespace Highday\Glitter\Services\Admin;
 
-use Highday\Glitter\Contracts\Repositories\ProductRepository;
-use Highday\Glitter\Domain\Entities\Product;
-use Highday\Glitter\Domain\Entities\Store;
+use Highday\Glitter\Eloquent\Models\Product;
+use Highday\Glitter\Eloquent\Models\Variant;
+use Highday\Glitter\Eloquent\Models\Store;
+use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Contracts\Validation\Factory as Validator;
-use Illuminate\Pagination\LengthAwarePaginator;
-use Illuminate\Pagination\Paginator;
 use Illuminate\Validation\ValidationException;
+use Illuminate\Support\Arr;
+use RuntimeException;
 
 class ProductsService
 {
-    /** @var ProductRepository */
-    private $repository;
-
     /** @var Store */
     private $store;
 
-    public function __construct(ProductRepository $repository, Store $store)
+    public function __construct(Store $store)
     {
-        $this->repository = $repository;
-
         $this->store = $store;
     }
 
-    public function paginate(string $keyword, int $perPage = null, string $pageName = 'page', int $page = null): LengthAwarePaginator
+    public function search(string $keyword = ''): LengthAwarePaginator
     {
-        $page = $page ?: Paginator::resolveCurrentPage($pageName);
-
-        $perPage = $perPage ?: 1;
-
-        $total = $this->repository->getCountForPagination($keyword);
-        $results = $this->repository->search($keyword, $perPage, $page);
-
-        return new LengthAwarePaginator($results, $total, $perPage, $page, [
-            'path'     => Paginator::resolveCurrentPath(),
-            'pageName' => $pageName,
-        ]);
+        $query = $this->store->products();
+        if ($keyword != '') {
+            $query->where('title', 'like', "%{$keyword}%");
+        }
+        return $query->paginate();
     }
 
     public function find(int $key): Product
     {
-        return $this->repository->find($key);
+        return $this->store->products->find($key);
     }
 
     public function store(array $attributes): Product
@@ -68,7 +58,32 @@ class ProductsService
             throw new ValidationException($validator);
         }
 
-        return $this->repository->store($this->store, $attributes);
+        $product = new Product(Arr::only($attributes, [
+            'title',
+            'description'
+        ]));
+        $this->store->products()->save($product);
+
+        $variants = array_map(function ($attributes) {
+            return new Variant(Arr::only($attributes, [
+                'sku',
+                'barcode',
+                'price',
+                'reference_price',
+                'taxes_included',
+                'inventory_management',
+                'inventory_quantity',
+                'out_of_stock_purchase',
+                'requires_shipping',
+                'weight',
+                'weight_unit',
+                'fulfillment_service',
+                'options',
+            ]));
+        }, Arr::get($attributes, 'variants'));
+        $product->variants()->saveMany($variants);
+
+        return $product;
     }
 
     public function update(int $key, array $attributes)
@@ -95,7 +110,35 @@ class ProductsService
             throw new ValidationException($validator);
         }
 
-        return $this->repository->update($key, $attributes);
+        $product = Product::findOrFail($id);
+        $product->fill(Arr::only($attributes, [
+            'title',
+            'description',
+        ]));
+        if ($product->save() !== true) {
+            throw new RuntimeException('Can not save model.');
+        }
+        $variants = array_map(function ($attributes) {
+            $variant = Variant::findOrFail(Arr::get($attributes, 'id'));
+            return $variant->fill(Arr::only($attributes, [
+                'sku',
+                'barcode',
+                'price',
+                'reference_price',
+                'taxes_included',
+                'inventory_management',
+                'inventory_quantity',
+                'out_of_stock_purchase',
+                'requires_shipping',
+                'weight',
+                'weight_unit',
+                'fulfillment_service',
+                'options',
+            ]));
+        }, Arr::get($attributes, 'variants'));
+        $product->variants()->saveMany($variants);
+
+        return $product;
     }
 
     public function addAttachment(int $key, array $attributes): bool
@@ -114,15 +157,6 @@ class ProductsService
 
     public function delete(int $key): bool
     {
-        $validator = app(Validator::class)->make($attributes, [
-            'title'       => 'required',
-            'description' => 'required',
-        ]);
-
-        if ($validator->fails()) {
-            throw new ValidationException($validator);
-        }
-
-        return $this->repository->update($key, $attributes);
+        //
     }
 }

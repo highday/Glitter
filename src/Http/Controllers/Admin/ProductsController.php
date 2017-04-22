@@ -13,7 +13,7 @@ class ProductsController extends Controller
     public function products(Request $request, ProductsService $service)
     {
         $keyword = $request->input('keyword');
-        $products = $service->paginate($keyword ?: '');
+        $products = $service->search($keyword ?: '');
 
         return view('glitter.admin::products.products', compact('keyword', 'products'));
     }

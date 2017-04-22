@@ -2,12 +2,10 @@
 
 namespace Highday\Glitter\Eloquent\Models;
 
-use Highday\Glitter\Contracts\Domain\Domainable;
-use Highday\Glitter\Domain\Entities\Store as DomainEntity;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Store extends Model implements Domainable
+class Store extends Model
 {
     use SoftDeletes;
 
@@ -61,19 +59,5 @@ class Store extends Model implements Domainable
     public function customers()
     {
         return $this->belongsToMany(Customer::class, 'store_customer');
-    }
-
-    public function toDomain(): DomainEntity
-    {
-        $entity = new DomainEntity(
-            $this->name,
-            $this->account_email,
-            $this->customer_email,
-            $this->timezone,
-            $this->currency
-        );
-        $entity->setId($this->getKey());
-
-        return $entity;
     }
 }

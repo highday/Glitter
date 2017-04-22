@@ -21,10 +21,5 @@ class GlitterServiceProvider extends ServiceProvider
                 \Highday\Glitter\Console\Commands\InstallCommand::class,
             ]);
         }
-
-        $this->app->bind(
-            \Highday\Glitter\Contracts\Repositories\ProductRepository::class,
-            \Highday\Glitter\Eloquent\Repositories\ProductRepository::class
-        );
     }
 }

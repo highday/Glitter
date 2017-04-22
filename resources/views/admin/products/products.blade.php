@@ -64,22 +64,15 @@
                     <thead>
                         <tr>
                             <th class="chk"><input type="checkbox"></th>
-                            <th class="media"></th>
+                            {{-- <th class="media"></th> --}}
                             <th>名称</th>
-                            <th>在庫</th>
-                            <th>タイプ</th>
-                            <th>ベンダ</th>
                         </tr>
                     </thead>
                     <tbody>
 @foreach($products as $product)
                         <tr>
                             <td class="chk"><input type="checkbox"></td>
-                            <td class="media"><img src="{{ $product->thumbnail->url }}" width="50" height="50" class="rounded"></td>
-                            <td class="title"><a href="{{ route('glitter.admin.products.edit', $product->id) }}">{{ $product->title }}</a></td>
-                            <td>@if($product->stock()){{ $product->stock() }}@else<span class="text-muted">N/A</span>@endif</td>
-                            <td>{{ $product->type->name }}</td>
-                            <td>{{ $product->vendor->name }}</td>
+                            <td class="title"><a href="{{ route('glitter.admin.products.edit', $product) }}">{{ $product->title }}</a></td>
                         </tr>
 @endforeach
                     </tbody>
