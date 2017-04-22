@@ -3,12 +3,12 @@
 namespace Highday\Glitter\Services\Admin;
 
 use Highday\Glitter\Eloquent\Models\Product;
-use Highday\Glitter\Eloquent\Models\Variant;
 use Highday\Glitter\Eloquent\Models\Store;
+use Highday\Glitter\Eloquent\Models\Variant;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Contracts\Validation\Factory as Validator;
-use Illuminate\Validation\ValidationException;
 use Illuminate\Support\Arr;
+use Illuminate\Validation\ValidationException;
 use RuntimeException;
 
 class ProductsService
@@ -27,6 +27,7 @@ class ProductsService
         if ($keyword != '') {
             $query->where('title', 'like', "%{$keyword}%");
         }
+
         return $query->paginate();
     }
 
@@ -60,7 +61,7 @@ class ProductsService
 
         $product = new Product(Arr::only($attributes, [
             'title',
-            'description'
+            'description',
         ]));
         $this->store->products()->save($product);
 
@@ -120,6 +121,7 @@ class ProductsService
         }
         $variants = array_map(function ($attributes) {
             $variant = Variant::findOrFail(Arr::get($attributes, 'id'));
+
             return $variant->fill(Arr::only($attributes, [
                 'sku',
                 'barcode',
