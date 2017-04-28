@@ -42,6 +42,7 @@ class Product extends Model
         $prices = $this->variants->map(function ($variant) {
             return $variant->price;
         })->unique();
+
         return array_unique([$prices->min(), $prices->max()]);
     }
 
@@ -50,6 +51,7 @@ class Product extends Model
         $prices = $this->variants->map(function ($variant) {
             return $variant->reference_price;
         })->filter()->unique();
+
         return array_unique([$prices->min(), $prices->max()]);
     }
 

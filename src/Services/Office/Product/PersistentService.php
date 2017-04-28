@@ -6,7 +6,6 @@ use Closure;
 use Highday\Glitter\Eloquent\Models\Product;
 use Highday\Glitter\Eloquent\Models\Store;
 use Highday\Glitter\Eloquent\Models\Variant;
-use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Contracts\Validation\Factory as Validator;
 use Illuminate\Database\DatabaseManager;
 use Illuminate\Support\Arr;
@@ -31,7 +30,6 @@ class PersistentService
     public function store(array $attributes): Product
     {
         return $this->transaction(function () use ($attributes) {
-
             $validator = app(Validator::class)->make($attributes, [
                 'title'                            => 'required',
                 'description'                      => 'nullable',
@@ -85,7 +83,6 @@ class PersistentService
     public function update(int $key, array $attributes)
     {
         return $this->transaction(function () use ($key, $attributes) {
-
             $validator = app(Validator::class)->make($attributes, [
                 'title'                            => 'required',
                 'description'                      => 'nullable',
@@ -144,7 +141,6 @@ class PersistentService
     public function update_variant(int $key, array $attributes)
     {
         return $this->transaction(function () use ($key, $attributes) {
-
             $validator = app(Validator::class)->make($attributes, [
                 'price'                 => 'required|numeric',
                 'reference_price'       => 'nullable|numeric',

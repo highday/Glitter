@@ -2,9 +2,9 @@
 
 namespace Highday\Glitter\Http\Controllers\Office;
 
-use Highday\Glitter\Http\Controllers\Controller;
 use Highday\Glitter\Eloquent\Models\Product;
 use Highday\Glitter\Eloquent\Models\Variant;
+use Highday\Glitter\Http\Controllers\Controller;
 use Highday\Glitter\Services\Office\Product\IndexService;
 use Highday\Glitter\Services\Office\Product\PersistentService;
 use Illuminate\Database\Eloquent\ModelNotFoundException;

@@ -4,8 +4,8 @@ namespace Highday\Glitter\Providers;
 
 use Highday\Glitter\Http\Middleware\Office\AccessRestrictionWithRemoteAddress;
 use Highday\Glitter\Http\Middleware\Office\RedirectIfMemberAuthenticated;
-use Highday\Glitter\Http\Middleware\Office\ShareVariables;
 use Highday\Glitter\Http\Middleware\Office\ShareFlashMessagesFromSession;
+use Highday\Glitter\Http\Middleware\Office\ShareVariables;
 use Illuminate\Contracts\Routing\Registrar as Router;
 use Illuminate\Support\ServiceProvider;
 

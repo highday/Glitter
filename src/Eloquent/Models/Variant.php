@@ -45,7 +45,7 @@ class Variant extends Model
 
     public function getNameAttribute()
     {
-        return join(', ', $this->options);
+        return implode(', ', $this->options);
     }
 
     public function getOptionsAttribute()
