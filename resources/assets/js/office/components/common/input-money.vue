@@ -12,20 +12,19 @@ module.exports = {
     name: { default: '' },
     value: { default: '' },
     unit: { default: '¥' },
-    point: { default: '0' },
+    point: { default: 0 },
     nullable: { type: Boolean, default: false },
   },
   data: function () {
     return {
       active: false,
       rawValue: this.value,
-      inputValue: '',
     }
   },
   computed: {
     isEmpty: function () {
       if (this.active) {
-        return this.nullable && this.inputValue == ''
+        return this.nullable && this.rawValue == ''
       } else {
         return this.nullable && this.formatedValue == ''
       }

@@ -60,4 +60,9 @@ class Store extends Model
     {
         return $this->belongsToMany(Customer::class, 'store_customer');
     }
+
+    public function getIconAttribute()
+    {
+        return 'https://placehold.jp/80x80.png?text='.mb_substr($this->name, 0, 1).'&css='.urlencode(json_encode(['font-size'=>'50px', 'font-weight'=>'bold']));
+    }
 }

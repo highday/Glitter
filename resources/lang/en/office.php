@@ -4,7 +4,7 @@ return [
 
     'product' => [
 
-        'title'       => 'Title',
+        'name'        => 'Name',
         'description' => 'Description',
 
         'images'         => 'Images',

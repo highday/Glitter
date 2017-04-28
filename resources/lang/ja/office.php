@@ -4,7 +4,7 @@ return [
 
     'product' => [
 
-        'title'       => '商品名',
+        'name'        => '商品名',
         'description' => '商品説明',
 
         'images'         => '商品画像',

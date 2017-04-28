@@ -5,8 +5,11 @@ $brand-color3: #367BE0;
 $brand-color4: #FCFCFE;
 $brand-color5: #F4F5F6;
 
-$body-bg: $brand-color5;
+$body-bg: #fff;
 $brand-primary: $brand-color3;
+
+$link-color: desaturate(darken($brand-primary, 10%), 20%);
+$link-hover-color: $brand-primary;
 
 $header-nav-height: 50px;
 $header-section-height: 3rem;

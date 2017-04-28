@@ -4,16 +4,11 @@
 
 @section('scripts')
 <script>
-var vm = new Vue({
-    el: '#edit',
-    data: {
-        name: '{{ old('name', $product->name) }}',
-        inventory_management: '{{ old('variants.0.inventory_management', $product->variants->first()->inventory_management) }}',
-        requires_shipping: {{ old('variants.0.requires_shipping', $product->variants->first()->requires_shipping) ? 'true' : 'false' }},
-        use_variant: {{ $product->variants->count() > 1 ? 'true' : 'false' }},
-        variants: [['Size', '']],
-    },
-})
+Vue.set(app.$data.screen, 'title', '{{ old('title', $product->title) }}');
+Vue.set(app.$data.screen, 'inventory_management', '{{ old('variants.0.inventory_management', $product->variants->first()->inventory_management) }}');
+Vue.set(app.$data.screen, 'requires_shipping', {{ old('variants.0.requires_shipping', $product->variants->first()->requires_shipping) ? 'true' : 'false' }});
+Vue.set(app.$data.screen, 'use_variant', {{ $product->variants->count() > 1 ? 'true' : 'false' }});
+Vue.set(app.$data.screen, 'variants', [['Size', '']]);
 </script>
 @endsection
 
@@ -23,7 +18,7 @@ var vm = new Vue({
 
 @section('content')
 @include('glitter.office::partials.errors')
-<form id="edit" role="form" method="POST" action="{{ route('glitter.office.products.update', $product->id) }}">
+<form role="form" method="POST" action="{{ route('glitter.office.products.update', $product->id) }}">
     {{ csrf_field() }}
     <div class="container-fluid">
         <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
@@ -42,50 +37,29 @@ var vm = new Vue({
     <hr>
     <div class="container-fluid">
         <div class="row">
+            <div class="col-lg-4">
+                <div class="form-card card">
+                    <div class="card-block">
+                        <h2 class="card-title">{{ $product->name }}</h2>
+                        <a href="{{ route('glitter.office.products.edit', $product) }}">← 商品編集に戻る</a>
+                    </div>
+                    <div class="list-group list-group-flush">
+                    @foreach($product->variants as $_variant)
+                        <a class="list-group-item list-group-item-action{{ $variant == $_variant ? ' active' : '' }}" href="{{ route('glitter.office.products.variant.edit', [$product, $_variant]) }}">
+                            <img class="mr-2 rounded" src="https://placehold.jp/50x50.png" width="50" height="50">
+                            <div class="col p-0">
+                                <strong>{{ $_variant->name }}</strong>
+                                <div class="d-flex justify-content-between">
+                                    <span class="small">{{ $_variant->sku }}</span>
+                                    <span class="ml-auto small text-right"><price unit="¥" point="0" value="{{ $_variant->price }}" /></span>
+                                </div>
+                            </div>
+                        </a>
+                    @endforeach
+                    </div>
+                </div>
+            </div>
             <div class="col-lg-8">
-
-                <div class="form-group{{ $errors->has('name') ? ' has-danger' : '' }}">
-                    <div class="mb-3 input-group input-group-lg">
-                        <input type="text" name="name" v-model.trim="name" placeholder="{{ trans('glitter::office.product.name') }}" class="form-control">
-                    </div>
-
-                    @if ($errors->has('name'))
-                        <div class="form-control-feedback">{{ $errors->first('name') }}</div>
-                    @endif
-                </div>
-
-                <div class="form-card card">
-                    <div class="card-block">
-                        <h2 class="card-title">{{ trans('glitter::office.product.description') }}</h2>
-                        <div class="form-group{{ $errors->has('description') ? ' has-danger' : '' }}">
-                            <textarea name="description" class="form-control" rows="10">{{ old('description', $product->description) }}</textarea>
-
-                            @if ($errors->has('description'))
-                                <div class="form-control-feedback">{{ $errors->first('description') }}</div>
-                            @endif
-                        </div>
-                    </div>
-                </div>
-                <div class="form-card card">
-                    <div class="card-block">
-                        <div class="row">
-                            <div class="col col-auto mr-auto">
-                                <h2 class="card-title">{{ trans('glitter::office.product.images') }}</h2>
-                            </div>
-                            <div class="col col-auto">
-                                <form-card-nav v-cloak>
-                                    <a class="nav-link" href="#" @click.prevent="$emit('modal', 'add_image_url')">{{ trans('glitter::office.product.add_image_url') }}</a>
-                                    <a class="nav-link" href="#">{{ trans('glitter::office.product.add_image_file') }}</a>
-                                </form-card-nav>
-                            </div>
-                        </div>
-                        <div class="p-5 text-center text-muted">
-                        Drop files to upload
-                        </div>
-                    </div>
-                </div>
-                @if($product->variants->count() == 1)
-                @foreach($product->variants as $variant)
                 <input type="hidden" name="variants[0][id]" value="{{ $variant->getKey() }}">
                 <div class="form-card card">
                     <div class="card-block">
@@ -154,7 +128,7 @@ var vm = new Vue({
                             <div class="col-sm-6">
                                 <div class="form-group">
                                     <label class="form-control-label">{{ trans('glitter::office.product.inventory_management') }}</label>
-                                    <select class="form-control" name="variants[0][inventory_management]" v-model="inventory_management">
+                                    <select class="form-control" name="variants[0][inventory_management]" v-model="screen.inventory_management">
                                         <option value="none">{{ trans('glitter::office.product.dont_track_inventory') }}</option>
                                         <option value="glitter">{{ trans('glitter::office.product.glitter_track_inventory') }}</option>
                                     </select>
@@ -164,7 +138,7 @@ var vm = new Vue({
                                     @endif
                                 </div>
                             </div>
-                            <div class="col-sm-6" v-if="inventory_management != 'none'">
+                            <div class="col-sm-6" v-if="screen.inventory_management != 'none'">
                                 <div class="form-group{{ $errors->has('variants.0.inventory_quantity') ? ' has-danger' : '' }}">
                                     <label class="form-control-label">{{ trans('glitter::office.product.inventory_quantity') }}</label>
                                     <input type="number" name="variants[0][inventory_quantity]" value="{{ old('variants.0.inventory_quantity', $variant->inventory_quantity) }}" class="form-control col-xs-4">
@@ -175,7 +149,7 @@ var vm = new Vue({
                                 </div>
                             </div>
                         </div>
-                        <div class="form-group{{ $errors->has('variants.0.out_of_stock_purchase') ? ' has-danger' : '' }}" v-if="inventory_management != 'none'">
+                        <div class="form-group{{ $errors->has('variants.0.out_of_stock_purchase') ? ' has-danger' : '' }}" v-if="screen.inventory_management != 'none'">
                             <label class="custom-control custom-checkbox">
                                 <input type="checkbox" name="variants[0][out_of_stock_purchase]" value="1" {{ old('variants.0.out_of_stock_purchase', $variant->out_of_stock_purchase) ? 'checked' : '' }} class="custom-control-input">
                                 <span class="custom-control-indicator"></span>
@@ -193,7 +167,7 @@ var vm = new Vue({
                         <h2 class="card-title">{{ trans('glitter::office.product.shipping') }}</h2>
                         <div class="form-group{{ $errors->has('variants.0.requires_shipping') ? ' has-danger' : '' }}">
                             <label class="custom-control custom-checkbox">
-                                <input type="checkbox" name="variants[0][requires_shipping]" value="1" v-model="requires_shipping" class="custom-control-input">
+                                <input type="checkbox" name="variants[0][requires_shipping]" value="1" v-model="screen.requires_shipping" class="custom-control-input">
                                 <span class="custom-control-indicator"></span>
                                 <span class="custom-control-description">{{ trans('glitter::office.product.requires_shipping') }}</span>
                             </label>
@@ -203,7 +177,7 @@ var vm = new Vue({
                             @endif
                         </div>
                     </div>
-                    <div class="card-block" v-if="requires_shipping">
+                    <div class="card-block" v-if="screen.requires_shipping">
                         <h3 class="card-title">{{ trans('glitter::office.product.weight') }}</h3>
                         <p class="small text-muted">{{ trans('glitter::office.product.weight_description') }}</p>
                         <div class="row flex-items-xs-between">
@@ -244,79 +218,6 @@ var vm = new Vue({
                             @if ($errors->has('variants.0.fulfillment_manual'))
                                 <div class="form-control-feedback">{{ $errors->first('variants.0.fulfillment_manual') }}</div>
                             @endif
-                        </div>
-                    </div>
-                </div>
-                <div class="form-card card">
-                    <div class="card-block">
-                        <div class="row">
-                            <div class="col col-auto mr-auto">
-                                <h2 class="card-title">{{ trans('glitter::office.product.variants') }}</h2>
-                            </div>
-                            <div class="col col-auto">
-                                <form-card-nav v-cloak>
-                                    <a class="nav-link" href="#">{{ trans('glitter::office.product.add_variant') }}</a>
-                                </form-card-nav>
-                            </div>
-                        </div>
-                        <p class="small mb-0">{{ trans('glitter::office.product.variants_description') }}</p>
-                    </div>
-                </div>
-                @endforeach
-                @else
-                <div class="form-card card">
-                    <div class="card-block">
-                        <div class="row">
-                            <div class="col col-auto mr-auto">
-                                <h2 class="card-title">{{ trans('glitter::office.product.variants') }}</h2>
-                            </div>
-                            <div class="col col-auto">
-                                <form-card-nav v-cloak>
-                                    <a class="nav-link" href="#">{{ trans('glitter::office.product.reorder_variants') }}</a>
-                                    <a class="nav-link" href="#">{{ trans('glitter::office.product.edit_options') }}</a>
-                                    <a class="nav-link" href="#">{{ trans('glitter::office.product.add_variant') }}</a>
-                                </form-card-nav>
-                            </div>
-                        </div>
-                        <div class="d-flex px-4 py-2">
-                            <div style="width: 50px;"></div>
-                            @foreach($product->options as $option)
-                            <div class="col">{{ $option }}</div>
-                            @endforeach
-                            <div class="col">SKU</div>
-                            <div class="col">Price</div>
-                        </div>
-                        <div class="list-group list-group-flush">
-                            @foreach($product->variants as $variant)
-                            <a class="list-group-item list-group-item-action px-4" href="{{ route('glitter.office.products.variant.edit', [$product, $variant]) }}">
-                                <div><img class="rounded" src="https://placehold.jp/50x50.png" width="50" height="50"></div>
-                                @foreach($variant->options as $option)
-                                <div class="col">{{ $option }}</div>
-                                @endforeach
-                                <div class="col">{{ $variant->sku }}</div>
-                                <div class="col text-right"><price unit="¥" point="0" value="{{ $variant->price }}" /></div>
-                            </a>
-                            @endforeach
-                        </div>
-                    </div>
-                </div>
-                @endif
-            </div>
-            <div class="col-lg-4">
-                <div class="form-card card">
-                    <div class="card-block">
-                        <h2 class="card-title">販売チャネル</h2>
-                        <div class="custom-controls-stacked">
-                            <label class="custom-control custom-checkbox">
-                                <input type="checkbox" name="channel[]" value="soundsupple" checked class="custom-control-input">
-                                <span class="custom-control-indicator"></span>
-                                <span class="custom-control-description">プレイリスト連携</span>
-                            </label>
-                            <label class="custom-control custom-checkbox">
-                                <input type="checkbox" name="channel[]" value="onlinestore" disabled class="custom-control-input">
-                                <span class="custom-control-indicator"></span>
-                                <span class="custom-control-description">オンラインストア</span>
-                            </label>
                         </div>
                     </div>
                 </div>

@@ -19,16 +19,37 @@ Vue.component('modal', require('./components/common/modal.vue'));
 Vue.component('form-card-nav', require('./components/common/form-card-nav.vue'));
 Vue.component('input-money', require('./components/common/input-money.vue'));
 Vue.component('input-option', require('./components/products/input-option.vue'));
+Vue.component('price', require('./components/common/price.vue'));
 
-window.app = new Vue({
-    el: '#glitter-admin',
+window.nav = new Vue({
+    el: 'header.nav-section',
     data: {
         drawerOpen: false,
-        screen: {},
+        storeFold: true,
+        foldDelayId: null,
     },
     methods: {
-        toggleDrawer: function () {
-            this.drawerOpen = !this.drawerOpen;
+        unfoldStoreNav: function () {
+            if (this.foldDelayId) {
+                clearTimeout(this.foldDelayId)
+                this.foldDelayId = null
+            } else {
+                this.foldDelayId = setTimeout((function () {
+                    this.storeFold = false
+                    this.foldDelayId = null
+                }).bind(this), 200)
+            }
+        },
+        foldStoreNav: function () {
+            if (this.foldDelayId) {
+                clearTimeout(this.foldDelayId)
+                this.foldDelayId = null
+            } else {
+                this.foldDelayId = setTimeout((function () {
+                    this.storeFold = true
+                    this.foldDelayId = null
+                }).bind(this), 600)
+            }
         },
         logout: function () {
             $('form#logoutForm').submit();

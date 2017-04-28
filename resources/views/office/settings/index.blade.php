@@ -1,4 +1,4 @@
-@extends('glitter.office::layouts.office')
+@extends('glitter.office::layouts.console')
 
 @section('title', 'ストア設定')
 
@@ -13,7 +13,7 @@
 @stop
 
 @section('content')
-<div class="container">
+<div class="container-fluid">
     <div class="row mb-4">
         <div class="col-lg-3">
             <div class="pt-2">

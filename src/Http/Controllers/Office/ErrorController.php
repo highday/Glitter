@@ -24,13 +24,13 @@ class ErrorController extends Controller
 
     public function notfound(Request $request, $path)
     {
-        $extends = 'glitter.office::layouts.office-guest';
+        $extends = 'glitter.office::layouts.guest';
 
         if ($this->auth->guard('member')->check()) {
-            $extends = 'glitter.office::layouts.office';
+            $extends = 'glitter.office::layouts.console';
 
             if ($request->is('office/account*')) {
-                $extends = 'glitter.office::layouts.office-account';
+                $extends = 'glitter.office::layouts.account';
             }
         }
 

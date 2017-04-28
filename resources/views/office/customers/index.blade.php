@@ -1,4 +1,4 @@
-@extends('glitter.office::layouts.office')
+@extends('glitter.office::layouts.console')
 
 @section('title', '顧客リスト')
 
@@ -6,6 +6,18 @@
 <h1 class="title">
     <a href="{{ route('glitter.office.customers.index') }}"><i class="fa fa-users fa-fw" aria-hidden="true"></i>顧客リスト</a>
 </h1>
+@endsection
+
+@section('nav')
+<div class="screen-nav-header">
+    顧客リスト
+</div>
+<div class="screen-nav-content">
+    <ul class="nav flex-column">
+        <li class="nav-item"><a class="nav-link{{ Request::is('office/customers') ? ' active' : '' }}" href="{{ route('glitter.office.customers.index') }}">顧客</a></li>
+        <li class="nav-item"><a class="nav-link{{ Request::is('office/customers/group') ? ' active' : '' }}" href="{{ route('glitter.office.customers.index') }}">グループ</a></li>
+    </ul>
+</div>
 @endsection
 
 @section('content')

@@ -17,11 +17,22 @@ window.Laravel = <?php echo json_encode([
 
 <div class="office-app">
 
-<header class="nav-section">
+@hasSection('nav')
+<header class="nav-section nav-section-has-screen" :class="{ unfold: !storeFold }" @mouseleave="foldStoreNav">
 @include('glitter.office::partials.navs.top')
-@include('glitter.office::partials.navs.account')
+@include('glitter.office::partials.navs.store')
+<nav class="screen-nav">
+@yield('nav')
+</nav>{{-- /.screen-nav --}}
 @include('glitter.office::partials.logout-form')
 </header>
+@else
+<header class="nav-section">
+@include('glitter.office::partials.navs.top')
+@include('glitter.office::partials.navs.store')
+@include('glitter.office::partials.logout-form')
+</header>
+@endif
 
 @section('main')
 <main class="main-section" role="main">
@@ -46,6 +57,16 @@ window.Laravel = <?php echo json_encode([
 
 </main>{{-- /.main-section --}}
 @show
+
+<transition name="modal-backdrop">
+    <div v-if="drawerOpen" v-cloak @click="toggleDrawer" class="drawer-nav-backdrop"></div>
+</transition>
+
+@hasSection('modal')
+<div v-cloak>
+@yield('modal')
+</div>
+@endif
 </div>{{-- /.office-app --}}
 
 {{-- Scripts --}}

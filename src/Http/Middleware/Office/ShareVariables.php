@@ -50,7 +50,7 @@ class ShareVariables
         $me = $this->auth->guard('member')->user();
         $store = $me->activeStore;
 
-        $extends = 'glitter.office::layouts.office-guest';
+        $extends = 'glitter.office::layouts.guest';
 
         $this->view->share(compact('me', 'store', 'extends'));
 

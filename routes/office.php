@@ -18,9 +18,10 @@ $route->group([
     $route->get('products', 'ProductsController@products')->name('products.products');
     $route->get('products/new', 'ProductsController@new')->name('products.new');
     $route->post('products/new', 'ProductsController@store')->name('products.store');
-    $route->get('products/edit/{key}', 'ProductsController@edit')->name('products.edit');
-    $route->post('products/edit/{key}', 'ProductsController@update')->name('products.update');
-    $route->post('products/edit/{key}/attachments', 'ProductAttachmentsController@add')->name('products.attachments.add');
+    $route->get('products/edit/{product}', 'ProductsController@edit')->name('products.edit');
+    $route->post('products/edit/{product}', 'ProductsController@update')->name('products.update');
+    $route->get('products/edit/{product}/variant/{variant}', 'ProductsController@edit_variant')->name('products.variant.edit');
+    $route->post('products/edit/{product}/attachments', 'ProductAttachmentsController@add')->name('products.attachments.add');
     $route->get('products/transfers', 'ProductsController@products')->name('products.transfers');
     $route->get('products/inventory', 'ProductsController@inventory')->name('products.inventory');
     $route->get('products/collections', 'ProductsController@products')->name('products.collections');
@@ -29,9 +30,9 @@ $route->group([
     $route->get('settings', 'SettingsController@index')->name('settings.index');
     $route->get('settings/members', 'SettingsController@members')->name('settings.members');
 
-    $route->get('switch/{id}', function ($store) {
+    $route->get('switch/{id}', function ($store_id) {
         $member = Auth::guard('member')->user();
-        $store = $member->switchable_stores->where('slug', $store)->first();
+        $store = $member->switchable_stores->find($store_id);
         $message = [];
         if ($store) {
             $last_login_at = \Carbon\Carbon::now();
@@ -39,8 +40,8 @@ $route->group([
             $message[] = sprintf('%s に切り替えました。', $store->name);
         }
 
-        return redirect()->back()->withFlashMessage($message);
+        return redirect()->route('glitter.office.index')->withFlashMessage($message);
     })->name('store_switch');
 });
 
-$route->get('{path}', 'ErrorController@notfound')->where('path', '(.*)')->name('404');
+$route->get('{path}', 'ErrorController@notfound')->where('path', '(.*)')->name('404')->middleware('glitter.office');

@@ -1,0 +1,28 @@
+
+@import "variables";
+@import "node_modules/bootstrap/scss/bootstrap";
+@import "node_modules/font-awesome/scss/font-awesome";
+@import "main";
+@import "navs";
+@import "card";
+@import "table";
+@import "forms";
+@import "error";
+@import "misc";
+
+label {
+    margin-bottom: 0.2rem;
+}
+
+.modal-enter-active, .modal-leave-active {
+    transition: opacity .3s;
+}
+.modal-enter, .modal-leave-to {
+    opacity: 0;
+}
+.modal-backdrop-enter-active, .modal-backdrop-leave-active {
+    transition: opacity 0.15s;
+}
+.modal-backdrop-enter, .modal-backdrop-leave-to {
+    opacity: 0;
+}

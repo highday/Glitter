@@ -1,4 +1,4 @@
-@extends('glitter.office::layouts.office')
+@extends('glitter.office::layouts.console')
 
 @section('title', '在庫')
 

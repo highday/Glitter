@@ -43,6 +43,11 @@ class Variant extends Model
         return $this->belongsTo(Attachment::class, 'image_id');
     }
 
+    public function getNameAttribute()
+    {
+        return join(', ', $this->options);
+    }
+
     public function getOptionsAttribute()
     {
         return array_filter([$this->option1, $this->option2, $this->option3]);

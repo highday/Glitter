@@ -11,7 +11,7 @@ class Product extends Model
 
     protected $fillable = [
         'store_id',
-        'title',
+        'name',
         'description',
         'option1',
         'option2',
@@ -35,6 +35,22 @@ class Product extends Model
     public function variants()
     {
         return $this->hasMany(Variant::class);
+    }
+
+    public function getPriceRangeAttribute()
+    {
+        $prices = $this->variants->map(function ($variant) {
+            return $variant->price;
+        })->unique();
+        return array_unique([$prices->min(), $prices->max()]);
+    }
+
+    public function getReferencePriceRangeAttribute()
+    {
+        $prices = $this->variants->map(function ($variant) {
+            return $variant->reference_price;
+        })->filter()->unique();
+        return array_unique([$prices->min(), $prices->max()]);
     }
 
     public function getOptionsAttribute()
