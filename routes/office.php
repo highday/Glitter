@@ -21,13 +21,15 @@ $route->group([
     $route->get('products/edit/{product}', 'ProductsController@edit')->name('products.edit');
     $route->post('products/edit/{product}', 'ProductsController@update')->name('products.update');
     $route->get('products/edit/{product}/variant/{variant}', 'ProductsController@edit_variant')->name('products.variant.edit');
-    $route->post('products/edit/{product}/attachments', 'ProductAttachmentsController@add')->name('products.attachments.add');
+    // $route->post('products/edit/{product}/attachments', 'ProductAttachmentsController@add')->name('products.attachments.add');
     $route->get('products/transfers', 'ProductsController@products')->name('products.transfers');
     $route->get('products/inventory', 'ProductsController@inventory')->name('products.inventory');
     $route->get('products/collections', 'ProductsController@products')->name('products.collections');
 
     $route->get('customers', 'CustomersController@index')->name('customers.index');
+
     $route->get('settings', 'SettingsController@index')->name('settings.index');
+    $route->post('settings', 'SettingsController@update_store')->name('settings.update_store');
     $route->get('settings/members', 'SettingsController@members')->name('settings.members');
 
     $route->get('switch/{id}', function ($store_id) {

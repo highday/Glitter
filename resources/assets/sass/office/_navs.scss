@@ -286,8 +286,8 @@
     .nav-section-has-screen .store-nav .nav-label {
         position: relative;
         opacity: 0;
-        right: 2rem;
-        transition: opacity 0.2s ease-in-out, right 0.3s cubic-bezier(.35,1.55,.49,.93);
+        right: 1rem;
+        transition: opacity 0.2s cubic-bezier(0,.5,1,1) 0.1s, right 0.2s cubic-bezier(.35,1.55,.49,.93) 0.1s;
     }
     .nav-section-has-screen.unfold .store-nav .nav-label {
         opacity: 1;

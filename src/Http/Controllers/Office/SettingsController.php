@@ -2,7 +2,9 @@
 
 namespace Highday\Glitter\Http\Controllers\Office;
 
+use Highday\Glitter\Eloquent\Models\Store;
 use Highday\Glitter\Http\Controllers\Controller;
+use Highday\Glitter\Services\Office\Store\SettingService;
 use Illuminate\Contracts\Auth\Factory as Auth;
 use Illuminate\Http\Request;
 
@@ -15,11 +17,26 @@ class SettingsController extends Controller
         $this->auth = $auth;
     }
 
-    public function index(Request $request)
+    public function index(Store $store)
     {
-        $store = $this->guard()->user()->activeStore;
-
         return view('glitter.office::settings.index', compact('store'));
+    }
+
+    public function update_store(Request $request, Store $store, SettingService $service)
+    {
+        try {
+            $service->saveGeneral($store->getKey(), [
+                'name' => $request->input('name'),
+                'account_email' => $request->input('account_email'),
+                'customer_email' => $request->input('customer_email'),
+                'timezone' => $request->input('timezone'),
+            ]);
+            
+            return redirect()->route('glitter.office.settings.index')
+                ->withFlashMessage([trans('glitter::office.save.success')]);
+        } catch (ValidationException $e) {
+            return redirect()->back()->withInput()->withErrors($e->validator);
+        }
     }
 
     public function members(Request $request)

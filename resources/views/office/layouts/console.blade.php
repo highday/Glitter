@@ -37,6 +37,56 @@ window.Laravel = <?php echo json_encode([
 @section('main')
 <main class="main-section" role="main">
 
+<header class="main-header">
+    <div class="d-flex">
+        <nav class="breadcrumb m-0" style="background: transparent;">
+            <a class="breadcrumb-item" href="#">ホーム</a>
+            <a class="breadcrumb-item" href="#">ストア設定</a>
+            <span class="breadcrumb-item active">ストア</span>
+        </nav>
+        <nav class="nav ml-auto">
+            <a class="nav-link text-muted" href="#" @click.prevent="addNotification('我こそは踊り狂う暴風！', 'さぁ！その胸に刻むが良い！我こそは軍神！踊り狂う暴風、グリームニル！')">
+                Add Notification
+            </a>
+            <a class="nav-link text-muted" href="#" @click.prevent="openNotification">
+                <i class="fa fa-list fa-fw" aria-hidden="true"></i>
+            </a>
+        </nav>
+    </div>
+    <div class="notification" :class="{ active: drawerOpen }">
+        <div class="notification-container">
+            <div class="d-flex mb-3">
+                Notification
+                <a class="ml-auto text-muted" href="#" @click.prevent="closeNotification">
+                    <i class="fa fa-window-close fa-fw" aria-hidden="true"></i>
+                </a>
+            </div>
+            <div class="card small mb-3" v-for="notification in listingNotifications">
+                <div class="card-header p-2 d-flex align-items-center">
+                    <i class="fa fa-bell mr-1" aria-hidden="true"></i>
+                    @{{ notification.title }}
+                    <span class="ml-auto text-muted">@{{ notification.date }}</span>
+                </div>
+                <div class="card-block p-2">
+                    <p class="card-text">@{{ notification.message }}</p>
+                </div>
+            </div>
+        </div>
+        <transition-group name="landing" tag="div" class="notification-runway" v-cloak>
+            <div class="card small landing-item p-3 d-flex flex-row align-items-center" v-for="notification in landingNotifications" :key="notification.id" @click="notification.landing = false">
+                <i class="fa fa-bell fa-fw fa-3x" aria-hidden="true"></i>
+                <div class="ml-2">
+                    <strong>@{{ notification.title }}</strong><br>
+                    <span class="text-muted">@{{ notification.message }}</span>
+                </div>
+            </div>
+        </transition-group>
+    </div>
+    <transition name="fade">
+        <div class="notification-backdrop" v-cloak v-show="drawerOpen" @click="closeNotification"></div>
+    </transition>
+</header>{{-- /.main-header --}}
+
 <div class="content-wrapper">
 
 @if(!$flash_message->isEmpty())

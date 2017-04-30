@@ -63,6 +63,7 @@ class Store extends Model
 
     public function getIconAttribute()
     {
-        return 'https://placehold.jp/80x80.png?text='.mb_substr($this->name, 0, 1).'&css='.urlencode(json_encode(['font-size'=>'50px', 'font-weight'=>'bold']));
+        return 'https://www.gravatar.com/avatar/'.md5(strtolower($this->account_email)).'?s=80&d=identicon';
+        // return 'https://placehold.jp/80x80.png?text='.mb_substr($this->name, 0, 1).'&css='.urlencode(json_encode(['font-size'=>'50px', 'font-weight'=>'bold']));
     }
 }

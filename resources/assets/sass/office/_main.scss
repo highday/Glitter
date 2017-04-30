@@ -26,7 +26,6 @@
     flex-grow: 1;
     flex-shrink: 0;
     flex-basis: auto;
-    padding: 1rem 0;
     height: 100vh;
     overflow-y: scroll;
 
@@ -48,6 +47,76 @@
         }
     }
 }
+
+.main-header {
+    border-bottom: 1px solid $brand-color5;
+}
+
+.notification {
+    position: fixed;
+    top: 0;
+    right: -400px;
+    bottom: 0;
+    width: 400px;
+    z-index: 2001;
+    transition: right 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+
+    &.active {
+        right: 0;
+        box-shadow: 0 0 1rem rgba(0, 0, 0, 0.1);
+    }
+}
+
+.notification-container {
+    width: 100%;
+    height: 100%;
+    padding: 1rem;
+    background: $body-bg;
+    box-shadow: 0 0 0 rgba(0, 0, 0, 0);
+    overflow-y: scroll;
+}
+
+.notification-runway {
+    position: absolute;
+    top: 3rem;
+    right: calc(400px + 1rem);
+    width: 400px;
+    z-index: 2001;
+}
+
+.notification-backdrop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0,0,0, 0.1);
+    backdrop-filter: blur(10px);
+    z-index: 2000;
+}
+
+.fade-enter-active, .fade-leave-active {
+    transition: opacity .5s;
+}
+.fade-enter, .fade-leave-to {
+    opacity: 0;
+}
+
+.landing-item {
+    display: block;
+    transition: opacity .5s, transform .5s;
+}
+.landing-item + .landing-item {
+    margin-top: 1rem;
+}
+.landing-enter, .landing-leave-to {
+    opacity: 0;
+    transform: translateX(100px);
+}
+.landing-leave-active {
+    position: absolute;
+}
+
 
 .nav-wrapper {
     // position: fixed;
@@ -136,6 +205,7 @@
 }
 
 .content-wrapper {
+    padding: 1rem 0;
     @include media-breakpoint-up('md') {
         .nav-wrapper ~ & {
             padding-top: calc(#{$nav-wrapper-height} + 1rem);
@@ -145,4 +215,5 @@
 
 .footer-container {
     margin-top: auto;
+    padding: 1rem 0;
 }

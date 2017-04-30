@@ -30,29 +30,57 @@ window.nav = new Vue({
     },
     methods: {
         unfoldStoreNav: function () {
-            if (this.foldDelayId) {
-                clearTimeout(this.foldDelayId)
-                this.foldDelayId = null
-            } else {
-                this.foldDelayId = setTimeout((function () {
-                    this.storeFold = false
-                    this.foldDelayId = null
-                }).bind(this), 200)
-            }
+            this.storeFold = false
         },
         foldStoreNav: function () {
-            if (this.foldDelayId) {
-                clearTimeout(this.foldDelayId)
-                this.foldDelayId = null
-            } else {
-                this.foldDelayId = setTimeout((function () {
-                    this.storeFold = true
-                    this.foldDelayId = null
-                }).bind(this), 600)
-            }
+            this.storeFold = true
         },
         logout: function () {
             $('form#logoutForm').submit();
+        },
+    },
+});
+
+window.mainHeader = new Vue({
+    el: '.main-header',
+    data: {
+        drawerOpen: false,
+        notifications: [],
+    },
+    computed: {
+        landingNotifications: function () {
+            var landing = this.notifications.filter(function (notification) {
+                return notification.landing == true
+            })
+            return landing.reverse()
+        },
+        listingNotifications: function () {
+            var listing = this.notifications.map(function (notification) {
+                notification.date = moment(notification.at).fromNow()
+                return notification
+            })
+            return listing.reverse()
+        }
+    },
+    methods: {
+        openNotification: function () {
+            this.drawerOpen = true
+        },
+        closeNotification: function () {
+            this.drawerOpen = false
+        },
+        addNotification: function (title, message) {
+            var notification = {
+                id: Math.floor( Math.random() * 10001 ),
+                at: moment(),
+                title: title,
+                message: message,
+                landing: true,
+            }
+            this.notifications.push(notification)
+            setTimeout(function () {
+                notification.landing = false
+            }, 5000)
         },
     },
 });
