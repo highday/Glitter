@@ -26,12 +26,12 @@ class SettingsController extends Controller
     {
         try {
             $service->saveGeneral($store->getKey(), [
-                'name' => $request->input('name'),
-                'account_email' => $request->input('account_email'),
+                'name'           => $request->input('name'),
+                'account_email'  => $request->input('account_email'),
                 'customer_email' => $request->input('customer_email'),
-                'timezone' => $request->input('timezone'),
+                'timezone'       => $request->input('timezone'),
             ]);
-            
+
             return redirect()->route('glitter.office.settings.index')
                 ->withFlashMessage([trans('glitter::office.save.success')]);
         } catch (ValidationException $e) {
