@@ -2,7 +2,7 @@
   <div class="form-card-nav">
     <button type="button" class="form-card-nav-toggle" @click="active = !active"><i class="fa fa-bars fa-fw"></i></button>
     <nav class="nav" :class="{ active: active }">
-      <slot>
+      <slot></slot>
     </nav>
   </div>
 </template>
