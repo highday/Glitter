@@ -18,6 +18,8 @@ require('bootstrap');
  */
 
 window.Vue = require('vue');
+window.Vuex = require('vuex');
+window.createPersistedState = require('vuex-persistedstate');
 
 /**
  * We'll load the axios HTTP library which allows us to easily issue requests

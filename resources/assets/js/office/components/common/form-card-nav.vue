@@ -8,6 +8,8 @@
 </template>
 
 <script>
+var $ = require('jquery')
+
 module.exports = {
   data: function () {
     return {

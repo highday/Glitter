@@ -4,11 +4,10 @@
 
 @section('scripts')
 <script>
-Vue.set(app.$data.screen, 'title', '{{ old('title', $product->title) }}');
-Vue.set(app.$data.screen, 'inventory_management', '{{ old('variants.0.inventory_management', $product->variants->first()->inventory_management) }}');
-Vue.set(app.$data.screen, 'requires_shipping', {{ old('variants.0.requires_shipping', $product->variants->first()->requires_shipping) ? 'true' : 'false' }});
-Vue.set(app.$data.screen, 'use_variant', {{ $product->variants->count() > 1 ? 'true' : 'false' }});
-Vue.set(app.$data.screen, 'variants', [['Size', '']]);
+window.contentData = {
+    inventory_management: '{{ old('variants.0.inventory_management', $variant->inventory_management) }}',
+    requires_shipping: {{ old('variants.0.requires_shipping', $variant->requires_shipping) ? 'true' : 'false' }},
+}
 </script>
 @endsection
 
@@ -128,7 +127,7 @@ Vue.set(app.$data.screen, 'variants', [['Size', '']]);
                             <div class="col-sm-6">
                                 <div class="form-group">
                                     <label class="form-control-label">{{ trans('glitter::office.product.inventory_management') }}</label>
-                                    <select class="form-control" name="variants[0][inventory_management]" v-model="screen.inventory_management">
+                                    <select class="form-control" name="variants[0][inventory_management]" v-model="inventory_management">
                                         <option value="none">{{ trans('glitter::office.product.dont_track_inventory') }}</option>
                                         <option value="glitter">{{ trans('glitter::office.product.glitter_track_inventory') }}</option>
                                     </select>
@@ -138,7 +137,7 @@ Vue.set(app.$data.screen, 'variants', [['Size', '']]);
                                     @endif
                                 </div>
                             </div>
-                            <div class="col-sm-6" v-if="screen.inventory_management != 'none'">
+                            <div class="col-sm-6" v-if="inventory_management != 'none'">
                                 <div class="form-group{{ $errors->has('variants.0.inventory_quantity') ? ' has-danger' : '' }}">
                                     <label class="form-control-label">{{ trans('glitter::office.product.inventory_quantity') }}</label>
                                     <input type="number" name="variants[0][inventory_quantity]" value="{{ old('variants.0.inventory_quantity', $variant->inventory_quantity) }}" class="form-control col-xs-4">
@@ -149,7 +148,7 @@ Vue.set(app.$data.screen, 'variants', [['Size', '']]);
                                 </div>
                             </div>
                         </div>
-                        <div class="form-group{{ $errors->has('variants.0.out_of_stock_purchase') ? ' has-danger' : '' }}" v-if="screen.inventory_management != 'none'">
+                        <div class="form-group{{ $errors->has('variants.0.out_of_stock_purchase') ? ' has-danger' : '' }}" v-if="inventory_management != 'none'">
                             <label class="custom-control custom-checkbox">
                                 <input type="checkbox" name="variants[0][out_of_stock_purchase]" value="1" {{ old('variants.0.out_of_stock_purchase', $variant->out_of_stock_purchase) ? 'checked' : '' }} class="custom-control-input">
                                 <span class="custom-control-indicator"></span>
@@ -167,7 +166,7 @@ Vue.set(app.$data.screen, 'variants', [['Size', '']]);
                         <h2 class="card-title">{{ trans('glitter::office.product.shipping') }}</h2>
                         <div class="form-group{{ $errors->has('variants.0.requires_shipping') ? ' has-danger' : '' }}">
                             <label class="custom-control custom-checkbox">
-                                <input type="checkbox" name="variants[0][requires_shipping]" value="1" v-model="screen.requires_shipping" class="custom-control-input">
+                                <input type="checkbox" name="variants[0][requires_shipping]" value="1" v-model="requires_shipping" class="custom-control-input">
                                 <span class="custom-control-indicator"></span>
                                 <span class="custom-control-description">{{ trans('glitter::office.product.requires_shipping') }}</span>
                             </label>
@@ -177,7 +176,7 @@ Vue.set(app.$data.screen, 'variants', [['Size', '']]);
                             @endif
                         </div>
                     </div>
-                    <div class="card-block" v-if="screen.requires_shipping">
+                    <div class="card-block" v-if="requires_shipping">
                         <h3 class="card-title">{{ trans('glitter::office.product.weight') }}</h3>
                         <p class="small text-muted">{{ trans('glitter::office.product.weight_description') }}</p>
                         <div class="row flex-items-xs-between">

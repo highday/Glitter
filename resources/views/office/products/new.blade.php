@@ -4,16 +4,12 @@
 
 @section('scripts')
 <script>
-var vm = new Vue({
-    el: '#new',
-    data: {
-        name: '{{ old('name') }}',
-        inventory_management: '{{ old('variants.0.inventory_management') }}',
-        requires_shipping: {{ old('variants.0.requires_shipping') ? 'true' : 'false' }},
-        use_variant: false,
-        variants: [['Size', '']],
-    },
-})
+window.contentData = {
+    inventory_management: '{{ old('variants.0.inventory_management') }}',
+    requires_shipping: {{ old('variants.0.requires_shipping') ? 'true' : 'false' }},
+    use_variant: false,
+    variants: [['Size', '']],
+}
 </script>
 @endsection
 
@@ -22,7 +18,7 @@ var vm = new Vue({
 @stop
 
 @section('content')
-<form id="new" role="form" method="POST" action="{{ route('glitter.office.products.store') }}">
+<form role="form" method="POST" action="{{ route('glitter.office.products.store') }}">
     {{ csrf_field() }}
     <div class="container-fluid">
         <div class="btn-toolbar" role="toolbar">

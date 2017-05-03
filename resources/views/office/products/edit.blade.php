@@ -4,18 +4,14 @@
 
 @section('scripts')
 <script>
-var vm = new Vue({
-    el: '#edit',
-    data: {
-        name: '{{ old('name', $product->name) }}',
-        inventory_management: '{{ old('variants.0.inventory_management', $product->variants->first()->inventory_management) }}',
-        requires_shipping: {{ old('variants.0.requires_shipping', $product->variants->first()->requires_shipping) ? 'true' : 'false' }},
-        use_variant: {{ $product->variants->count() > 1 ? 'true' : 'false' }},
-        variants: [['Size', '']],
-    },
-})
+window.contentData = {
+    inventory_management: '{{ old('variants.0.inventory_management', $product->variants->first()->inventory_management) }}',
+    requires_shipping: {{ old('variants.0.requires_shipping', $product->variants->first()->requires_shipping) ? 'true' : 'false' }},
+    use_variant: {{ $product->variants->count() > 1 ? 'true' : 'false' }},
+    variants: [['Size', '']],
+}
 </script>
-@endsection
+@stop
 
 @section('nav')
 @include('glitter.office::products.nav')
@@ -23,7 +19,7 @@ var vm = new Vue({
 
 @section('content')
 @include('glitter.office::partials.errors')
-<form id="edit" role="form" method="POST" action="{{ route('glitter.office.products.update', $product->id) }}">
+<form id="product_form" role="form" method="POST" action="{{ route('glitter.office.products.update', $product->id) }}">
     {{ csrf_field() }}
     <div class="container-fluid">
         <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
@@ -46,7 +42,7 @@ var vm = new Vue({
 
                 <div class="form-group{{ $errors->has('name') ? ' has-danger' : '' }}">
                     <div class="mb-3 input-group input-group-lg">
-                        <input type="text" name="name" v-model.trim="name" placeholder="{{ trans('glitter::office.product.name') }}" class="form-control">
+                        <input type="text" name="name" placeholder="{{ trans('glitter::office.product.name') }}" class="form-control">
                     </div>
 
                     @if ($errors->has('name'))
