@@ -184,7 +184,7 @@ class PersistentService
 
                 return $variant;
             }
-            throw (new ModelNotFoundException)->setModel(Variant::class, $key);
+            throw (new ModelNotFoundException())->setModel(Variant::class, $key);
         });
     }
 

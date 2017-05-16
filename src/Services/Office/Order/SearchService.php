@@ -2,7 +2,6 @@
 
 namespace Highday\Glitter\Services\Office\Order;
 
-use Highday\Glitter\Eloquent\Models\Order;
 use Highday\Glitter\Eloquent\Models\Store;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 
