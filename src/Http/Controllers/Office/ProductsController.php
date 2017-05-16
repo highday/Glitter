@@ -21,21 +21,19 @@ class ProductsController extends Controller
         return view('glitter.office::products.products', compact('keyword', 'products'));
     }
 
-    public function inventory(Request $request, IndexService $service)
-    {
-        $keyword = $request->input('keyword');
-        $perPage = 2;
-        $page = $request->input('page', 1);
-
-        return view('glitter.office::products.inventory', [
-            'keyword'  => $keyword,
-            'products' => $service->search($keyword ?: '', $perPage, $page ?: 1),
-        ]);
-    }
-
     public function new()
     {
         return view('glitter.office::products.new');
+    }
+
+    public function collections(Request $request, IndexService $service)
+    {
+        $perPage = 2;
+        $page = $request->input('page', 1);
+
+        return view('glitter.office::products.collections', [
+            'collections' => [],
+        ]);
     }
 
     public function store(Request $request, PersistentService $service)
@@ -76,10 +74,10 @@ class ProductsController extends Controller
         ]);
     }
 
-    public function edit_variant(Product $product, Variant $variant)
+    public function edit_variant(Variant $variant)
     {
         return view('glitter.office::products.edit_variant', [
-            'product' => $product,
+            'product' => $variant->product,
             'variant' => $variant,
         ]);
     }
@@ -88,7 +86,7 @@ class ProductsController extends Controller
     {
         try {
             $product = $service->update($key, [
-                'title'                 => $request->input('title'),
+                'name'                  => $request->input('name'),
                 'description'           => $request->input('description') ?: '',
                 'variants'              => array_map(function ($input) {
                     return [
@@ -114,14 +112,14 @@ class ProductsController extends Controller
         } catch (ModelNotFoundException $e) {
             return view('glitter.office::errors.404');
         } catch (ValidationException $e) {
-            return redirect()->back()->withErrors($e->validator);
+            return redirect()->back()->withInput()->withErrors($e->validator);
         }
     }
 
-    public function update_variant(Request $request, PersistentService $service, $key)
+    public function update_variant(Request $request, PersistentService $service, Variant $variant)
     {
         try {
-            $product = $service->update_variant($key, [
+            $variant = $service->update_variant($variant->getKey(), [
                 'id'                    => $request->input('id'),
                 'price'                 => $request->input('price'),
                 'reference_price'       => $request->input('reference_price'),

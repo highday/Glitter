@@ -84,7 +84,7 @@ class PersistentService
     {
         return $this->transaction(function () use ($key, $attributes) {
             $validator = app(Validator::class)->make($attributes, [
-                'title'                            => 'required',
+                'name'                             => 'required',
                 'description'                      => 'nullable',
                 'variants.*.price'                 => 'required|numeric',
                 'variants.*.reference_price'       => 'nullable|numeric',
@@ -105,7 +105,7 @@ class PersistentService
                 throw new ValidationException($validator);
             }
 
-            $product = Product::findOrFail($key);
+            $products = $this->store->products()->findOrFail($key);
             $product->fill(Arr::only($attributes, [
                 'title',
                 'description',
@@ -161,24 +161,30 @@ class PersistentService
                 throw new ValidationException($validator);
             }
 
-            $variant = $this->store->variants()->findOrFail($key);
-            $variant->fill(Arr::only($attributes, [
-                'sku',
-                'barcode',
-                'price',
-                'reference_price',
-                'taxes_included',
-                'inventory_management',
-                'inventory_quantity',
-                'out_of_stock_purchase',
-                'requires_shipping',
-                'weight',
-                'weight_unit',
-                'fulfillment_service',
-                'options',
-            ]));
+            if ($variant = $this->store->variants->find($key)) {
+                $variant->fill(Arr::only($attributes, [
+                    'sku',
+                    'barcode',
+                    'price',
+                    'reference_price',
+                    'taxes_included',
+                    'inventory_management',
+                    'inventory_quantity',
+                    'out_of_stock_purchase',
+                    'requires_shipping',
+                    'weight',
+                    'weight_unit',
+                    'fulfillment_service',
+                    'options',
+                ]));
 
-            return $variant;
+                if ($variant->save() !== true) {
+                    throw new RuntimeException('Can not save model.');
+                }
+
+                return $variant;
+            }
+            throw (new ModelNotFoundException)->setModel(Variant::class, $key);
         });
     }
 

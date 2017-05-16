@@ -76,7 +76,7 @@ class InstallCommand extends Command
 
         $product = \Highday\Glitter\Eloquent\Models\Product::firstOrCreate([
             'store_id'    => $store->getKey(),
-            'title'       => 'Highday original t-shirt',
+            'name'        => 'Highday original t-shirt',
             'description' => 'My first sample product.',
             'option1'     => 'Color',
             'option2'     => 'Size',
@@ -94,7 +94,6 @@ class InstallCommand extends Command
             'reference_price'      => null,
             'inventory_management' => 'glitter',
             'inventory_quantity'   => 100,
-            'inventory_policy'     => 'deny',
             'requires_shipping'    => true,
         ]);
 
@@ -109,7 +108,6 @@ class InstallCommand extends Command
             'reference_price'      => null,
             'inventory_management' => 'glitter',
             'inventory_quantity'   => 100,
-            'inventory_policy'     => 'deny',
             'requires_shipping'    => true,
         ]);
 
@@ -124,7 +122,6 @@ class InstallCommand extends Command
             'reference_price'      => null,
             'inventory_management' => 'glitter',
             'inventory_quantity'   => 100,
-            'inventory_policy'     => 'deny',
             'requires_shipping'    => true,
         ]);
 
@@ -139,7 +136,6 @@ class InstallCommand extends Command
             'reference_price'      => null,
             'inventory_management' => 'glitter',
             'inventory_quantity'   => 100,
-            'inventory_policy'     => 'deny',
             'requires_shipping'    => true,
         ]);
 
@@ -154,7 +150,6 @@ class InstallCommand extends Command
             'reference_price'      => null,
             'inventory_management' => 'glitter',
             'inventory_quantity'   => 100,
-            'inventory_policy'     => 'deny',
             'requires_shipping'    => true,
         ]);
 
@@ -169,7 +164,6 @@ class InstallCommand extends Command
             'reference_price'      => null,
             'inventory_management' => 'glitter',
             'inventory_quantity'   => 100,
-            'inventory_policy'     => 'deny',
             'requires_shipping'    => true,
         ]);
     }

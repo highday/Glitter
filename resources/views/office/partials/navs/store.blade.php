@@ -13,7 +13,7 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link{{ Request::is('office/orders*') ? ' active' : '' }}" href="{{ route('glitter.office.orders.index') }}">
+                <a class="nav-link{{ Request::is('office/orders*') ? ' active' : '' }}" href="{{ route('glitter.office.order.search') }}">
                     <i class="fa fa-inbox" aria-hidden="true"></i>
                     <div class="nav-label">受注管理</div>
                     {{-- <span class="ml-auto badge">9,999</span> --}}

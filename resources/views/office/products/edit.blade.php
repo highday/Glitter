@@ -42,7 +42,7 @@ window.contentData = {
 
                 <div class="form-group{{ $errors->has('name') ? ' has-danger' : '' }}">
                     <div class="mb-3 input-group input-group-lg">
-                        <input type="text" name="name" placeholder="{{ trans('glitter::office.product.name') }}" class="form-control">
+                        <input type="text" name="name" value="{{ $product->name }}" placeholder="{{ trans('glitter::office.product.name') }}" class="form-control">
                     </div>
 
                     @if ($errors->has('name'))
@@ -90,7 +90,7 @@ window.contentData = {
                             <div class="col-sm">
                                 <div class="form-group{{ $errors->has('variants.0.price') ? ' has-danger' : '' }}">
                                     <label class="form-control-label">{{ trans('glitter::office.product.price') }}</label>
-                                    <input-money name="variants[0][price]" value="{{ old('variants.0.price', $variant->price) }}" unit="¥" point="0">
+                                    <input-money name="variants[0][price]" value="{{ old('variants.0.price', $variant->price) }}" unit="¥" point="0"></input-money>
 
                                     @if ($errors->has('variants.0.price'))
                                         <div class="form-control-feedback">{{ $errors->first('variants.0.price') }}</div>
@@ -100,7 +100,7 @@ window.contentData = {
                             <div class="col-sm">
                                 <div class="form-group{{ $errors->has('variants.0.reference_price') ? ' has-danger' : '' }}">
                                     <label class="form-control-label">{{ trans('glitter::office.product.reference_price') }}</label>
-                                    <input-money name="variants[0][reference_price]" value="{{ old('variants.0.reference_price', $variant->reference_price) }}" unit="¥" point="0" nullable>
+                                    <input-money name="variants[0][reference_price]" value="{{ old('variants.0.reference_price', $variant->reference_price) }}" unit="¥" point="0" nullable></input-money>
 
                                     @if ($errors->has('variants.0.reference_price'))
                                         <div class="form-control-feedback">{{ $errors->first('variants.0.reference_price') }}</div>
@@ -284,13 +284,15 @@ window.contentData = {
                         </div>
                         <div class="list-group list-group-flush">
                             @foreach($product->variants as $variant)
-                            <a class="list-group-item list-group-item-action px-4" href="{{ route('glitter.office.products.variant.edit', [$product, $variant]) }}">
+                            <a class="list-group-item list-group-item-action px-4" href="{{ route('glitter.office.products.variant.edit', $variant) }}">
                                 <div><img class="rounded" src="https://placehold.jp/50x50.png" width="50" height="50"></div>
                                 @foreach($variant->options as $option)
                                 <div class="col">{{ $option }}</div>
                                 @endforeach
                                 <div class="col">{{ $variant->sku }}</div>
-                                <div class="col text-right"><price unit="¥" point="0" value="{{ $variant->price }}" /></div>
+                                <div class="col text-right">
+                                  <price unit="¥" point="0" value="{{ $variant->price }}"></price>
+                                </div>
                             </a>
                             @endforeach
                         </div>

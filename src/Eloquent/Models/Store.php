@@ -36,6 +36,11 @@ class Store extends Model
         return $this->hasMany(Policy::class);
     }
 
+    public function orders()
+    {
+        return $this->hasMany(Order::class);
+    }
+
     public function products()
     {
         return $this->hasMany(Product::class);

@@ -32,6 +32,11 @@
     border: none;
     outline: none;
   }
+
+  &.form-control-sm .unit,
+  &.form-control-sm .input {
+    font-size: $font-size-sm;
+  }
 }
 
 .form-control-option {

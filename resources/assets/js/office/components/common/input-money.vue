@@ -1,5 +1,5 @@
 <template>
-  <label class="form-control form-control-money" :class="{ focus: active }">
+  <label class="form-control form-control-money" :class="{ focus: active, 'form-control-sm': sm }">
     <input type="hidden" :name="name" :value="fixedValue">
     <span class="unit" :style="{ opacity: isEmpty ? 0.5 : 1 }">{{ unit }}</span>
     <input class="input" type="text" :value="formatedValue" @change="updateValue" @focus="focusInput" @blur="blurInput">
@@ -13,6 +13,7 @@ module.exports = {
     value: { default: '' },
     unit: { default: '¥' },
     point: { default: 0 },
+    sm: { type: Boolean, default: false },
     nullable: { type: Boolean, default: false },
   },
   data: function () {

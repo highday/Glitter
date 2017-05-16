@@ -9,10 +9,6 @@ module.exports = {
     unit: { default: '¥' },
     point: { default: 0 },
   },
-  data: function () {
-    return {
-    }
-  },
   computed: {
     price: function () {
       return this.unit + ' ' + this.formatedValue

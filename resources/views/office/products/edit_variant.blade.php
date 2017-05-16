@@ -17,7 +17,7 @@ window.contentData = {
 
 @section('content')
 @include('glitter.office::partials.errors')
-<form role="form" method="POST" action="{{ route('glitter.office.products.update', $product->id) }}">
+<form role="form" method="POST" action="{{ route('glitter.office.products.variant.update', $variant) }}">
     {{ csrf_field() }}
     <div class="container-fluid">
         <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
@@ -44,7 +44,7 @@ window.contentData = {
                     </div>
                     <div class="list-group list-group-flush">
                     @foreach($product->variants as $_variant)
-                        <a class="list-group-item list-group-item-action{{ $variant == $_variant ? ' active' : '' }}" href="{{ route('glitter.office.products.variant.edit', [$product, $_variant]) }}">
+                        <a class="list-group-item list-group-item-action{{ $variant->getKey() == $_variant->getKey() ? ' active' : '' }}" href="{{ route('glitter.office.products.variant.edit', $_variant) }}">
                             <img class="mr-2 rounded" src="https://placehold.jp/50x50.png" width="50" height="50">
                             <div class="col p-0">
                                 <strong>{{ $_variant->name }}</strong>
@@ -59,7 +59,7 @@ window.contentData = {
                 </div>
             </div>
             <div class="col-lg-8">
-                <input type="hidden" name="variants[0][id]" value="{{ $variant->getKey() }}">
+                <input type="hidden" name="id" value="{{ $variant->getKey() }}">
                 <div class="form-card card">
                     <div class="card-block">
                         <h2 class="card-title">{{ trans('glitter::office.product.pricing') }}</h2>
@@ -67,7 +67,7 @@ window.contentData = {
                             <div class="col-sm">
                                 <div class="form-group{{ $errors->has('variants.0.price') ? ' has-danger' : '' }}">
                                     <label class="form-control-label">{{ trans('glitter::office.product.price') }}</label>
-                                    <input-money name="variants[0][price]" value="{{ old('variants.0.price', $variant->price) }}" unit="¥" point="0">
+                                    <input-money name="price" value="{{ old('variants.0.price', $variant->price) }}" unit="¥" point="0">
 
                                     @if ($errors->has('variants.0.price'))
                                         <div class="form-control-feedback">{{ $errors->first('variants.0.price') }}</div>
@@ -77,7 +77,7 @@ window.contentData = {
                             <div class="col-sm">
                                 <div class="form-group{{ $errors->has('variants.0.reference_price') ? ' has-danger' : '' }}">
                                     <label class="form-control-label">{{ trans('glitter::office.product.reference_price') }}</label>
-                                    <input-money name="variants[0][reference_price]" value="{{ old('variants.0.reference_price', $variant->reference_price) }}" unit="¥" point="0" nullable>
+                                    <input-money name="reference_price" value="{{ old('variants.0.reference_price', $variant->reference_price) }}" unit="¥" point="0" nullable>
 
                                     @if ($errors->has('variants.0.reference_price'))
                                         <div class="form-control-feedback">{{ $errors->first('variants.0.reference_price') }}</div>
@@ -87,7 +87,7 @@ window.contentData = {
                         </div>
                         <div class="form-group{{ $errors->has('variants.0.taxes_included') ? ' has-danger' : '' }}">
                             <label class="custom-control custom-checkbox">
-                                <input type="checkbox" name="variants[0][taxes_included]" value="1" {{ old('variants.0.taxes_included', $variant->price) ? 'checked' : '' }} class="custom-control-input">
+                                <input type="checkbox" name="taxes_included" value="1" {{ old('variants.0.taxes_included', $variant->price) ? 'checked' : '' }} class="custom-control-input">
                                 <span class="custom-control-indicator"></span>
                                 <span class="custom-control-description">{{ trans('glitter::office.product.taxes_included') }}</span>
                             </label>
@@ -105,7 +105,7 @@ window.contentData = {
                             <div class="col-sm">
                                 <div class="form-group{{ $errors->has('variants.0.sku') ? ' has-danger' : '' }}">
                                     <label class="form-control-label">{{ trans('glitter::office.product.sku') }}</label>
-                                    <input type="text" name="variants[0][sku]" value="{{ old('variants.0.sku', $variant->sku) }}" class="form-control">
+                                    <input type="text" name="sku" value="{{ old('variants.0.sku', $variant->sku) }}" class="form-control">
 
                                     @if ($errors->has('variants.0.sku'))
                                         <div class="form-control-feedback">{{ $errors->first('variants.0.sku') }}</div>
@@ -115,7 +115,7 @@ window.contentData = {
                             <div class="col-sm">
                                 <div class="form-group{{ $errors->has('variants.0.barcode') ? ' has-danger' : '' }}">
                                     <label class="form-control-label">{{ trans('glitter::office.product.barcode') }}</label>
-                                    <input type="text" name="variants[0][barcode]" value="{{ old('variants.0.barcode', $variant->barcode) }}" class="form-control">
+                                    <input type="text" name="barcode" value="{{ old('variants.0.barcode', $variant->barcode) }}" class="form-control">
 
                                     @if ($errors->has('variants.0.barcode'))
                                         <div class="form-control-feedback">{{ $errors->first('variants.0.barcode') }}</div>
@@ -127,7 +127,7 @@ window.contentData = {
                             <div class="col-sm-6">
                                 <div class="form-group">
                                     <label class="form-control-label">{{ trans('glitter::office.product.inventory_management') }}</label>
-                                    <select class="form-control" name="variants[0][inventory_management]" v-model="inventory_management">
+                                    <select class="form-control" name="inventory_management" v-model="inventory_management">
                                         <option value="none">{{ trans('glitter::office.product.dont_track_inventory') }}</option>
                                         <option value="glitter">{{ trans('glitter::office.product.glitter_track_inventory') }}</option>
                                     </select>
@@ -140,7 +140,7 @@ window.contentData = {
                             <div class="col-sm-6" v-if="inventory_management != 'none'">
                                 <div class="form-group{{ $errors->has('variants.0.inventory_quantity') ? ' has-danger' : '' }}">
                                     <label class="form-control-label">{{ trans('glitter::office.product.inventory_quantity') }}</label>
-                                    <input type="number" name="variants[0][inventory_quantity]" value="{{ old('variants.0.inventory_quantity', $variant->inventory_quantity) }}" class="form-control col-xs-4">
+                                    <input type="number" name="inventory_quantity" value="{{ old('variants.0.inventory_quantity', $variant->inventory_quantity) }}" class="form-control col-xs-4">
 
                                     @if ($errors->has('variants.0.inventory_quantity'))
                                         <div class="form-control-feedback">{{ $errors->first('variants.0.inventory_quantity') }}</div>
@@ -150,7 +150,7 @@ window.contentData = {
                         </div>
                         <div class="form-group{{ $errors->has('variants.0.out_of_stock_purchase') ? ' has-danger' : '' }}" v-if="inventory_management != 'none'">
                             <label class="custom-control custom-checkbox">
-                                <input type="checkbox" name="variants[0][out_of_stock_purchase]" value="1" {{ old('variants.0.out_of_stock_purchase', $variant->out_of_stock_purchase) ? 'checked' : '' }} class="custom-control-input">
+                                <input type="checkbox" name="out_of_stock_purchase" value="1" {{ old('variants.0.out_of_stock_purchase', $variant->out_of_stock_purchase) ? 'checked' : '' }} class="custom-control-input">
                                 <span class="custom-control-indicator"></span>
                                 <span class="custom-control-description">{{ trans('glitter::office.product.out_of_stock_purchase') }}</span>
                             </label>
@@ -166,7 +166,7 @@ window.contentData = {
                         <h2 class="card-title">{{ trans('glitter::office.product.shipping') }}</h2>
                         <div class="form-group{{ $errors->has('variants.0.requires_shipping') ? ' has-danger' : '' }}">
                             <label class="custom-control custom-checkbox">
-                                <input type="checkbox" name="variants[0][requires_shipping]" value="1" v-model="requires_shipping" class="custom-control-input">
+                                <input type="checkbox" name="requires_shipping" value="1" v-model="requires_shipping" class="custom-control-input">
                                 <span class="custom-control-indicator"></span>
                                 <span class="custom-control-description">{{ trans('glitter::office.product.requires_shipping') }}</span>
                             </label>
@@ -183,7 +183,7 @@ window.contentData = {
                             <div class="col-sm">
                                 <div class="form-group{{ $errors->has('variants.0.weight') ? ' has-danger' : '' }}">
                                     <label class="form-control-label">{{ trans('glitter::office.product.weight') }}</label>
-                                    <input type="text" name="variants[0][weight]" value="{{ old('variants.0.weight', $variant->weight) }}" class="form-control col-xs-4">
+                                    <input type="text" name="weight" value="{{ old('variants.0.weight', $variant->weight) }}" class="form-control col-xs-4">
 
                                     @if ($errors->has('variants.0.weight'))
                                         <div class="form-control-feedback">{{ $errors->first('variants.0.weight') }}</div>
@@ -193,7 +193,7 @@ window.contentData = {
                             <div class="col-sm">
                                 <div class="form-group{{ $errors->has('variants.0.weight_unit') ? ' has-danger' : '' }}">
                                     <label class="form-control-label">{{ trans('glitter::office.product.weight_unit') }}</label>
-                                    <select name="variants[0][weight_unit]" class="form-control">
+                                    <select name="weight_unit" class="form-control">
                                         <option value="kg" {{ old('variants.0.weight_unit', $variant->weight_unit) == 'kg' ? 'selected' : '' }}>kg</option>
                                         <option value="g" {{ old('variants.0.weight_unit', $variant->weight_unit) == 'g' ? 'selected' : '' }}>g</option>
                                     </select>
@@ -208,7 +208,7 @@ window.contentData = {
                     <div class="card-block">
                         <h3 class="card-title">{{ trans('glitter::office.product.fulfillment_service') }}</h3>
                         <div class="form-group{{ $errors->has('variants.0.fulfillment_manual') ? ' has-danger' : '' }}">
-                            <select class="form-control" name="variants[0][fulfillment_service]" style="width: auto;">
+                            <select class="form-control" name="fulfillment_service" style="width: auto;">
                                 <option value="manual" {{ old('variants.0.fulfillment_service', $variant->fulfillment_service) == 'manual' ? 'selected' : '' }}>{{ trans('glitter::office.product.fulfillment_manual') }}</option>
                                 <option value="ヤマト運輸" {{ old('variants.0.fulfillment_service', $variant->fulfillment_service) == 'ヤマト運輸' ? 'selected' : '' }}>ヤマト運輸</option>
                                 <option value="佐川急便" {{ old('variants.0.fulfillment_service', $variant->fulfillment_service) == '佐川急便' ? 'selected' : '' }}>佐川急便</option>

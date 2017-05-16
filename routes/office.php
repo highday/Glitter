@@ -13,18 +13,20 @@ $route->group([
     $route->get('account/profile', 'AccountController@profile')->name('account.profile');
     $route->get('account/security', 'AccountController@security')->name('account.security');
 
-    $route->get('orders', 'OrdersController@index')->name('orders.index');
+    $route->get('orders', 'Order\SearchController@search')->name('order.search');
+    $route->get('orders/view/{order}', 'Order\EditController@input')->name('order.edit');
+    $route->post('orders/view/{order}', 'Order\EditController@save')->name('order.update');
 
     $route->get('products', 'ProductsController@products')->name('products.products');
     $route->get('products/new', 'ProductsController@new')->name('products.new');
     $route->post('products/new', 'ProductsController@store')->name('products.store');
     $route->get('products/edit/{product}', 'ProductsController@edit')->name('products.edit');
     $route->post('products/edit/{product}', 'ProductsController@update')->name('products.update');
-    $route->get('products/edit/{product}/variant/{variant}', 'ProductsController@edit_variant')->name('products.variant.edit');
+    $route->get('products/edit_variant/{variant}', 'ProductsController@edit_variant')->name('products.variant.edit');
+    $route->post('products/edit_variant/{variant}', 'ProductsController@update_variant')->name('products.variant.update');
     // $route->post('products/edit/{product}/attachments', 'ProductAttachmentsController@add')->name('products.attachments.add');
     $route->get('products/transfers', 'ProductsController@products')->name('products.transfers');
-    $route->get('products/inventory', 'ProductsController@inventory')->name('products.inventory');
-    $route->get('products/collections', 'ProductsController@products')->name('products.collections');
+    $route->get('products/collections', 'ProductsController@collections')->name('products.collections');
 
     $route->get('customers', 'CustomersController@index')->name('customers.index');
 

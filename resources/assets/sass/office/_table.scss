@@ -77,3 +77,18 @@
         width: 100px;
     }
 }
+
+.table-order_content {
+    thead th, thead td {
+        border-top: none;
+    }
+    th {
+        font-weight: normal;
+        color: $gray-light;
+    }
+    th, td {
+        padding: 0.5rem 0;
+        vertical-align: middle;
+        font-size: 0.875rem;
+    }
+}
