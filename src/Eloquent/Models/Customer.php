@@ -37,6 +37,7 @@ class Customer extends Authenticatable
     public function orders()
     {
         $relation = $this->hasMany(Order::class);
+
         return $this->pivot ? $relation->store($this->pivot->store()) : $relation;
     }
 
@@ -53,6 +54,7 @@ class Customer extends Authenticatable
     public function getLocationAttribute()
     {
         $address = $this->pivot ? $this->pivot->address : $this->addresses()->first();
+
         return $address ? $address->province : null;
     }
 }

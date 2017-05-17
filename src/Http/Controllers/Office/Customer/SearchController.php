@@ -2,7 +2,6 @@
 
 namespace Highday\Glitter\Http\Controllers\Office\Customer;
 
-use Highday\Glitter\Eloquent\Models\Store;
 use Highday\Glitter\Http\Controllers\Controller;
 use Highday\Glitter\Services\Office\Customer\SearchService;
 use Illuminate\Http\Request;
