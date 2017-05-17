@@ -3,7 +3,7 @@
 @section('title', '受注管理')
 
 @section('nav')
-@include('glitter.office::orders.nav')
+@include('glitter.office::order.nav')
 @stop
 
 @section('content')

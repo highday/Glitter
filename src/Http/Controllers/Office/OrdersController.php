@@ -20,7 +20,7 @@ class OrdersController extends Controller
         $me = $this->guard()->user();
         $orders = $me->active_store->orders;
 
-        return view('glitter.office::orders.index', compact('orders'));
+        return view('glitter.office::order.index', compact('orders'));
     }
 
     protected function guard()

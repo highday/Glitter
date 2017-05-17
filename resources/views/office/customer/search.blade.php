@@ -4,7 +4,7 @@
 
 @section('header')
 <h1 class="title">
-    <a href="{{ route('glitter.office.customers.index') }}"><i class="fa fa-users fa-fw" aria-hidden="true"></i>顧客リスト</a>
+    <a href="{{ route('glitter.office.customer.search') }}"><i class="fa fa-users fa-fw" aria-hidden="true"></i>顧客リスト</a>
 </h1>
 @endsection
 
@@ -14,8 +14,8 @@
 </div>
 <div class="screen-nav-content">
     <ul class="nav flex-column">
-        <li class="nav-item"><a class="nav-link{{ Request::is('office/customers') ? ' active' : '' }}" href="{{ route('glitter.office.customers.index') }}">顧客</a></li>
-        <li class="nav-item"><a class="nav-link{{ Request::is('office/customers/group') ? ' active' : '' }}" href="{{ route('glitter.office.customers.index') }}">グループ</a></li>
+        <li class="nav-item"><a class="nav-link{{ Request::is('office/customers') ? ' active' : '' }}" href="{{ route('glitter.office.customer.search') }}">顧客</a></li>
+        <li class="nav-item"><a class="nav-link{{ Request::is('office/customers/group') ? ' active' : '' }}" href="{{ route('glitter.office.customer.group.search') }}">グループ</a></li>
     </ul>
 </div>
 @endsection

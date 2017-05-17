@@ -48,12 +48,28 @@ module.exports = [
           use: 'file-loader?name=[name].[ext]&outputPath=images/',
         },
         {
-          test: /\.(ttf|eot|svg)(\?[\s\S]+)?$/,
-          use: 'file-loader?name=[name].[ext]&outputPath=fonts/'
+          test: /fontawesome-webfont\.woff(2)?(\?v=[0-9]\.[0-9]\.[0-9])?$/,
+          use: [
+            {
+              loader: 'url-loader',
+              options: {
+                limit: 10000,
+                mimetype: 'application/font-woff',
+                name: 'fonts/[name].[ext]'
+              }
+            }
+          ]
         },
         {
-          test: /\.woff2?(\?v=[0-9]\.[0-9]\.[0-9])?$/,
-          use: 'file-loader?name=[name].[ext]&outputPath=fonts/'
+          test: /fontawesome-webfont\.(ttf|eot|svg)(\?v=[0-9]\.[0-9]\.[0-9])?$/,
+          use: [
+            {
+              loader: 'file-loader',
+              options: {
+                name: 'fonts/[name].[ext]'
+              }
+            }
+          ]
         },
       ]
     },

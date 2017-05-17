@@ -1,4 +1,4 @@
-<nav class="store-nav" @mouseenter="unfoldStoreNav">
+<nav class="store-nav" @mouseenter="defoldStoreNav">
     <div class="store-nav-header">
         <img class="rounded" src="{{ $store->icon }}" width="40" height="40">
         <div class="nav-label">{{ $store->name }}</div>
@@ -20,19 +20,19 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link{{ Request::is('office/products*') ? ' active' : '' }}" href="{{ route('glitter.office.products.products') }}">
+                <a class="nav-link{{ Request::is('office/products*') ? ' active' : '' }}" href="{{ route('glitter.office.product.search') }}">
                     <i class="fa fa-tag" aria-hidden="true"></i>
                     <div class="nav-label">商品管理</div>
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link{{ Request::is('office/customers*') ? ' active' : '' }}" href="{{ route('glitter.office.customers.index') }}">
+                <a class="nav-link{{ Request::is('office/customers*') ? ' active' : '' }}" href="{{ route('glitter.office.customer.search') }}">
                     <i class="fa fa-users" aria-hidden="true"></i>
                     <div class="nav-label">顧客リスト</div>
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">
+                <a class="nav-link disabled" href="#">
                     <i class="fa fa-scissors" aria-hidden="true"></i>
                     <div class="nav-label">値引き</div>
                 </a>
@@ -57,7 +57,7 @@
         </div>
         <ul class="nav flex-column">
             <li class="nav-item">
-                <a class="nav-link" href="#">
+                <a class="nav-link disabled" href="#">
                     <i class="fa fa-music" aria-hidden="true"></i>
                     <div class="nav-label">プレイリスト連携</div>
                 </a>

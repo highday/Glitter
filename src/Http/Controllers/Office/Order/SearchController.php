@@ -14,11 +14,11 @@ class SearchController extends Controller
         $keyword = $request->input('keyword');
         $orders = $service->search($keyword ?: '');
 
-        return view('glitter.office::orders.search', compact('keyword', 'orders'));
+        return view('glitter.office::order.search', compact('keyword', 'orders'));
     }
 
     public function new()
     {
-        return view('glitter.office::orders.new');
+        return view('glitter.office::order.new');
     }
 }

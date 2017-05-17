@@ -3,7 +3,7 @@
 @section('title', 'コレクション')
 
 @section('nav')
-@include('glitter.office::products.nav')
+@include('glitter.office::product.nav')
 @stop
 
 @section('content')

@@ -13,7 +13,7 @@ class EditController extends Controller
 {
     public function input(Request $request, Order $order)
     {
-        return view('glitter.office::orders.edit', compact('order'));
+        return view('glitter.office::order.edit', compact('order'));
     }
 
     public function save(Request $request, PersistentService $service, Order $order)

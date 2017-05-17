@@ -285,13 +285,13 @@
     }
     .nav-section-has-screen .store-nav .nav-label {
         position: relative;
-        opacity: 0;
-        right: 1rem;
-        transition: opacity 0.2s cubic-bezier(0,.5,1,1) 0.1s, right 0.2s cubic-bezier(.35,1.55,.49,.93) 0.1s;
-    }
-    .nav-section-has-screen.unfold .store-nav .nav-label {
         opacity: 1;
         right: 0;
+        transition: opacity 0.2s cubic-bezier(0,.5,1,1) 0.1s, right 0.2s cubic-bezier(.35,1.55,.49,.93) 0.1s;
+    }
+    .nav-section-has-screen.folded .store-nav .nav-label {
+        opacity: 0;
+        right: 1rem;
     }
 
 .screen-nav {

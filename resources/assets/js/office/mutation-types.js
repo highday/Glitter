@@ -1,0 +1,10 @@
+
+// nav
+export const NAV_FOLD   = 'NAV_FOLD'
+export const NAV_DEFOLD = 'NAV_DEFOLD'
+
+// notification
+export const NOTIFICATION_PUSH      = 'NOTIFICATION_PUSH'
+export const NOTIFICATION_TAKEOFF   = 'NOTIFICATION_TAKEOFF'
+export const NOTIFICATION_DESTORY   = 'NOTIFICATION_DESTORY'
+export const NOTIFICATION_TRANCATE  = 'NOTIFICATION_TRANCATE'

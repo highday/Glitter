@@ -13,26 +13,41 @@ $route->group([
     $route->get('account/profile', 'AccountController@profile')->name('account.profile');
     $route->get('account/security', 'AccountController@security')->name('account.security');
 
-    $route->get('orders', 'Order\SearchController@search')->name('order.search');
-    $route->get('orders/view/{order}', 'Order\EditController@input')->name('order.edit');
-    $route->post('orders/view/{order}', 'Order\EditController@save')->name('order.update');
+    // 受注管理
+    $route->group(['namespace' => 'Order', 'prefix' => 'orders', 'as' => 'order.'], function ($route) {
+        $route->get('/', 'SearchController@search')->name('search');
+        $route->get('view/{order}', 'EditController@input')->name('edit');
+        $route->post('view/{order}', 'EditController@save')->name('update');
+    });
 
-    $route->get('products', 'ProductsController@products')->name('products.products');
-    $route->get('products/new', 'ProductsController@new')->name('products.new');
-    $route->post('products/new', 'ProductsController@store')->name('products.store');
-    $route->get('products/edit/{product}', 'ProductsController@edit')->name('products.edit');
-    $route->post('products/edit/{product}', 'ProductsController@update')->name('products.update');
-    $route->get('products/edit_variant/{variant}', 'ProductsController@edit_variant')->name('products.variant.edit');
-    $route->post('products/edit_variant/{variant}', 'ProductsController@update_variant')->name('products.variant.update');
-    // $route->post('products/edit/{product}/attachments', 'ProductAttachmentsController@add')->name('products.attachments.add');
-    $route->get('products/transfers', 'ProductsController@products')->name('products.transfers');
-    $route->get('products/collections', 'ProductsController@collections')->name('products.collections');
+    // 商品管理
+    $route->group(['namespace' => 'Product', 'prefix' => 'products', 'as' => 'product.'], function ($route) {
+        $route->get('/', 'SearchController@search')->name('search');
+        $route->get('new', 'CreateController@input')->name('new');
+        $route->post('new', 'CreateController@save')->name('create');
+        $route->get('edit/{product}', 'EditController@input')->name('edit');
+        $route->post('edit/{product}', 'EditController@save')->name('update');
+        // $route->post('delete/{product}', 'EditController@destory')->name('delete');
+        $route->get('variant/{variant}', 'VariantEditController@input')->name('variant.edit');
+        $route->post('variant/{variant}', 'VariantEditController@save')->name('variant.update');
+        $route->get('transfers', 'SearchController@search')->name('transfer');
+        $route->get('collections', 'SearchController@search')->name('collection');
+    });
 
-    $route->get('customers', 'CustomersController@index')->name('customers.index');
+    // 顧客リスト
+    $route->group(['namespace' => 'Customer', 'prefix' => 'customers', 'as' => 'customer.'], function ($route) {
+        $route->get('/', 'SearchController@search')->name('search');
+        $route->get('group', 'GroupSearchController@search')->name('group.search');
+    });
 
     $route->get('settings', 'SettingsController@index')->name('settings.index');
     $route->post('settings', 'SettingsController@update_store')->name('settings.update_store');
-    $route->get('settings/members', 'SettingsController@members')->name('settings.members');
+    $route->get('settings/members', 'Setting\MemberController@search')->name('settings.members.search');
+    $route->get('settings/members/edit/{member}', 'Setting\MemberController@edit')->name('settings.members.edit');
+    $route->post('settings/members/edit/{member}', 'Setting\MemberController@save')->name('settings.members.update');
+    $route->get('settings/roles', 'Setting\RoleController@search')->name('settings.roles.search');
+    $route->get('settings/roles/edit/{role}', 'Setting\RoleController@edit')->name('settings.roles.edit');
+    $route->post('settings/roles/edit/{role}', 'Setting\RoleController@save')->name('settings.roles.update');
 
     $route->get('switch/{id}', function ($store_id) {
         $member = Auth::guard('member')->user();

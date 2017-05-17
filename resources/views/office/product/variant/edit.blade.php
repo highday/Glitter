@@ -12,12 +12,12 @@ window.contentData = {
 @endsection
 
 @section('nav')
-@include('glitter.office::products.nav')
+@include('glitter.office::product.nav')
 @stop
 
 @section('content')
 @include('glitter.office::partials.errors')
-<form role="form" method="POST" action="{{ route('glitter.office.products.variant.update', $variant) }}">
+<form role="form" method="POST" action="{{ route('glitter.office.product.variant.update', $variant) }}">
     {{ csrf_field() }}
     <div class="container-fluid">
         <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
@@ -40,11 +40,11 @@ window.contentData = {
                 <div class="form-card card">
                     <div class="card-block">
                         <h2 class="card-title">{{ $product->name }}</h2>
-                        <a href="{{ route('glitter.office.products.edit', $product) }}">← 商品編集に戻る</a>
+                        <a href="{{ route('glitter.office.product.edit', $product) }}">← 商品編集に戻る</a>
                     </div>
                     <div class="list-group list-group-flush">
                     @foreach($product->variants as $_variant)
-                        <a class="list-group-item list-group-item-action{{ $variant->getKey() == $_variant->getKey() ? ' active' : '' }}" href="{{ route('glitter.office.products.variant.edit', $_variant) }}">
+                        <a class="list-group-item list-group-item-action{{ $variant->getKey() == $_variant->getKey() ? ' active' : '' }}" href="{{ route('glitter.office.product.variant.edit', $_variant) }}">
                             <img class="mr-2 rounded" src="https://placehold.jp/50x50.png" width="50" height="50">
                             <div class="col p-0">
                                 <strong>{{ $_variant->name }}</strong>

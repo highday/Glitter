@@ -2,6 +2,7 @@
 
 namespace Highday\Glitter\Eloquent\Models;
 
+use Highday\Glitter\Eloquent\Relations\StoreMember;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -26,9 +27,14 @@ class Member extends Authenticatable
         'deleted_at',
     ];
 
+    public function getRouteKeyName()
+    {
+        return 'email';
+    }
+
     public function stores()
     {
-        return $this->belongsToMany(Store::class, 'store_member');
+        return $this->belongsToMany(Store::class, 'store_member')->using(StoreMember::class);
     }
 
     public function activeStore()
@@ -43,7 +49,7 @@ class Member extends Authenticatable
 
     public function getNameAttribute()
     {
-        return $this->first_name.' '.$this->last_name;
+        return join(' ', [$this->last_name, $this->first_name]);
     }
 
     public function getActiveStoreAttribute()

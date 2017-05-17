@@ -65,7 +65,7 @@
                             </div>
                         </template>
                     </td>
-                    <td><a href="{{ route('glitter.office.products.edit', $product) }}">{{ $product->name }}</a></td>
+                    <td><a href="{{ route('glitter.office.product.edit', $product) }}">{{ $product->name }}</a></td>
                     <td class="text-center">
                         @if (count($product->price_range) == 1)
                         <price unit="¥" point="0" value="{{ $product->price_range[0] }}"></price>
@@ -87,14 +87,14 @@
 @endsection
 
 @section('nav')
-@include('glitter.office::products.nav')
+@include('glitter.office::product.nav')
 @stop
 
 @section('content')
 <div class="container-fluid d-flex flex-column">
     <ul class="nav nav-tabs mb-3">
         <li class="nav-item">
-            <a class="nav-link active" href="{{ route('glitter.office.products.products') }}">すべて</a>
+            <a class="nav-link active" href="{{ route('glitter.office.product.search') }}">すべて</a>
         </li>
     </ul>
     <list-table :page-keys="{{ json_encode($products->modelKeys()) }}"></list-table>
