@@ -16,7 +16,7 @@ $route->group([
     // 受注管理
     $route->group(['namespace' => 'Order', 'prefix' => 'orders', 'as' => 'order.'], function ($route) {
         $route->get('/', 'SearchController@search')->name('search');
-        $route->get('view/{order}', 'EditController@input')->name('edit');
+        $route->get('view/{order}', 'EditController@input')->name('view');
         $route->post('view/{order}', 'EditController@save')->name('update');
     });
 
@@ -37,6 +37,7 @@ $route->group([
     // 顧客リスト
     $route->group(['namespace' => 'Customer', 'prefix' => 'customers', 'as' => 'customer.'], function ($route) {
         $route->get('/', 'SearchController@search')->name('search');
+        $route->get('edit/{customer}', 'EditController@input')->name('edit');
         $route->get('group', 'GroupSearchController@search')->name('group.search');
     });
 

@@ -37,7 +37,7 @@ window.contentData = {
 
                 <div class="form-group{{ $errors->has('name') ? ' has-danger' : '' }}">
                     <div class="mb-3 input-group input-group-lg">
-                        <input type="text" name="name" v-model.trim="name" placeholder="{{ trans('glitter::office.product.name') }}" class="form-control">
+                        <input type="text" name="name" placeholder="{{ trans('glitter::office.product.name') }}" class="form-control">
                     </div>
 
                     @if ($errors->has('name'))

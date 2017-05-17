@@ -3,7 +3,7 @@
 @section('title', 'ホーム')
 
 @section('scripts')
-<script defer>
+<script>
 var data = {
     labels: [],
     datasets: [{

@@ -19,7 +19,7 @@ window.Laravel = <?php echo json_encode([
 <div class="office-app">
 
 @hasSection('nav')
-<header class="nav-section nav-section-has-screen" :class="{ folded: storeFold }" @mouseleave="foldStoreNav">
+<header class="nav-section nav-section-has-screen" :class="{ fold: storeFold }" @mouseleave="foldStoreNav">
 @include('glitter.office::partials.navs.top')
 @include('glitter.office::partials.navs.store')
 <nav class="screen-nav">
@@ -28,7 +28,7 @@ window.Laravel = <?php echo json_encode([
 @include('glitter.office::partials.logout-form')
 </header>
 @else
-<header class="nav-section">
+<header class="nav-section" :class="{ fold: storeFold }" @mouseleave="foldStoreNav">
 @include('glitter.office::partials.navs.top')
 @include('glitter.office::partials.navs.store')
 @include('glitter.office::partials.logout-form')

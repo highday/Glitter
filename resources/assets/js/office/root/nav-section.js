@@ -11,13 +11,13 @@ export default new Vue({
   },
   computed: {
     ...mapState({
-      storeFold: state => state.nav.folded,
+      storeFold: state => state.nav.fold,
     }),
   },
   methods: {
     ...mapActions([
-      'defoldStoreNav',
       'foldStoreNav',
+      'unfoldStoreNav',
     ]),
     logout: function () {
       $('form#logoutForm').submit()

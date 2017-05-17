@@ -2,27 +2,27 @@ import Vue from 'vue'
 import * as types from '../../mutation-types'
 
 const state = {
-  folded: true,
+  fold: false,
 }
 
 const getters = {
 }
 
 const actions = {
-  defoldStoreNav ({ commit }) {
-    commit(types.NAV_DEFOLD)
-  },
   foldStoreNav ({ commit }) {
     commit(types.NAV_FOLD)
+  },
+  unfoldStoreNav ({ commit }) {
+    commit(types.NAV_UNFOLD)
   },
 }
 
 const mutations = {
   [types.NAV_FOLD] (state) {
-    state.folded = true
+    state.fold = true
   },
-  [types.NAV_DEFOLD] (state) {
-    state.folded = false
+  [types.NAV_UNFOLD] (state) {
+    state.fold = false
   },
 }
 

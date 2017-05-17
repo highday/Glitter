@@ -1,7 +1,7 @@
 
 // nav
 export const NAV_FOLD   = 'NAV_FOLD'
-export const NAV_DEFOLD = 'NAV_DEFOLD'
+export const NAV_UNFOLD = 'NAV_UNFOLD'
 
 // notification
 export const NOTIFICATION_PUSH      = 'NOTIFICATION_PUSH'

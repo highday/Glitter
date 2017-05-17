@@ -37,6 +37,16 @@ class Order extends Model
         return $this->hasMany(Variant::class);
     }
 
+    public function scopeStore($query, Store $store)
+    {
+        return $query->where('store_id', $store->getKey());
+    }
+
+    public function getTotalPriceAttribute()
+    {
+        return 18500;
+    }
+
     public function getPriceRangeAttribute()
     {
         $prices = $this->variants->map(function ($variant) {

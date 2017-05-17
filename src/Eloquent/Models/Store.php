@@ -2,6 +2,8 @@
 
 namespace Highday\Glitter\Eloquent\Models;
 
+use Highday\Glitter\Eloquent\Relations\StoreCustomer;
+use Highday\Glitter\Eloquent\Relations\StoreMember;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
@@ -23,7 +25,7 @@ class Store extends Model
 
     public function members()
     {
-        return $this->belongsToMany(Member::class, 'store_member');
+        return $this->belongsToMany(Member::class, 'store_member')->using(StoreMember::class);
     }
 
     public function roles()
@@ -63,7 +65,9 @@ class Store extends Model
 
     public function customers()
     {
-        return $this->belongsToMany(Customer::class, 'store_customer');
+        return $this->belongsToMany(Customer::class, 'store_customer')
+            ->withPivot('address_id', 'accepts_marketing', 'tax_exempt')
+            ->using(StoreCustomer::class);
     }
 
     public function getIconAttribute()

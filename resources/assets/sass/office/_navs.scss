@@ -289,7 +289,7 @@
         right: 0;
         transition: opacity 0.2s cubic-bezier(0,.5,1,1) 0.1s, right 0.2s cubic-bezier(.35,1.55,.49,.93) 0.1s;
     }
-    .nav-section-has-screen.folded .store-nav .nav-label {
+    .nav-section-has-screen.fold .store-nav .nav-label {
         opacity: 0;
         right: 1rem;
     }

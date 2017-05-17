@@ -9,12 +9,15 @@
     display: flex;
     flex-grow: 0;
     flex-shrink: 0;
-    flex-basis: 64px + 240px + 176px;
+    flex-basis: 64px + 240px;
     height: 100vh;
     overflow: auto;
     transition: flex-basis 0.3s ease-in-out;
 }
-.nav-section-has-screen.folded {
+.nav-section-has-screen {
+    flex-basis: 64px + 240px + 176px;
+}
+.nav-section-has-screen.fold {
     flex-basis: 64px + 240px;
 }
 

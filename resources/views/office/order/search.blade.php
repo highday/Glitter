@@ -88,7 +88,7 @@
                         <i v-cloak v-if="isSelected({{ $order->getKey() }})" class="fa fa-check-square fa-lg fa-fw text-primary" :class="{ 'text-danger': mode == 'all' }" aria-hidden="true"></i>
                         <i v-cloak v-else class="fa fa-square-o fa-lg fa-fw text-muted" aria-hidden="true"></i>
                     </td>
-                    <td><a href="{{ route('glitter.office.order.edit', $order) }}">{{ $order->number }}</a></td>
+                    <td><a href="{{ route('glitter.office.order.view', $order) }}">{{ $order->number }}</a></td>
                     <td><timestamp value="{{ $order->order_at }}"></timestamp></td>
                     <td><a href="#">根本 啓介</a></td>
                     <td><span class="status status-unpaid">未払い</span></td>

@@ -1,4 +1,4 @@
-<nav class="store-nav" @mouseenter="defoldStoreNav">
+<nav class="store-nav" @mouseenter="unfoldStoreNav">
     <div class="store-nav-header">
         <img class="rounded" src="{{ $store->icon }}" width="40" height="40">
         <div class="nav-label">{{ $store->name }}</div>
