@@ -32,6 +32,11 @@ class Order extends Model
         return $this->belongsToMany(Attachment::class, 'product_media');
     }
 
+    public function customer()
+    {
+        return $this->belongsTo(Customer::class);
+    }
+
     public function variants()
     {
         return $this->hasMany(Variant::class);

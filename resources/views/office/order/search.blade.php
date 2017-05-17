@@ -90,7 +90,7 @@
                     </td>
                     <td><a href="{{ route('glitter.office.order.view', $order) }}">{{ $order->number }}</a></td>
                     <td><timestamp value="{{ $order->order_at }}"></timestamp></td>
-                    <td><a href="#">根本 啓介</a></td>
+                    <td><a href="{{ route('glitter.office.customer.edit', $order->customer) }}">{{ $order->customer->name }}</a></td>
                     <td><span class="status status-unpaid">未払い</span></td>
                     <td><span class="status status-unfulfilled">未発送</span></td>
                     <td><price unit="¥" point="0" value="123456"></price></td>

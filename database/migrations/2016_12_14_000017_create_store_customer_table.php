@@ -19,7 +19,7 @@ class CreateStoreCustomerTable extends Migration
             $table->foreign('store_id')->references('id')->on('stores')->onDelete('cascade');
             $table->integer('customer_id')->unsigned();
             $table->foreign('customer_id')->references('id')->on('customers')->onDelete('cascade');
-            $table->integer('address_id')->unsigned();
+            $table->integer('address_id')->unsigned()->nullable();
             $table->foreign('address_id')->references('id')->on('customer_addresses')->onDelete('cascade');
             $table->boolean('accepts_marketing')->default(false);
             $table->boolean('tax_exempt')->default(false);
