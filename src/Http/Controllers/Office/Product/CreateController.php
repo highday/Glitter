@@ -4,7 +4,6 @@ namespace Highday\Glitter\Http\Controllers\Office\Product;
 
 use Highday\Glitter\Http\Controllers\Controller;
 use Highday\Glitter\Services\Office\Product\PersistentService;
-use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
 use Illuminate\Validation\ValidationException;
 

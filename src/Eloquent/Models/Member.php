@@ -49,7 +49,7 @@ class Member extends Authenticatable
 
     public function getNameAttribute()
     {
-        return join(' ', [$this->last_name, $this->first_name]);
+        return implode(' ', [$this->last_name, $this->first_name]);
     }
 
     public function getActiveStoreAttribute()

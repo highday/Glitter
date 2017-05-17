@@ -23,7 +23,7 @@ class MemberController extends Controller
 
     public function save(Request $request, Member $member)
     {
-    //     try {
+        //     try {
     //         $service->update($order->getKey(), [
     //             'number'    => $request->input('number') ?: '',
     //             'status'    => $request->input('status') ?: '',

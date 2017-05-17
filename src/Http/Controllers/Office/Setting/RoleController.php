@@ -23,7 +23,7 @@ class RoleController extends Controller
 
     public function save(Request $request, Role $role)
     {
-    //     try {
+        //     try {
     //         $service->update($order->getKey(), [
     //             'number'    => $request->input('number') ?: '',
     //             'status'    => $request->input('status') ?: '',
