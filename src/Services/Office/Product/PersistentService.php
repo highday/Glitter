@@ -105,7 +105,7 @@ class PersistentService
                 throw new ValidationException($validator);
             }
 
-            $products = $this->store->products()->findOrFail($key);
+            $product = $this->store->products()->findOrFail($key);
             $product->fill(Arr::only($attributes, [
                 'title',
                 'description',

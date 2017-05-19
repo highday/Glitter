@@ -5,7 +5,8 @@ import store from '../store'
 
 Vue.filter('fromNow', at => moment(at).fromNow())
 
-Vue.component('notification', require('../components/main-header/notification.vue'))
+Vue.component('notification-list', require('../components/main-header/notification-list.vue'))
+Vue.component('notification-item', require('../components/main-header/notification-item.vue'))
 
 export default new Vue({
   el: '.main-header',

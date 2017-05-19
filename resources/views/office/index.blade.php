@@ -4,60 +4,62 @@
 
 @section('scripts')
 <script>
-var data = {
-    labels: [],
-    datasets: [{
-        label: 'Sales',
-        data: [],
-        borderWidth: 0,
-        backgroundColor: 'rgba(61,69,79,0.8)',
-    }]
-}
-for (var i = 0; i < 24; i++) {
-    data.labels.push(moment({hour: i}));
-    data.datasets[0].data.push(Math.floor(Math.random() * 10000) + 0);
-}
-var options = {
-    layout: {
-        padding: 0,
-    },
-    legend: {
-        display: false,
-    },
-    tooltips: {
-        backgroundColor: '#fff',
-        titleFontColor: '#000',
-        bodyFontColor: '#333',
-        footerFontColor: '#000',
-        cornerRadius: 0,
-        displayColors: false,
-    },
-    scales: {
-        xAxes: [{
-            // categoryPercentage: 0.2,
-            gridLines: {
-                display: false,
-            },
-            ticks: {
-                padding: 0,
-                callback: function (value, index, values) {
-                    return value.hour() % 4 == 0 || index + 1 == values.length ? value.format('H') : '';
-                },
-            },
-        }],
-        yAxes: [{
-            // type: 'category',
-            ticks: {
-                beginAtZero: true,
-                callback: function (value, index, values) {
-                    return index % 4 == 0 ? '¥'+value : '';
-                },
-            }
+window.onload = e => {
+    var data = {
+        labels: [],
+        datasets: [{
+            label: 'Sales',
+            data: [],
+            borderWidth: 0,
+            backgroundColor: 'rgba(61,69,79,0.8)',
         }]
     }
+    for (var i = 0; i < 24; i++) {
+        data.labels.push(moment({hour: i}));
+        data.datasets[0].data.push(Math.floor(Math.random() * 10000) + 0);
+    }
+    var options = {
+        layout: {
+            padding: 0,
+        },
+        legend: {
+            display: false,
+        },
+        tooltips: {
+            backgroundColor: '#fff',
+            titleFontColor: '#000',
+            bodyFontColor: '#333',
+            footerFontColor: '#000',
+            cornerRadius: 0,
+            displayColors: false,
+        },
+        scales: {
+            xAxes: [{
+                // categoryPercentage: 0.2,
+                gridLines: {
+                    display: false,
+                },
+                ticks: {
+                    padding: 0,
+                    callback: function (value, index, values) {
+                        return value.hour() % 4 == 0 || index + 1 == values.length ? value.format('H') : '';
+                    },
+                },
+            }],
+            yAxes: [{
+                // type: 'category',
+                ticks: {
+                    beginAtZero: true,
+                    callback: function (value, index, values) {
+                        return index % 4 == 0 ? '¥'+value : '';
+                    },
+                }
+            }]
+        }
+    }
+    var myChart = new Chart(document.getElementById("myChart"), {type: 'bar', data: data, options: options});
+    // console.log(myChart)
 }
-var myChart = new Chart(document.getElementById("myChart"), {type: 'bar', data: data, options: options});
-console.log(myChart)
 </script>
 @endsection
 

@@ -47,14 +47,18 @@ window.Laravel = <?php echo json_encode([
             </a>
         </nav>
     </div>
-    <notification :open="drawerOpen" @close="closeNotification"></notification>
+    <notification-list :open="drawerOpen" @close="closeNotification">
+@foreach ($flash_message->messages() as $messages) @foreach ($messages as $message)
+        <notification-item :id="{{ rand(9999, 99999) }}" message="{{ $message }}"></notification-item>
+@endforeach @endforeach
+    </notification-list>
 </header>{{-- /.main-header --}}
 
 <div class="main-content">
 
-@if(!$flash_message->isEmpty())
+{{-- @if(!$flash_message->isEmpty())
 <div class="container-fluid">{!! join($flash_message->all()) !!}</div>
-@endif
+@endif --}}
 
 @yield('content')
 

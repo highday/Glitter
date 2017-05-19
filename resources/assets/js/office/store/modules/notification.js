@@ -1,7 +1,8 @@
 import Vue from 'vue'
 import * as types from '../../mutation-types'
-import { Howl } from 'howler'
 import moment from 'moment'
+import hash from 'object-hash'
+import { Howl } from 'howler'
 
 const se = new Howl({
   src: [require('../../../../se/test.mp3')]
@@ -12,9 +13,9 @@ const state = {
 }
 
 const getters = {
-  findNotification: (state) => (id) => {
-    if (typeof id == 'object' && 'id' in id) id = id.id
-    return state.items.find(item => item.id === id)
+  findNotification: (state) => (hash) => {
+    if (typeof hash == 'object' && 'hash' in hash) hash = hash.hash
+    return state.items.find(item => item.hash === hash)
   },
   landingNotifications (state, { listingNotifications }) {
     return listingNotifications.filter(item => item.landing === true)
@@ -27,14 +28,13 @@ const getters = {
 const actions = {
   notify ({ dispatch, commit }, props) {
     let notification = Object.assign({
-        id: null,
         at: moment(),
-        title: '',
         message: '',
         landing: true,
         auto_grage: true,
         archived: false,
     }, props)
+    notification.hash = hash(notification)
     commit(types.NOTIFICATION_PUSH, notification)
     if (notification.auto_grage) {
       setTimeout(() => dispatch('takeoffNotification', notification), 5000)
@@ -65,12 +65,12 @@ const mutations = {
     if (notification.landing) se.play()
   },
   [types.NOTIFICATION_TAKEOFF] (state, notification) {
-    let index = state.items.findIndex(item => item.id === notification.id)
+    let index = state.items.findIndex(item => item.hash === notification.hash)
     notification.landing = false
     if (index !== -1) Vue.set(state.items, index, notification)
   },
   [types.NOTIFICATION_DESTORY] (state, notification) {
-    let index = state.items.findIndex(item => item.id === notification.id)
+    let index = state.items.findIndex(item => item.hash === notification.hash)
     notification.landing = false
     notification.archived = true
     if (index !== -1) Vue.set(state.items, index, notification)

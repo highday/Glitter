@@ -12,28 +12,23 @@
           </a>
         </div>
         <transition-group name="fade" tag="div" class="notification-list" v-cloak>
-          <div class="notification-item fade-item card small mb-3" v-for="notification in listingNotifications" :key="notification.id">
-            <div class="card-header p-2 d-flex align-items-center">
-              <i class="fa fa-bell mr-1" aria-hidden="true"></i>
-              {{ notification.title }}
-              <span class="date ml-auto text-muted">{{ notification.at | fromNow }}</span>
-              <a class="archive ml-auto text-muted" href="#" @click.prevent="removeNotification(notification)"><i class="fa fa-times-circle fa-fw" aria-hidden="true"></i></a>
-            </div>
-            <div class="card-block p-2">
-              <p class="card-text">{{ notification.message }}</p>
-            </div>
+          <div class="notification-item fade-item card small mb-3 p-3 d-flex flex-row align-items-center" v-for="notification in listingNotifications" :key="notification.hash">
+            <i class="fa fa-bell fa-fw fa-lg mr-2" aria-hidden="true"></i>
+            {{ notification.message }}
+            <span class="date ml-auto text-muted">{{ notification.at | fromNow }}</span>
+            <a class="archive ml-auto text-muted" href="#" @click.prevent="removeNotification(notification)">
+              <i class="fa fa-times-circle fa-fw" aria-hidden="true"></i>
+            </a>
           </div>
         </transition-group>
       </div>
       <transition-group name="landing" tag="div" class="notification-runway" v-cloak>
-        <div class="card small landing-item p-3 d-flex flex-row align-items-center" v-for="notification in landingNotifications" :key="notification.id" @click="takeoffNotification(notification)">
-          <i class="fa fa-bell fa-fw fa-3x" aria-hidden="true"></i>
-          <div class="ml-2">
-            <strong>{{ notification.title }}</strong><br>
-            <span class="text-muted">{{ notification.message }}</span>
-          </div>
+        <div class="card small landing-item p-3 d-flex flex-row align-items-center" v-for="notification in landingNotifications" :key="notification.hash" @click="takeoffNotification(notification)">
+          <i class="fa fa-bell fa-fw fa-lg mr-2" aria-hidden="true"></i>
+          {{ notification.message }}
         </div>
       </transition-group>
+      <slot></slot>
     </div>
     <transition name="backdrop">
       <div class="notification-backdrop" v-cloak v-show="open" @click="$emit('close')"></div>
@@ -45,7 +40,7 @@
 import { mapGetters, mapState, mapActions } from 'vuex'
 
 export default {
-  name: 'notification',
+  name: 'notification-list',
   props: {
     open: false,
   },
