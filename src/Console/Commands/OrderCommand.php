@@ -34,7 +34,7 @@ class OrderCommand extends Command
      */
     public function handle()
     {
-        $app = $this->getLaravel();
+        $this->app = $this->getLaravel();
 
         $flows = [
             \Glitter\Commerce\Order\Flow\CartConvert::class,
@@ -42,14 +42,13 @@ class OrderCommand extends Command
             \Glitter\Commerce\Order\Flow\Discount::class,
         ];
 
-        $order = (new Pipeline($app))
-            ->send($app->make(OrderContext::class))
-            ->through($flows)->via('process')
-            ->then(function (OrderContext $order) {
-                return $order;
-            });
-
-        // dd($order);
+        $order = $this->app->make(OrderContext::class);
+        $order = (new Pipeline($this->app))
+                        ->send($order)
+                        ->through($flows)->via('process')
+                        ->then(function (OrderContext $order) {
+                            return $order;
+                        });
 
         $table = new Table($this->getOutput());
         $table->setHeaders([
@@ -57,7 +56,7 @@ class OrderCommand extends Command
             ['Item', 'Quantity', 'Price'],
         ]);
         $rows = [];
-        foreach ($order as $box) {
+        foreach ($order->getBoxes() as $box) {
             foreach ($box as $item) {
                 $rows[] = [
                     $item->getName(),

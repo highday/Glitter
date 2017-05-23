@@ -23,7 +23,7 @@ class Shipping implements Flow
             'phone'      => '08012345678',
         ]);
 
-        foreach ($order as $box) {
+        foreach ($order->getBoxes() as $box) {
             $box->setShippingTag((new Tag)->setMethod('佐川急便')->setAddress($customerAddress)->setFee(500));
         }
 
