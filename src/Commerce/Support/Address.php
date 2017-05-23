@@ -47,18 +47,19 @@ class Address
     protected $phone;
 
     /**
-     * @param  array  $attributes
+     * @param array $attributes
+     *
      * @return void
      */
     public function __construct($attributes = [])
     {
-        $this->name       = Arr::get($attributes, 'name', '');
-        $this->address1   = Arr::get($attributes, 'address1', '');
-        $this->address2   = Arr::get($attributes, 'address2', '');
-        $this->city       = Arr::get($attributes, 'city', '');
-        $this->state      = Arr::get($attributes, 'state', '');
+        $this->name = Arr::get($attributes, 'name', '');
+        $this->address1 = Arr::get($attributes, 'address1', '');
+        $this->address2 = Arr::get($attributes, 'address2', '');
+        $this->city = Arr::get($attributes, 'city', '');
+        $this->state = Arr::get($attributes, 'state', '');
         $this->postalCode = Arr::get($attributes, 'postalCode', '');
-        $this->country    = Arr::get($attributes, 'country', '');
-        $this->phone      = Arr::get($attributes, 'phone', '');
+        $this->country = Arr::get($attributes, 'country', '');
+        $this->phone = Arr::get($attributes, 'phone', '');
     }
 }

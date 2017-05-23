@@ -24,7 +24,7 @@ class Shipping implements Flow
         ]);
 
         foreach ($order->getBoxes() as $box) {
-            $box->setShippingTag((new Tag)->setMethod('佐川急便')->setAddress($customerAddress)->setFee(500));
+            $box->setShippingTag((new Tag())->setMethod('佐川急便')->setAddress($customerAddress)->setFee(500));
         }
 
         return $next($order);

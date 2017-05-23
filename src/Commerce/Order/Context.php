@@ -2,7 +2,6 @@
 
 namespace Glitter\Commerce\Order;
 
-use Glitter\Commerce\Order\Box;
 use Glitter\Contracts\Commerce\Order\Context as ContextContract;
 
 class Context implements ContextContract
@@ -33,7 +32,8 @@ class Context implements ContextContract
     protected $discounts = [];
 
     /**
-     * @param  \Glitter\Commerce\Order\Box  $box
+     * @param \Glitter\Commerce\Order\Box $box
+     *
      * @return $this
      */
     public function pushBox(Box $box)
@@ -52,7 +52,8 @@ class Context implements ContextContract
     }
 
     /**
-     * @param  string  $status
+     * @param string $status
+     *
      * @return void
      */
     public function setStatus($status)
@@ -69,7 +70,8 @@ class Context implements ContextContract
     }
 
     /**
-     * @param  \Carbon\Carbon  $orderedAt
+     * @param \Carbon\Carbon $orderedAt
+     *
      * @return void
      */
     public function setOrderedAt(Carbon $orderedAt)
@@ -86,7 +88,8 @@ class Context implements ContextContract
     }
 
     /**
-     * @param  string  $note
+     * @param string $note
+     *
      * @return void
      */
     public function setNote($note)

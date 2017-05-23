@@ -30,7 +30,8 @@ class Item
     protected $requiredShipment = false;
 
     /**
-     * @param  string  $name
+     * @param string $name
+     *
      * @return $this
      */
     public function setName($name)
@@ -49,7 +50,8 @@ class Item
     }
 
     /**
-     * @param  int  $quantity
+     * @param int $quantity
+     *
      * @return $this
      */
     public function setQuantity($quantity)
@@ -68,7 +70,8 @@ class Item
     }
 
     /**
-     * @param  float  $unitPrice
+     * @param float $unitPrice
+     *
      * @return $this
      */
     public function setUnitPrice($unitPrice)
@@ -87,7 +90,8 @@ class Item
     }
 
     /**
-     * @param  bool  $taxIncluded
+     * @param bool $taxIncluded
+     *
      * @return $this
      */
     public function setTaxIncluded($taxIncluded)
@@ -106,7 +110,8 @@ class Item
     }
 
     /**
-     * @param  bool  $requiredShipment
+     * @param bool $requiredShipment
+     *
      * @return $this
      */
     public function setRequiredShipment($requiredShipment)

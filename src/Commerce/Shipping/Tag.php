@@ -27,7 +27,8 @@ class Tag
     protected $fee = 0;
 
     /**
-     * @param  string  $method
+     * @param string $method
+     *
      * @return $this
      */
     public function setMethod($method)
@@ -46,7 +47,8 @@ class Tag
     }
 
     /**
-     * @param  \Glitter\Commerce\Support\Address $address
+     * @param \Glitter\Commerce\Support\Address $address
+     *
      * @return $this
      */
     public function setAddress(Address $address)
@@ -65,7 +67,8 @@ class Tag
     }
 
     /**
-     * @param  string  $trackingNumber
+     * @param string $trackingNumber
+     *
      * @return $this
      */
     public function setTrackingNumber($trackingNumber)
@@ -84,7 +87,8 @@ class Tag
     }
 
     /**
-     * @param  float  $fee
+     * @param float $fee
+     *
      * @return $this
      */
     public function setFee($fee)
