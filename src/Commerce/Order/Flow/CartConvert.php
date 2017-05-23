@@ -12,12 +12,12 @@ class CartConvert implements Flow
 {
     public function process(Context $order, Closure $next)
     {
-        $box = new Box;
+        $box = new Box();
         $order->pushBox($box);
 
-        $box->pushItem((new Item)->setName('アイテム1')->setQuantity(1)->setUnitPrice(1000));
-        $box->pushItem((new Item)->setName('アイテム2')->setQuantity(3)->setUnitPrice(1500));
-        $box->pushItem((new Item)->setName('アイテム3')->setQuantity(8)->setUnitPrice(3200));
+        $box->pushItem((new Item())->setName('アイテム1')->setQuantity(1)->setUnitPrice(1000));
+        $box->pushItem((new Item())->setName('アイテム2')->setQuantity(3)->setUnitPrice(1500));
+        $box->pushItem((new Item())->setName('アイテム3')->setQuantity(8)->setUnitPrice(3200));
 
         return $next($order);
     }

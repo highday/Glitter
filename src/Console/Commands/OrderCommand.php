@@ -2,11 +2,9 @@
 
 namespace Glitter\Console\Commands;
 
-use Closure;
-use Illuminate\Console\Command;
-use Illuminate\Contracts\Pipeline\Hub as PipelineHub;
-use Illuminate\Pipeline\Pipeline;
 use Glitter\Contracts\Commerce\Order\Context as OrderContext;
+use Illuminate\Console\Command;
+use Illuminate\Pipeline\Pipeline;
 use Symfony\Component\Console\Helper\Table;
 use Symfony\Component\Console\Helper\TableCell;
 use Symfony\Component\Console\Helper\TableSeparator;

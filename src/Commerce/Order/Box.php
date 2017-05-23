@@ -2,12 +2,11 @@
 
 namespace Glitter\Commerce\Order;
 
-use Countable;
 use ArrayAccess;
 use ArrayIterator;
-use IteratorAggregate;
-use Glitter\Commerce\Order\Item;
+use Countable;
 use Glitter\Commerce\Shipping\Tag as ShippingTag;
+use IteratorAggregate;
 
 class Box implements ArrayAccess, Countable, IteratorAggregate
 {
@@ -22,7 +21,8 @@ class Box implements ArrayAccess, Countable, IteratorAggregate
     protected $shippingTag;
 
     /**
-     * @param  \Glitter\Commerce\Order\Item  $item
+     * @param \Glitter\Commerce\Order\Item $item
+     *
      * @return $this
      */
     public function pushItem(Item $item)
@@ -33,7 +33,8 @@ class Box implements ArrayAccess, Countable, IteratorAggregate
     }
 
     /**
-     * @param  \Glitter\Commerce\Shipping\Tag  $shippingTag
+     * @param \Glitter\Commerce\Shipping\Tag $shippingTag
+     *
      * @return $this
      */
     public function setShippingTag(ShippingTag $shippingTag)
@@ -64,7 +65,9 @@ class Box implements ArrayAccess, Countable, IteratorAggregate
      */
     public function getShippingFee()
     {
-        if ($this->hasShippingTag() === false) return 0;
+        if ($this->hasShippingTag() === false) {
+            return 0;
+        }
 
         return $this->getShippingTag()->getFee();
     }
@@ -102,7 +105,8 @@ class Box implements ArrayAccess, Countable, IteratorAggregate
     /**
      * Determine if an item exists at an offset.
      *
-     * @param  mixed  $key
+     * @param mixed $key
+     *
      * @return bool
      */
     public function offsetExists($key)
@@ -113,7 +117,8 @@ class Box implements ArrayAccess, Countable, IteratorAggregate
     /**
      * Get an item at a given offset.
      *
-     * @param  mixed  $key
+     * @param mixed $key
+     *
      * @return mixed
      */
     public function offsetGet($key)
@@ -124,8 +129,9 @@ class Box implements ArrayAccess, Countable, IteratorAggregate
     /**
      * Set the item at a given offset.
      *
-     * @param  mixed  $key
-     * @param  mixed  $value
+     * @param mixed $key
+     * @param mixed $value
+     *
      * @return void
      */
     public function offsetSet($key, $value)
@@ -140,7 +146,8 @@ class Box implements ArrayAccess, Countable, IteratorAggregate
     /**
      * Unset the item at a given offset.
      *
-     * @param  string  $key
+     * @param string $key
+     *
      * @return void
      */
     public function offsetUnset($key)
