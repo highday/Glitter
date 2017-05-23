@@ -1,9 +1,9 @@
 <?php
 
-namespace Highday\Glitter\Eloquent\Models;
+namespace Glitter\Eloquent\Models;
 
-use Highday\Glitter\Eloquent\Relations\StoreCustomer;
-use Highday\Glitter\Eloquent\Relations\StoreMember;
+use Glitter\Eloquent\Relations\StoreCustomer;
+use Glitter\Eloquent\Relations\StoreMember;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 

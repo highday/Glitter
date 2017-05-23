@@ -1,10 +1,10 @@
 <?php
 
-namespace Highday\Glitter\Http\Controllers\Office\Setting;
+namespace Glitter\Http\Controllers\Office\Setting;
 
-use Highday\Glitter\Eloquent\Models\Member;
-use Highday\Glitter\Eloquent\Models\Store;
-use Highday\Glitter\Http\Controllers\Controller;
+use Glitter\Eloquent\Models\Member;
+use Glitter\Eloquent\Models\Store;
+use Glitter\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
 class MemberController extends Controller

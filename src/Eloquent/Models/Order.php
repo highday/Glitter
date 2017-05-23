@@ -1,6 +1,6 @@
 <?php
 
-namespace Highday\Glitter\Eloquent\Models;
+namespace Glitter\Eloquent\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;

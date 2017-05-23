@@ -1,9 +1,9 @@
 <?php
 
-namespace Highday\Glitter\Http\Controllers\Office\Product;
+namespace Glitter\Http\Controllers\Office\Product;
 
-use Highday\Glitter\Http\Controllers\Controller;
-use Highday\Glitter\Services\Office\Product\PersistentService;
+use Glitter\Http\Controllers\Controller;
+use Glitter\Services\Office\Product\PersistentService;
 use Illuminate\Http\Request;
 use Illuminate\Validation\ValidationException;
 

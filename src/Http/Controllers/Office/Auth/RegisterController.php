@@ -1,9 +1,9 @@
 <?php
 
-namespace Highday\Glitter\Http\Controllers\Office\Auth;
+namespace Glitter\Http\Controllers\Office\Auth;
 
-use Highday\Glitter\Http\Controllers\Controller;
-use Highday\Glitter\Member;
+use Glitter\Http\Controllers\Controller;
+use Glitter\Member;
 use Illuminate\Contracts\Auth\Factory as Auth;
 use Illuminate\Contracts\Validation\Factory as Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;

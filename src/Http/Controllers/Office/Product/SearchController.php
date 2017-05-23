@@ -1,10 +1,10 @@
 <?php
 
-namespace Highday\Glitter\Http\Controllers\Office\Product;
+namespace Glitter\Http\Controllers\Office\Product;
 
-use Highday\Glitter\Eloquent\Models\Product;
-use Highday\Glitter\Http\Controllers\Controller;
-use Highday\Glitter\Services\Office\Product\IndexService;
+use Glitter\Eloquent\Models\Product;
+use Glitter\Http\Controllers\Controller;
+use Glitter\Services\Office\Product\IndexService;
 use Illuminate\Http\Request;
 
 class SearchController extends Controller

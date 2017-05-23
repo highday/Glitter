@@ -1,8 +1,8 @@
 <?php
 
-namespace Highday\Glitter\Http\Controllers\Office\Auth;
+namespace Glitter\Http\Controllers\Office\Auth;
 
-use Highday\Glitter\Http\Controllers\Controller;
+use Glitter\Http\Controllers\Controller;
 use Illuminate\Contracts\Auth\Factory as Auth;
 use Illuminate\Contracts\Auth\PasswordBrokerFactory as Password;
 use Illuminate\Foundation\Auth\ResetsPasswords;

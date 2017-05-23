@@ -1,8 +1,8 @@
 <?php
 
-namespace Highday\Glitter\Eloquent\Relations;
+namespace Glitter\Eloquent\Relations;
 
-use Highday\Glitter\Eloquent\Models\CustomerAddress;
+use Glitter\Eloquent\Models\CustomerAddress;
 use Illuminate\Database\Eloquent\Relations\Pivot;
 
 class StoreCustomer extends Pivot

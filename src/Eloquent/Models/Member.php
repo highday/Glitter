@@ -1,8 +1,8 @@
 <?php
 
-namespace Highday\Glitter\Eloquent\Models;
+namespace Glitter\Eloquent\Models;
 
-use Highday\Glitter\Eloquent\Relations\StoreMember;
+use Glitter\Eloquent\Relations\StoreMember;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;

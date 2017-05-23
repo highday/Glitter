@@ -1,6 +1,6 @@
 <?php
 
-namespace Highday\Glitter\Providers;
+namespace Glitter\Providers;
 
 use Illuminate\Support\ServiceProvider;
 
@@ -10,15 +10,20 @@ class GlitterServiceProvider extends ServiceProvider
     {
         $this->loadTranslationsFrom(__DIR__.'/../../resources/lang', 'glitter');
 
+        $this->loadMigrationsFrom(__DIR__.'/../../database/migrations');
+        $this->publishes([
+            __DIR__.'/../../database/migrations' => database_path('migrations'),
+        ], 'glitter');
+
+        $this->app->bind(
+            \Glitter\Contracts\Commerce\Order\Context::class,
+            \Glitter\Commerce\Order\Context::class
+        );
+
         if ($this->app->runningInConsole()) {
-            $this->loadMigrationsFrom(__DIR__.'/../../database/migrations');
-
-            $this->publishes([
-                __DIR__.'/../../database/migrations' => database_path('migrations'),
-            ], 'glitter');
-
             $this->commands([
-                \Highday\Glitter\Console\Commands\InstallCommand::class,
+                \Glitter\Console\Commands\InstallCommand::class,
+                \Glitter\Console\Commands\OrderCommand::class,
             ]);
         }
     }

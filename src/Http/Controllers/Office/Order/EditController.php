@@ -1,10 +1,10 @@
 <?php
 
-namespace Highday\Glitter\Http\Controllers\Office\Order;
+namespace Glitter\Http\Controllers\Office\Order;
 
-use Highday\Glitter\Eloquent\Models\Order;
-use Highday\Glitter\Http\Controllers\Controller;
-use Highday\Glitter\Services\Office\Order\PersistentService;
+use Glitter\Eloquent\Models\Order;
+use Glitter\Http\Controllers\Controller;
+use Glitter\Services\Office\Order\PersistentService;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
 use Illuminate\Validation\ValidationException;

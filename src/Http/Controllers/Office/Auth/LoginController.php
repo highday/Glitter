@@ -1,9 +1,9 @@
 <?php
 
-namespace Highday\Glitter\Http\Controllers\Office\Auth;
+namespace Glitter\Http\Controllers\Office\Auth;
 
 use Carbon\Carbon;
-use Highday\Glitter\Http\Controllers\Controller;
+use Glitter\Http\Controllers\Controller;
 use Illuminate\Contracts\Auth\Factory as Auth;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;

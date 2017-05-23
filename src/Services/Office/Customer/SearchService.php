@@ -1,8 +1,8 @@
 <?php
 
-namespace Highday\Glitter\Services\Office\Customer;
+namespace Glitter\Services\Office\Customer;
 
-use Highday\Glitter\Eloquent\Models\Store;
+use Glitter\Eloquent\Models\Store;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 
 class SearchService

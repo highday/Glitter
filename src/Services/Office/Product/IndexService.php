@@ -1,9 +1,9 @@
 <?php
 
-namespace Highday\Glitter\Services\Office\Product;
+namespace Glitter\Services\Office\Product;
 
-use Highday\Glitter\Eloquent\Models\Product;
-use Highday\Glitter\Eloquent\Models\Store;
+use Glitter\Eloquent\Models\Product;
+use Glitter\Eloquent\Models\Store;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 
 class IndexService

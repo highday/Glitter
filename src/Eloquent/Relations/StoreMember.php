@@ -1,6 +1,6 @@
 <?php
 
-namespace Highday\Glitter\Eloquent\Relations;
+namespace Glitter\Eloquent\Relations;
 
 use Illuminate\Database\Eloquent\Relations\Pivot;
 

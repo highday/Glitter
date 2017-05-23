@@ -1,8 +1,8 @@
 <?php
 
-namespace Highday\Glitter\Http\Controllers\Office;
+namespace Glitter\Http\Controllers\Office;
 
-use Highday\Glitter\Http\Controllers\Controller;
+use Glitter\Http\Controllers\Controller;
 use Illuminate\Contracts\Auth\Factory as AuthFactory;
 use Illuminate\Http\Request;
 

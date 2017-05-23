@@ -1,10 +1,10 @@
 <?php
 
-namespace Highday\Glitter\Http\Controllers\Office;
+namespace Glitter\Http\Controllers\Office;
 
-use Highday\Glitter\Eloquent\Models\Store;
-use Highday\Glitter\Http\Controllers\Controller;
-use Highday\Glitter\Services\Office\Store\SettingService;
+use Glitter\Eloquent\Models\Store;
+use Glitter\Http\Controllers\Controller;
+use Glitter\Services\Office\Store\SettingService;
 use Illuminate\Contracts\Auth\Factory as Auth;
 use Illuminate\Http\Request;
 

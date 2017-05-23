@@ -1,6 +1,6 @@
 <?php
 
-namespace Highday\Glitter\Http\Middleware\Office;
+namespace Glitter\Http\Middleware\Office;
 
 use Closure;
 

@@ -24,7 +24,7 @@
     },
     "autoload": {
         "psr-4": {
-            "Highday\\Glitter\\": "src/"
+            "Glitter\\": "src/"
         }
     },
     "scripts": {

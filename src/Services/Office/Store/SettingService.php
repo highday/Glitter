@@ -1,9 +1,9 @@
 <?php
 
-namespace Highday\Glitter\Services\Office\Store;
+namespace Glitter\Services\Office\Store;
 
 use Closure;
-use Highday\Glitter\Eloquent\Models\Store;
+use Glitter\Eloquent\Models\Store;
 use Illuminate\Contracts\Validation\Factory as Validator;
 use Illuminate\Database\DatabaseManager;
 use Illuminate\Support\Arr;

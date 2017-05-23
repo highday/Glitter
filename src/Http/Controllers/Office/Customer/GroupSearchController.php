@@ -1,9 +1,9 @@
 <?php
 
-namespace Highday\Glitter\Http\Controllers\Office\Customer;
+namespace Glitter\Http\Controllers\Office\Customer;
 
-use Highday\Glitter\Eloquent\Models\Store;
-use Highday\Glitter\Http\Controllers\Controller;
+use Glitter\Eloquent\Models\Store;
+use Glitter\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
 class GroupSearchController extends Controller
