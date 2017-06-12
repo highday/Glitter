@@ -34,18 +34,18 @@ return [
         'customers' => [
             'mailmagazine' => [
                 'label'    => 'メールマガジン',
-                'callback' => Finder\MailMagazine::class
+                'callback' => Finder\MailMagazine::class,
             ],
             'repeaters'    => [
                 'label'    => 'リピーター',
-                'callback' => Finder\Repeater::class
+                'callback' => Finder\Repeater::class,
             ],
             'lead'         => [
                 'label'    => '見込み顧客',
-                'callback' => Finder\Lead::class
-            ]
+                'callback' => Finder\Lead::class,
+            ],
 
-        ]
-    ]
+        ],
+    ],
 
 ];

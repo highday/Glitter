@@ -11,5 +11,5 @@ interface FinderInterface
      *
      * @return Builder
      */
-    function __invoke($builder);
+    public function __invoke($builder);
 }

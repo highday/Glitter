@@ -11,7 +11,7 @@ class MailMagazine implements FinderInterface
      *
      * @return Builder
      */
-    function __invoke($builder)
+    public function __invoke($builder)
     {
         return $builder;
     }
