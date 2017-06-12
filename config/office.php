@@ -1,5 +1,7 @@
 <?php
 
+use Glitter\Http\Controllers\Office\Customer\Finder;
+
 return [
 
     'auth' => [
@@ -27,5 +29,23 @@ return [
         ],
 
     ],
+
+    'finder' => [
+        'customers' => [
+            'mailmagazine' => [
+                'label'    => 'メールマガジン',
+                'callback' => Finder\MailMagazine::class
+            ],
+            'repeaters'    => [
+                'label'    => 'リピーター',
+                'callback' => Finder\Repeater::class
+            ],
+            'lead'         => [
+                'label'    => '見込み顧客',
+                'callback' => Finder\Lead::class
+            ]
+
+        ]
+    ]
 
 ];
