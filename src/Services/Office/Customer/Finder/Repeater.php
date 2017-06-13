@@ -2,6 +2,7 @@
 
 namespace Glitter\Services\Office\Customer\Finder;
 
+use Glitter\Services\Office\Finder\FinderItem;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Relations\Relation;
 
@@ -10,8 +11,18 @@ use Illuminate\Database\Eloquent\Relations\Relation;
  *
  * 注文履歴 n 件以上
  */
-class Repeater implements FinderInterface
+class Repeater extends FinderItem
 {
+    /**
+     * @var string
+     */
+    protected $name = 'repeater';
+
+    /**
+     * @var string
+     */
+    protected $label = 'リピート客';
+
     /**
      * @var int 閾値
      */

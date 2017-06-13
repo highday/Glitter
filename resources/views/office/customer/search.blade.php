@@ -9,11 +9,11 @@
 @section('content')
 <div class="container-fluid d-flex flex-column">
     <ul class="nav nav-tabs mb-3">
-        @foreach ($finder_collection as $finder_name => $finder_config)
+        @foreach ($finderGroup as $finder)
             <li class="nav-item">
-                <a class="nav-link{{ $finder_name === $preset ? ' active' : '' }}"
-                   href="{{ route('glitter.office.customer.search', ['preset' => $finder_name]) }}"
-                >{{ $finder_config['label'] }}</a>
+                <a class="nav-link{{ $finder->getName() === $preset ? ' active' : '' }}"
+                   href="{{ route('glitter.office.customer.search', ['preset' => $finder->getName()]) }}"
+                >{{ $finder->getLabel() }}</a>
             </li>
         @endforeach
     </ul>

@@ -29,22 +29,11 @@ return [
     ],
 
     'finder' => [
-        'all' => [
-            'label'    => 'すべて',
-            'callback' => \Glitter\Services\Office\Customer\Finder\All::class,
-            'default'  => true,
-        ],
-        'mailmagazine' => [
-            'label'    => 'メルマガ購読',
-            'callback' => \Glitter\Services\Office\Customer\Finder\Mailmagazine::class,
-        ],
-        'repeater'     => [
-            'label'    => 'リピート客',
-            'callback' => \Glitter\Services\Office\Customer\Finder\Repeater::class,
-        ],
-        'lead'         => [
-            'label'    => '見込み客',
-            'callback' => \Glitter\Services\Office\Customer\Finder\Lead::class,
-        ],
+        'customers' => [
+            \Glitter\Services\Office\Customer\Finder\All::class,
+            \Glitter\Services\Office\Customer\Finder\Mailmagazine::class,
+            \Glitter\Services\Office\Customer\Finder\Repeater::class,
+            \Glitter\Services\Office\Customer\Finder\Lead::class,
+        ]
     ],
 ];

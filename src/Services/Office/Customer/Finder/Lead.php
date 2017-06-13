@@ -2,6 +2,7 @@
 
 namespace Glitter\Services\Office\Customer\Finder;
 
+use Glitter\Services\Office\Finder\FinderItem;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Relations\Relation;
 
@@ -11,8 +12,18 @@ use Illuminate\Database\Eloquent\Relations\Relation;
  * カートに入れてる顧客
  *  (カート未実装のためまだできてない)
  */
-class Lead implements FinderInterface
+class Lead extends FinderItem
 {
+    /**
+     * @var string
+     */
+    protected $name = 'lead';
+
+    /**
+     * @var string
+     */
+    protected $label = '見込み客';
+
     /**
      * @var int 閾値
      */
