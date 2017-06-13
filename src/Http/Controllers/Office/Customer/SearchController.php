@@ -25,7 +25,6 @@ class SearchController extends Controller
         $keyword = $request->input('keyword', null);
         $service->setKeyword($keyword);
 
-
         # プリセットファインダー
         $finder_collection = collect(app('config')->get('glitter-office.finder'));
 
