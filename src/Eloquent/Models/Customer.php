@@ -21,7 +21,7 @@ class Customer extends Authenticatable
         'last_name',
         'email',
         'password',
-        'mailmagazine_flag'
+        'mailmagazine_flag',
     ];
 
     protected $dates = [

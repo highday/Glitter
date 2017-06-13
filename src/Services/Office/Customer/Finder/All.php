@@ -6,11 +6,9 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Relations\Relation;
 
 /**
- * Class All
+ * Class All.
  *
  * 特に何もしない
- *
- * @package Glitter\Services\Office\Customer\Finder
  */
 class All implements FinderInterface
 {
@@ -19,7 +17,7 @@ class All implements FinderInterface
      *
      * @return Builder
      */
-    function __invoke($builder)
+    public function __invoke($builder)
     {
         return $builder;
     }

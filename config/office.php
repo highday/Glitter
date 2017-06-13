@@ -30,21 +30,21 @@ return [
 
     'finder' => [
         'all' => [
-            'label' => 'すべて',
+            'label'    => 'すべて',
             'callback' => \Glitter\Services\Office\Customer\Finder\All::class,
-            'default' => true
+            'default'  => true,
         ],
         'mailmagazine' => [
             'label'    => 'メルマガ購読',
-            'callback' => \Glitter\Services\Office\Customer\Finder\Mailmagazine::class
+            'callback' => \Glitter\Services\Office\Customer\Finder\Mailmagazine::class,
         ],
         'repeater'     => [
             'label'    => 'リピート客',
-            'callback' => \Glitter\Services\Office\Customer\Finder\Repeater::class
+            'callback' => \Glitter\Services\Office\Customer\Finder\Repeater::class,
         ],
         'lead'         => [
             'label'    => '見込み客',
-            'callback' => \Glitter\Services\Office\Customer\Finder\Lead::class
-        ]
-    ]
+            'callback' => \Glitter\Services\Office\Customer\Finder\Lead::class,
+        ],
+    ],
 ];
