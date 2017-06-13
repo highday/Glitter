@@ -15,7 +15,7 @@ use Illuminate\View\View;
 class SearchController extends Controller
 {
     /**
-     * @param string|null         $preset ファインダー名
+     * @param string|null         $preset      ファインダー名
      * @param Request             $request
      * @param SearchService       $service
      * @param CustomerFinderGroup $finderGroup

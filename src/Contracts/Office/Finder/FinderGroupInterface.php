@@ -8,6 +8,7 @@ interface FinderGroupInterface
 {
     /**
      * @param string $name
+     *
      * @return FinderItem
      */
     public function getFinder(string $name): FinderItem;

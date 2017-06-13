@@ -10,7 +10,6 @@ use Glitter\Http\Middleware\Office\ShareVariables;
 use Glitter\Services\Office\Finder\Factory;
 use Glitter\Services\Office\Finder\FinderGroup;
 use Illuminate\Contracts\Routing\Registrar as Router;
-use Illuminate\Foundation\Application;
 use Illuminate\Support\ServiceProvider;
 
 class OfficeServiceProvider extends ServiceProvider
@@ -19,24 +18,24 @@ class OfficeServiceProvider extends ServiceProvider
     {
         // Config
         // $this->mergeConfigFrom(__DIR__.'/../../config/office.php', '');
-        $config = require __DIR__ . '/../../config/office.php';
+        $config = require __DIR__.'/../../config/office.php';
         foreach (array_get($config, 'auth') as $key => $value) {
             $value = array_merge($value, $this->app['config']->get("auth.{$key}", []));
             $this->app['config']->set("auth.{$key}", $value);
         }
         $this->publishes([
-            __DIR__ . '/../../config/office.php' => config_path('glitter-office.php'),
+            __DIR__.'/../../config/office.php' => config_path('glitter-office.php'),
         ], 'glitter-office');
 
         // Views
-        $this->loadViewsFrom(__DIR__ . '/../../resources/views/office', 'glitter.office');
+        $this->loadViewsFrom(__DIR__.'/../../resources/views/office', 'glitter.office');
         $this->publishes([
-            __DIR__ . '/../../resources/views/office' => resource_path('views/vendor/glitter/office'),
+            __DIR__.'/../../resources/views/office' => resource_path('views/vendor/glitter/office'),
         ], 'glitter-office');
 
         // Languages
         $this->publishes([
-            __DIR__ . '/../../resources/lang/office' => resource_path('lang/vendor/glitter/office'),
+            __DIR__.'/../../resources/lang/office' => resource_path('lang/vendor/glitter/office'),
         ], 'glitter-office');
 
         $this->app->bind(\Glitter\Eloquent\Models\Member::class, function ($app) {
@@ -47,14 +46,13 @@ class OfficeServiceProvider extends ServiceProvider
             return call_user_func($app['auth']->userResolver(), 'member')->activeStore;
         });
 
-        # Finder
+        // Finder
         $this->app->bind(CustomerFinderGroup::class, FinderGroup::factory('glitter-office.finder.customers'));
 
         $router->middlewareGroup('glitter.office', [
             ShareVariables::class,
             ShareFlashMessagesFromSession::class,
         ]);
-
 
         $router->aliasMiddleware('restriction', AccessRestrictionWithRemoteAddress::class);
         $router->aliasMiddleware('outsider', RedirectIfMemberAuthenticated::class);
@@ -66,7 +64,7 @@ class OfficeServiceProvider extends ServiceProvider
                 'prefix'     => 'office',
                 'as'         => 'glitter.office.',
             ], function ($route) {
-                require __DIR__ . '/../../routes/office.php';
+                require __DIR__.'/../../routes/office.php';
             });
         }
     }
