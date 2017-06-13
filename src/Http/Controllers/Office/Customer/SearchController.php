@@ -6,8 +6,10 @@ use Glitter\Contracts\Office\Finder\CustomerFinderGroup;
 use Glitter\Http\Controllers\Controller;
 use Glitter\Services\Office\Customer\SearchService;
 use Illuminate\Contracts\View\Factory;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 /**
  * Class SearchController.
@@ -15,12 +17,11 @@ use Illuminate\View\View;
 class SearchController extends Controller
 {
     /**
-     * @param string|null         $preset      ファインダー名
+     * @param string|null         $preset ファインダー名
      * @param Request             $request
      * @param SearchService       $service
      * @param CustomerFinderGroup $finderGroup
-     *
-     * @return Factory|View
+     * @return Factory|View|RedirectResponse
      */
     public function search(
         string $preset = null,
@@ -32,13 +33,16 @@ class SearchController extends Controller
         $keyword = $request->input('keyword', null);
         $service->setKeyword($keyword);
 
-        if ($preset) {
-            $finder = $finderGroup->getFinder($preset);
-            if (!$finder) {
-                // @todo NotFound ???
+        $finder = ($preset)
+            ? $finderGroup->getFinder($preset)
+            : null;
+
+        if (!$finder) {
+            $default_finder = $finderGroup->getDefault();
+            if (!$default_finder) {
+                throw new NotFoundHttpException();
             }
-        } else {
-            $finder = $finderGroup->getDefault();
+            return redirect()->route('glitter.office.customer.search', ['preset' => $default_finder->getName()]);
         }
 
         $customers = $service->search($finder);
