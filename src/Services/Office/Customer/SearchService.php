@@ -3,7 +3,6 @@
 namespace Glitter\Services\Office\Customer;
 
 use Glitter\Eloquent\Models\Store;
-use Glitter\Exception\InvalidCallbackException;
 use Glitter\Services\Office\Finder\FinderItem;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Database\Eloquent\Builder;
