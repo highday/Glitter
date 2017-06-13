@@ -3,6 +3,7 @@
 namespace Glitter\Services\Office\Finder;
 
 use Glitter\Contracts\Office\Finder\CustomerFinderGroup;
+use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Support\Collection;
 
 /**
@@ -33,5 +34,21 @@ class FinderGroup extends Collection implements CustomerFinderGroup
         });
     }
 
+    /**
+     * @param string $config
+     *
+     * @return \Closure
+     */
+    static public function factory(string $config)
+    {
+        return function (Application $app) use ($config) {
 
+            $collection = new FinderGroup($app->make('config')
+                                              ->get($config));
+            $collection->transform(function (string $itemClass) {
+                return new $itemClass;
+            });
+            return $collection;
+        };
+    }
 }

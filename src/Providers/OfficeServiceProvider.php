@@ -47,14 +47,8 @@ class OfficeServiceProvider extends ServiceProvider
             return call_user_func($app['auth']->userResolver(), 'member')->activeStore;
         });
 
-        $this->app->bind(CustomerFinderGroup::class, function (Application $app) {
-            $collection = new FinderGroup($app->make('config')
-                                              ->get('glitter-office.finder.customers'));
-            $collection->transform(function (string $itemClass) {
-                return new $itemClass;
-            });
-            return $collection;
-        });
+        # Finder
+        $this->app->bind(CustomerFinderGroup::class, FinderGroup::factory('glitter-office.finder.customers'));
 
         $router->middlewareGroup('glitter.office', [
             ShareVariables::class,
