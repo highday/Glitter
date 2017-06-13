@@ -7,13 +7,12 @@ use Glitter\Services\Office\Customer\SearchService;
 use Illuminate\Http\Request;
 
 /**
- * Class SearchController
- * @package Glitter\Http\Controllers\Office\Customer
+ * Class SearchController.
  */
 class SearchController extends Controller
 {
     /**
-     * @param string|null   $preset ファインダー名
+     * @param string|null   $preset  ファインダー名
      * @param Request       $request
      * @param SearchService $service
      *
@@ -21,11 +20,11 @@ class SearchController extends Controller
      */
     public function search(string $preset = null, Request $request, SearchService $service)
     {
-        # キーワードセット
+        // キーワードセット
         $keyword = $request->input('keyword', null);
         $service->setKeyword($keyword);
 
-        # プリセットファインダー
+        // プリセットファインダー
         $finder_collection = collect(app('config')->get('glitter-office.finder'));
 
         if ($preset) {
@@ -33,12 +32,13 @@ class SearchController extends Controller
                 return $preset === $name;
             });
             if (!$finder) {
-                # @todo NotFound ???
+                // @todo NotFound ???
             }
         } else {
             $finder = $finder_collection->first(function ($config, $name) use (&$preset) {
                 if (isset($config['default']) && $config['default'] === true) {
                     $preset = $name;
+
                     return true;
                 } else {
                     return false;

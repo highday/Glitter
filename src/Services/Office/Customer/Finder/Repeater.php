@@ -6,11 +6,9 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Relations\Relation;
 
 /**
- * Class Repeater
+ * Class Repeater.
  *
  * 注文履歴 n 件以上
- *
- * @package Glitter\Services\Office\Customer\Finder
  */
 class Repeater implements FinderInterface
 {
@@ -24,7 +22,7 @@ class Repeater implements FinderInterface
      *
      * @return Builder
      */
-    function __invoke($builder)
+    public function __invoke($builder)
     {
         $builder->join('orders', 'customers.id', '=', 'orders.customer_id', 'LEFT')
                 ->groupBy(
@@ -34,7 +32,7 @@ class Repeater implements FinderInterface
                     'store_customer.accepts_marketing',
                     'store_customer.tax_exempt'
                 )
-                ->havingRaw('count(orders.id) >= ' . $this->threshold);
+                ->havingRaw('count(orders.id) >= '.$this->threshold);
 
         return $builder;
     }
