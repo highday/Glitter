@@ -6,12 +6,10 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Relations\Relation;
 
 /**
- * Class Lead
+ * Class Lead.
  *
  * カートに入れてる顧客
  *  (カート未実装のためまだできてない)
- *
- * @package Glitter\Services\Office\Customer\Finder
  */
 class Lead implements FinderInterface
 {
@@ -20,7 +18,7 @@ class Lead implements FinderInterface
      *
      * @return Builder
      */
-    function __invoke($builder)
+    public function __invoke($builder)
     {
         return $builder;
     }

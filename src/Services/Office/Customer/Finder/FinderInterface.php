@@ -5,9 +5,7 @@ namespace Glitter\Services\Office\Customer\Finder;
 use Illuminate\Database\Eloquent\Builder;
 
 /**
- * Interface FinderInterface
- *
- * @package Glitter\Services\Office\Customer\Finder
+ * Interface FinderInterface.
  */
 interface FinderInterface
 {
@@ -16,5 +14,5 @@ interface FinderInterface
      *
      * @return Builder
      */
-    function __invoke($builder);
+    public function __invoke($builder);
 }

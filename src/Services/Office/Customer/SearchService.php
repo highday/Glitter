@@ -5,13 +5,11 @@ namespace Glitter\Services\Office\Customer;
 use Glitter\Eloquent\Models\Store;
 use Glitter\Exception\InvalidCallbackException;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
-use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 /**
- * Class SearchService
- *
- * @package Glitter\Services\Office\Customer
+ * Class SearchService.
  */
 class SearchService
 {
@@ -30,7 +28,7 @@ class SearchService
     {
         $this->store = $store;
 
-        $this->query = $this->store->customers();//->with('orders');
+        $this->query = $this->store->customers(); //->with('orders');
     }
 
     /**
@@ -49,18 +47,18 @@ class SearchService
     /**
      * @param string|null $finder
      *
-     * @return LengthAwarePaginator
      * @throws \Exception
+     *
+     * @return LengthAwarePaginator
      */
     public function search($finder = null): LengthAwarePaginator
     {
         if ($finder) {
-
             if (!class_exists($finder)) {
                 throw new InvalidCallbackException();
             }
 
-            $finder = new $finder;
+            $finder = new $finder();
             $this->query = $finder($this->query);
         }
 

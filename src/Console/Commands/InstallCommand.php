@@ -67,7 +67,7 @@ class InstallCommand extends Command
             'first_name'        => 'Keisuke',
             'last_name'         => 'Nemoto',
             'email'             => 'customer@example.com',
-            'mailmagazine_flag' => 1
+            'mailmagazine_flag' => 1,
         ]);
         if (!$customer->exists) {
             // $customer->password = bcrypt('password');

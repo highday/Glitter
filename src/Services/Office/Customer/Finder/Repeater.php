@@ -6,11 +6,9 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Relations\Relation;
 
 /**
- * Class Repeater
+ * Class Repeater.
  *
  * 注文履歴 1 件以上
- *
- * @package Glitter\Services\Office\Customer\Finder
  */
 class Repeater implements FinderInterface
 {
@@ -19,7 +17,7 @@ class Repeater implements FinderInterface
      *
      * @return Builder
      */
-    function __invoke($builder)
+    public function __invoke($builder)
     {
         // Hmmm...
 
