@@ -47,5 +47,4 @@ return [
             'callback' => \Glitter\Services\Office\Customer\Finder\Lead::class
         ]
     ]
-
 ];
