@@ -37,8 +37,13 @@ class SearchController extends Controller
                 # @todo NotFound ???
             }
         } else {
-            $finder = $finder_collection->first(function ($config) {
-                return (isset($config['default']) && $config['default'] === true);
+            $finder = $finder_collection->first(function ($config, $name) use (&$preset) {
+                if (isset($config['default']) && $config['default'] === true) {
+                    $preset = $name;
+                    return true;
+                } else {
+                    return false;
+                }
             });
         }
 
