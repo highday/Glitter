@@ -7,14 +7,13 @@ use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Support\Collection;
 
 /**
- * Class FinderGroup
- *
- * @package Glitter\Services\Office\Finder
+ * Class FinderGroup.
  */
 class FinderGroup extends Collection implements CustomerFinderGroup
 {
     /**
      * @param string $name
+     *
      * @return FinderItem
      */
     public function getFinder(string $name): FinderItem
@@ -39,15 +38,15 @@ class FinderGroup extends Collection implements CustomerFinderGroup
      *
      * @return \Closure
      */
-    static public function factory(string $config)
+    public static function factory(string $config)
     {
         return function (Application $app) use ($config) {
-
             $collection = new FinderGroup($app->make('config')
                                               ->get($config));
             $collection->transform(function (string $itemClass) {
-                return new $itemClass;
+                return new $itemClass();
             });
+
             return $collection;
         };
     }
