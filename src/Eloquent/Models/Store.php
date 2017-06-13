@@ -5,12 +5,24 @@ namespace Glitter\Eloquent\Models;
 use Glitter\Eloquent\Relations\StoreCustomer;
 use Glitter\Eloquent\Relations\StoreMember;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasManyThrough;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Database\Eloquent\Builder;
 
+/**
+ * Class Store
+ *
+ * @package Glitter\Eloquent\Models
+ */
 class Store extends Model
 {
     use SoftDeletes;
 
+    /**
+     * @var array
+     */
     protected $fillable = [
         'name',
         'account_email',
@@ -19,50 +31,80 @@ class Store extends Model
         'currency',
     ];
 
+    /**
+     * @var array
+     */
     protected $dates = [
         'deleted_at',
     ];
 
+    /**
+     * @return BelongsToMany|Builder
+     */
     public function members()
     {
         return $this->belongsToMany(Member::class, 'store_member')->using(StoreMember::class);
     }
 
+    /**
+     * @return HasMany|Builder
+     */
     public function roles()
     {
         return $this->hasMany(Role::class);
     }
 
+    /**
+     * @return HasMany|Builder
+     */
     public function policies()
     {
         return $this->hasMany(Policy::class);
     }
 
+    /**
+     * @return HasMany|Builder
+     */
     public function orders()
     {
         return $this->hasMany(Order::class);
     }
 
+    /**
+     * @return HasMany|Builder
+     */
     public function products()
     {
         return $this->hasMany(Product::class);
     }
 
+    /**
+     * @return HasManyThrough|Builder
+     */
     public function variants()
     {
         return $this->hasManyThrough(Variant::class, Product::class);
     }
 
+    /**
+     * @return HasMany|Builder
+     */
     public function suppliers()
     {
         return $this->hasMany(Supplier::class);
     }
 
+    /**
+     * @return HasMany|Builder
+     */
     public function transfers()
     {
         return $this->hasMany(Transfer::class);
     }
 
+    /**
+     * @return BelongsToMany|Builder
+     */
     public function customers()
     {
         return $this->belongsToMany(Customer::class, 'store_customer')
@@ -70,6 +112,9 @@ class Store extends Model
             ->using(StoreCustomer::class);
     }
 
+    /**
+     * @return string
+     */
     public function getIconAttribute()
     {
         return 'https://www.gravatar.com/avatar/'.md5(strtolower($this->account_email)).'?s=80&d=identicon';

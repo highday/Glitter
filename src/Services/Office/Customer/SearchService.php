@@ -3,25 +3,67 @@
 namespace Glitter\Services\Office\Customer;
 
 use Glitter\Eloquent\Models\Store;
+use Glitter\Exception\InvalidCallbackException;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Builder;
 
+/**
+ * Class SearchService
+ *
+ * @package Glitter\Services\Office\Customer
+ */
 class SearchService
 {
     /** @var Store */
     private $store;
 
+    /** @var Builder|BelongsToMany */
+    private $query;
+
+    /**
+     * SearchService constructor.
+     *
+     * @param Store $store
+     */
     public function __construct(Store $store)
     {
         $this->store = $store;
+
+        $this->query = $this->store->customers();//->with('orders');
     }
 
-    public function search(string $keyword = ''): LengthAwarePaginator
+    /**
+     * @param string|null $keyword
+     */
+    public function setKeyword(string $keyword = null)
     {
-        $query = $this->store->customers();
-        if ($keyword != '') {
-            $query->where('name', 'like', "%{$keyword}%");
+        if (!is_null($keyword) && $keyword != '') {
+            $this->query->where(function (Builder $q) use ($keyword) {
+                $q->where('first_name', 'like', "%{$keyword}%")
+                  ->orWhere('last_name', 'like', "%{$keyword}%");
+            });
+        }
+    }
+
+    /**
+     * @param string|null $finder
+     *
+     * @return LengthAwarePaginator
+     * @throws \Exception
+     */
+    public function search($finder = null): LengthAwarePaginator
+    {
+        if ($finder) {
+
+            if (!class_exists($finder)) {
+                throw new InvalidCallbackException();
+            }
+
+            $finder = new $finder;
+            $this->query = $finder($this->query);
         }
 
-        return $query->paginate();
+        return $this->query->paginate();
     }
 }

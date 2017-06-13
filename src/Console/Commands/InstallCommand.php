@@ -64,9 +64,10 @@ class InstallCommand extends Command
         }
 
         $customer = \Glitter\Eloquent\Models\Customer::firstOrNew([
-            'first_name' => 'Keisuke',
-            'last_name'  => 'Nemoto',
-            'email'      => 'customer@example.com',
+            'first_name'        => 'Keisuke',
+            'last_name'         => 'Nemoto',
+            'email'             => 'customer@example.com',
+            'mailmagazine_flag' => 1
         ]);
         if (!$customer->exists) {
             // $customer->password = bcrypt('password');

@@ -6,13 +6,47 @@ use Glitter\Http\Controllers\Controller;
 use Glitter\Services\Office\Customer\SearchService;
 use Illuminate\Http\Request;
 
+/**
+ * Class SearchController
+ * @package Glitter\Http\Controllers\Office\Customer
+ */
 class SearchController extends Controller
 {
-    public function search(Request $request, SearchService $service)
+    /**
+     * @param string|null   $preset ファインダー名
+     * @param Request       $request
+     * @param SearchService $service
+     *
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function search(string $preset = null, Request $request, SearchService $service)
     {
-        $keyword = $request->input('keyword');
-        $customers = $service->search($keyword ?: '');
+        # キーワードセット
+        $keyword = $request->input('keyword', null);
+        $service->setKeyword($keyword);
 
-        return view('glitter.office::customer.search', compact('keyword', 'customers'));
+
+        # プリセットファインダー
+        $finder_collection = collect(app('config')->get('glitter-office.finder'));
+
+        if ($preset) {
+            $finder = $finder_collection->first(function ($config, $name) use ($preset) {
+                return $preset === $name;
+            });
+            if (!$finder) {
+                # @todo NotFound ???
+            }
+        } else {
+            $finder = $finder_collection->first(function ($config) {
+                return (isset($config['default']) && $config['default'] === true);
+            });
+        }
+
+        $customers = $service->search($finder['callback']);
+
+        return view(
+            'glitter.office::customer.search',
+            compact('keyword', 'customers', 'preset', 'finder', 'finder_collection')
+        );
     }
 }
