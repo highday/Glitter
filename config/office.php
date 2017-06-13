@@ -34,6 +34,6 @@ return [
             \Glitter\Services\Office\Customer\Finder\Mailmagazine::class,
             \Glitter\Services\Office\Customer\Finder\Repeater::class,
             \Glitter\Services\Office\Customer\Finder\Lead::class,
-        ]
+        ],
     ],
 ];

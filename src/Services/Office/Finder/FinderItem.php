@@ -5,9 +5,7 @@ namespace Glitter\Services\Office\Finder;
 use Illuminate\Database\Eloquent\Builder;
 
 /**
- * Class FinderItem
- *
- * @package Glitter\Services\Office\Finder
+ * Class FinderItem.
  */
 abstract class FinderItem
 {
@@ -25,8 +23,6 @@ abstract class FinderItem
      * @var string
      */
     protected $label;
-
-
 
     /**
      * @param Builder $builder

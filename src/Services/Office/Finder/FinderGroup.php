@@ -6,14 +6,13 @@ use Glitter\Contracts\Office\Finder\CustomerFinderGroup;
 use Illuminate\Support\Collection;
 
 /**
- * Class FinderGroup
- *
- * @package Glitter\Services\Office\Finder
+ * Class FinderGroup.
  */
 class FinderGroup extends Collection implements CustomerFinderGroup
 {
     /**
      * @param string $name
+     *
      * @return FinderItem
      */
     public function getFinder(string $name): FinderItem
@@ -32,6 +31,4 @@ class FinderGroup extends Collection implements CustomerFinderGroup
             return $item->isDefault();
         });
     }
-
-
 }
