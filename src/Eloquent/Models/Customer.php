@@ -12,9 +12,8 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
 /**
- * Class Customer
+ * Class Customer.
  *
- * @package Glitter\Eloquent\Models
  *
  * @property string last_name
  * @property string first_name

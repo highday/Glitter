@@ -17,10 +17,11 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 class SearchController extends Controller
 {
     /**
-     * @param string|null         $preset ファインダー名
+     * @param string|null         $preset      ファインダー名
      * @param Request             $request
      * @param SearchService       $service
      * @param CustomerFinderGroup $finderGroup
+     *
      * @return Factory|View|RedirectResponse
      */
     public function search(
@@ -42,6 +43,7 @@ class SearchController extends Controller
             if (!$default_finder) {
                 throw new NotFoundHttpException();
             }
+
             return redirect()->route('glitter.office.customer.search', ['preset' => $default_finder->getName()]);
         }
 

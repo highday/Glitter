@@ -49,7 +49,7 @@ return [
         'email'      => 'メールアドレス',
         'password'   => 'パスワード',
 
-        'delete_customer' => '顧客を削除'
+        'delete_customer' => '顧客を削除',
     ],
 
     'buttons' => [

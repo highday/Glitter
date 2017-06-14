@@ -49,7 +49,7 @@ return [
         'email'      => 'Mail Address',
         'password'   => 'Password',
 
-        'delete_customer' => 'Delete Customer'
+        'delete_customer' => 'Delete Customer',
     ],
 
     'buttons' => [
