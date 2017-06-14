@@ -9,9 +9,9 @@ interface FinderGroupInterface
     /**
      * @param string $name
      *
-     * @return FinderItem
+     * @return FinderItem|null
      */
-    public function getFinder(string $name): FinderItem;
+    public function getFinder(string $name);
 
     /**
      * @return FinderItem

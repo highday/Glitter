@@ -14,9 +14,9 @@ class FinderGroup extends Collection implements CustomerFinderGroup
     /**
      * @param string $name
      *
-     * @return FinderItem
+     * @return FinderItem|null
      */
-    public function getFinder(string $name): FinderItem
+    public function getFinder(string $name)
     {
         return $this->first(function (FinderItem $item) use ($name) {
             return $item->getName() === $name;

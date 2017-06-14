@@ -43,6 +43,21 @@ return [
 
     ],
 
+    'customer' => [
+        'first_name' => '名',
+        'last_name'  => '姓',
+        'email'      => 'メールアドレス',
+        'password'   => 'パスワード',
+
+        'delete_customer' => '顧客を削除'
+    ],
+
+    'buttons' => [
+        'save'   => '保存',
+        'edit'   => '編集',
+        'delete' => '削除',
+    ],
+
     'save' => [
         'success' => '保存しました！',
     ],

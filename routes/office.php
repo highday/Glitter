@@ -36,9 +36,9 @@ $route->group([
 
     // 顧客リスト
     $route->group(['namespace' => 'Customer', 'prefix' => 'customers', 'as' => 'customer.'], function ($route) {
-        $route->get('/{preset?}', 'SearchController@search')->name('search');
         $route->get('edit/{customer}', 'EditController@input')->name('edit');
-        $route->get('group', 'GroupSearchController@search')->name('group.search');
+        $route->get('circle', 'CircleSearchController@search')->name('circle.search');
+        $route->get('/{preset?}', 'SearchController@search')->name('search');
     });
 
     $route->get('settings', 'SettingsController@index')->name('settings.index');

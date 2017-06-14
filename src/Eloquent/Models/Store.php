@@ -110,6 +110,11 @@ class Store extends Model
             ->using(StoreCustomer::class);
     }
 
+    public function circles()
+    {
+        return $this->hasMany(Circle::class, 'store_id', 'id');
+    }
+
     /**
      * @return string
      */

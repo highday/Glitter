@@ -3,7 +3,7 @@
 </div>
 <div class="screen-nav-content">
     <ul class="nav flex-column">
-        <li class="nav-item"><a class="nav-link{{ Request::is('office/customers') ? ' active' : '' }}" href="{{ route('glitter.office.customer.search') }}">顧客</a></li>
-        <li class="nav-item"><a class="nav-link{{ Request::is('office/customers/group') ? ' active' : '' }}" href="{{ route('glitter.office.customer.group.search') }}">グループ</a></li>
+        <li class="nav-item"><a class="nav-link{{ Request::routeIs('glitter.office.customer.search') ? ' active' : '' }}" href="{{ route('glitter.office.customer.search') }}">顧客</a></li>
+        <li class="nav-item"><a class="nav-link{{ Request::routeIs('glitter.office.customer.circle.search') ? ' active' : '' }}" href="{{ route('glitter.office.customer.circle.search') }}">サークル</a></li>
     </ul>
 </div>
