@@ -21,7 +21,7 @@ class ProductSaved
     /**
      * Create a new event instance.
      *
-     * @param  \Glitter\Eloquent\Models\Product  $product
+     * @param \Glitter\Eloquent\Models\Product $product
      */
     public function __construct($product)
     {

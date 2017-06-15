@@ -13,8 +13,8 @@ trait Auditable
     {
         $log = new Log([
             'action_at' => \Carbon\Carbon::now(),
-            'action' => $action,
-            'data' => $data,
+            'action'    => $action,
+            'data'      => $data,
         ]);
 
         if ($this->activeStore) {
