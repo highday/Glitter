@@ -17,6 +17,7 @@ class CreateRolesTable extends Migration
             $table->increments('id');
             $table->integer('store_id')->unsigned();
             $table->foreign('store_id')->references('id')->on('stores')->onDelete('cascade');
+            $table->boolean('built_in')->default(false);
             $table->string('name');
             $table->text('description');
             $table->timestamps();

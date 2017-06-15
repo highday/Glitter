@@ -14,20 +14,24 @@ class EventServiceProvider extends ServiceProvider
      */
     protected $listen = [
         'Illuminate\Auth\Events\Login' => [
-            'Glitter\Audit\Listeners\LogSuccessfulLogin',
+            'Glitter\Audit\Listeners\Member\LogSuccessfulLogin',
         ],
         'Illuminate\Auth\Events\Failed' => [
-            'Glitter\Audit\Listeners\LogFailedLogin',
+            'Glitter\Audit\Listeners\Member\LogFailedLogin',
         ],
         'Illuminate\Auth\Events\Logout' => [
-            'Glitter\Audit\Listeners\LogSuccessfulLogout',
+            'Glitter\Audit\Listeners\Member\LogSuccessfulLogout',
         ],
 
         'Glitter\Events\MemberCreated' => [
-            'Glitter\Audit\Listeners\LogCreateMember',
+            'Glitter\Audit\Listeners\Member\LogCreate',
         ],
         'Glitter\Events\MemberUpdated' => [
-            'Glitter\Audit\Listeners\LogChangePassword',
+            'Glitter\Audit\Listeners\Member\LogChangePassword',
+        ],
+
+        'Glitter\Events\ProductSaved' => [
+            'Glitter\Audit\Listeners\Product\LogSave',
         ],
     ];
 

@@ -1,6 +1,6 @@
 <?php
 
-namespace Glitter\Audit\Listeners;
+namespace Glitter\Audit\Listeners\Member;
 
 use Glitter\Events\MemberUpdated;
 
@@ -24,6 +24,8 @@ class LogChangePassword
      */
     public function handle(MemberUpdated $event)
     {
+        if (is_null($event->actor)) return;
+
         if ($event->member->isDirty($event->member->getKeyName())
             || $event->member->isClean('password')) { return; }
 
@@ -32,11 +34,6 @@ class LogChangePassword
             'ua' => request()->header('User-Agent'),
         ];
 
-        if ($actor = request()->user()) {
-            $data['actor_id'] = $actor->getKey();
-            $data['actor_name'] = $actor->name;
-        }
-
-        $event->member->log('member.change_password', $data);
+        $event->actor->log('member.change_password', $data);
     }
 }

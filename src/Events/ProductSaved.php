@@ -2,7 +2,7 @@
 
 namespace Glitter\Events;
 
-class MemberUpdated
+class ProductSaved
 {
     /**
      * The actor member.
@@ -12,21 +12,21 @@ class MemberUpdated
     public $actor;
 
     /**
-     * The update member.
+     * The save product.
      *
-     * @var \Glitter\Eloquent\Models\Member
+     * @var \Glitter\Eloquent\Models\Product
      */
-    public $member;
+    public $product;
 
     /**
      * Create a new event instance.
      *
-     * @param  \Glitter\Eloquent\Models\Member  $member
+     * @param  \Glitter\Eloquent\Models\Product  $product
      */
-    public function __construct($member)
+    public function __construct($product)
     {
         $this->actor = auth('member')->user();
 
-        $this->member = $member;
+        $this->product = $product;
     }
 }

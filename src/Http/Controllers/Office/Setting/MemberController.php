@@ -16,12 +16,17 @@ class MemberController extends Controller
         return view('glitter.office::settings.members.search', compact('members'));
     }
 
+    public function new(Request $request)
+    {
+        return view('glitter.office::settings.members.new');
+    }
+
     public function edit(Request $request, Member $member)
     {
         return view('glitter.office::settings.members.edit', compact('member'));
     }
 
-    public function save(Request $request, Member $member)
+    public function update(Request $request, Member $member)
     {
         //     try {
     //         $service->update($order->getKey(), [

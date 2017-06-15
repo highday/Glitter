@@ -38,14 +38,17 @@
                         <div class="form-group">
                             <label for="accountEmail">メールアドレス</label>
                             <input type="email" class="form-control" id="accountEmail" name="account_email" value="{{ old('account_email', $store->account_email) }}">
+                            <small class="form-text text-muted">このメールアドレスの <a href="https://gravatar.com/" target="_blank">Gravatar</a> アイコンが表示されます。</small>
                         </div>
                         <div class="form-group">
                             <label for="customerEmail">連絡先メールアドレス</label>
                             <input type="email" class="form-control" id="customerEmail" name="customer_email" value="{{ old('customer_email', $store->customer_email) }}">
+                            <small class="form-text text-muted">顧客にはこちらのメールアドレスが表示されます。</small>
                         </div>
                         <div class="form-group">
                             <label for="timezone">タイムゾーン</label>
                             <input type="text" class="form-control" id="timezone" name="timezone" value="{{ old('timezone', $store->timezone) }}">
+                            <small class="form-text text-muted"><a href="http://php.net/manual/timezones.php" target="_blank">サポートされるタイムゾーンのリスト</a></small>
                         </div>
                         <button type="submit" class="btn btn-primary">基本設定を保存する</button>
                     </div>
@@ -70,9 +73,9 @@
                     <div class="form-group">
                         <label for="orderNumberFormat">受注番号フォーマット</label>
                         <input type="text" class="form-control" id="orderNumberFormat" name="name" value="{{ old('name', '#0000') }}" aria-describedby="orderNumberFormatHelp">
-                        <p id="orderNumberFormatHelp" class="form-text text-muted">
+                        <small class="form-text text-muted">
                             サンプル: <em>#0001</em>, <em>#0012</em>, <em>#0123</em>, <em>#1234</em>, <em>#12345</em>
-                        </p>
+                        </small>
                     </div>
                     <button type="submit" class="btn btn-primary">受注設定を保存する</button>
                 </div>

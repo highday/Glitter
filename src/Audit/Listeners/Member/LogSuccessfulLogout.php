@@ -1,10 +1,10 @@
 <?php
 
-namespace Glitter\Audit\Listeners;
+namespace Glitter\Audit\Listeners\Member;
 
-use Illuminate\Auth\Events\Login;
+use Illuminate\Auth\Events\Logout;
 
-class LogSuccessfulLogin
+class LogSuccessfulLogout
 {
     /**
      * Create the event listener.
@@ -19,17 +19,16 @@ class LogSuccessfulLogin
     /**
      * Handle the event.
      *
-     * @param  Login  $event
+     * @param  Logout  $event
      * @return void
      */
-    public function handle(Login $event)
+    public function handle(Logout $event)
     {
         $model = snake_case(class_basename($event->user));
         $data = [
             'ip' => request()->ip(),
             'ua' => request()->header('User-Agent'),
-            'remember' => $event->remember,
         ];
-        $event->user->log("{$model}.login", $data);
+        $event->user->log("{$model}.logout", $data);
     }
 }

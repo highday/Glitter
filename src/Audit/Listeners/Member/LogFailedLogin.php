@@ -1,6 +1,6 @@
 <?php
 
-namespace Glitter\Audit\Listeners;
+namespace Glitter\Audit\Listeners\Member;
 
 use Illuminate\Auth\Events\Failed;
 

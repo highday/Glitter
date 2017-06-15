@@ -22,14 +22,14 @@
     @foreach ($logs as $log)
     <tr>
       <td>{{ $log->member ? $log->member->name : '' }}</td>
-      <td>{{ $log->action_at->format('Y/m/d H:i:s') }}</td>
+      <td>{{ $log->action_at->toAtomString() }}</td>
       <td>{{ $log->action }}</td>
       <td>
         <table class="table-sm table-bordered small">
           @foreach ($log->data as $key => $value)
           <tr>
             <th>{{ $key }}</th>
-            <td>{{ $value }}</td>
+            <td>{{ is_array($value) ? json_encode($value) : $value }}</td>
           </tr>
           @endforeach
         </table>

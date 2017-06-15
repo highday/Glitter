@@ -12,12 +12,17 @@ class Role extends Model
 
     protected $fillable = [
         'store_id',
+        'built_in',
         'name',
         'description',
     ];
 
     protected $with = [
         'policies',
+    ];
+
+    protected $casts = [
+        'built_in' => 'bool',
     ];
 
     public function members()

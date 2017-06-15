@@ -2,12 +2,17 @@
 
 namespace Glitter\Eloquent\Models;
 
+use Glitter\Events\ProductSaved;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Product extends Model
 {
     use SoftDeletes;
+
+    protected $events = [
+        'saved' => ProductSaved::class,
+    ];
 
     protected $fillable = [
         'store_id',

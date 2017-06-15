@@ -43,13 +43,30 @@ $route->group([
 
     $route->get('settings', 'SettingsController@index')->name('settings.index');
     $route->post('settings', 'SettingsController@update_store')->name('settings.update_store');
-    $route->get('settings/members', 'Setting\MemberController@search')->name('settings.members.search');
-    $route->get('settings/members/edit/{member}', 'Setting\MemberController@edit')->name('settings.members.edit');
-    $route->post('settings/members/edit/{member}', 'Setting\MemberController@save')->name('settings.members.update');
-    $route->get('settings/roles', 'Setting\RoleController@search')->name('settings.roles.search');
-    $route->get('settings/roles/edit/{role}', 'Setting\RoleController@edit')->name('settings.roles.edit');
-    $route->post('settings/roles/edit/{role}', 'Setting\RoleController@save')->name('settings.roles.update');
-    $route->get('settings/audit', 'Setting\AuditController@log')->name('settings.audit.log');
+
+    // ストア設定
+    $route->group(['namespace' => 'Setting', 'prefix' => 'settings', 'as' => 'settings.'], function ($route) {
+        // メンバー
+        $route->group(['prefix' => 'members', 'as' => 'members.'], function ($route) {
+            $route->get('/', 'MemberController@search')->name('search');
+            $route->get('new', 'MemberController@new')->name('new');
+            $route->post('new', 'MemberController@store')->name('store');
+            $route->get('edit/{member}', 'MemberController@edit')->name('edit');
+            $route->post('edit/{member}', 'MemberController@update')->name('update');
+        });
+
+        // ロール
+        $route->group(['prefix' => 'roles', 'as' => 'roles.'], function ($route) {
+            $route->get('/', 'RoleController@search')->name('search');
+            $route->get('new', 'RoleController@new')->name('new');
+            $route->post('new', 'RoleController@store')->name('store');
+            $route->get('edit/{role}', 'RoleController@edit')->name('edit');
+            $route->post('edit/{role}', 'RoleController@update')->name('update');
+        });
+
+        // 監査ログ
+        $route->get('audit', 'AuditController@log')->name('audit.log');
+    });
 
     $route->get('switch/{id}', function ($store_id) {
         $member = Auth::guard('member')->user();

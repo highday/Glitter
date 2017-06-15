@@ -36,7 +36,6 @@
                     </div>
                 </div>
                 <a href="#" class="btn btn-secondary btn-block mb-3">権限を変更</a>
-                <a href="#" class="btn btn-secondary btn-block mb-3">パスワード再発行</a>
                 <a href="#" class="btn btn-outline-danger btn-block mb-3">メンバーを停止</a>
             </div>
             <div class="col-lg-8">

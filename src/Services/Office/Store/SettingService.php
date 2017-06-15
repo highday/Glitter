@@ -25,9 +25,9 @@ class SettingService
         return app(DatabaseManager::class)->transaction($callback);
     }
 
-    public function saveGeneral(int $key, array $attributes)
+    public function saveGeneral(int $store_id, array $attributes)
     {
-        return $this->transaction(function () use ($key, $attributes) {
+        return $this->transaction(function () use ($store_id, $attributes) {
             $validator = app(Validator::class)->make($attributes, [
                 'name'                             => 'required',
                 'account_email'                    => 'required|email',
@@ -39,7 +39,7 @@ class SettingService
                 throw new ValidationException($validator);
             }
 
-            $store = Store::findOrFail($key);
+            $store = Store::findOrFail($store_id);
             $store->fill(Arr::only($attributes, [
                 'name',
                 'account_email',
@@ -51,6 +51,57 @@ class SettingService
             }
 
             return $store;
+        });
+    }
+
+    public function addRole(int $store_id, array $attributes)
+    {
+        return $this->transaction(function () use ($store_id, $attributes) {
+            $validator = app(Validator::class)->make($attributes, [
+                'name'          => 'required',
+                'description'   => 'required',
+                'policies'      => 'required',
+            ]);
+
+            if ($validator->fails()) {
+                throw new ValidationException($validator);
+            }
+
+            $store = Store::findOrFail($store_id);
+            $role = $store->roles()->create(Arr::only($attributes, [
+                'name',
+                'description',
+            ]));
+
+            $role->policies()->sync($attributes['policies']);
+
+            return $role;
+        });
+    }
+
+    public function saveRole(int $store_id, int $role_id, array $attributes)
+    {
+        return $this->transaction(function () use ($store_id, $role_id, $attributes) {
+            $validator = app(Validator::class)->make($attributes, [
+                'name'          => 'required',
+                'description'   => 'required',
+                'policies'      => 'required',
+            ]);
+
+            if ($validator->fails()) {
+                throw new ValidationException($validator);
+            }
+
+            $store = Store::findOrFail($store_id);
+            $role = $store->roles()->findOrFail($role_id)->fill(Arr::only($attributes, [
+                'name',
+                'description',
+            ]));
+            $role->save();
+
+            $role->policies()->sync($attributes['policies']);
+
+            return $role;
         });
     }
 }
