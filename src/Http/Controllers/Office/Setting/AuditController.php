@@ -2,7 +2,6 @@
 
 namespace Glitter\Http\Controllers\Office\Setting;
 
-use Glitter\Eloquent\Models\Member;
 use Glitter\Eloquent\Models\Store;
 use Glitter\Http\Controllers\Controller;
 use Illuminate\Http\Request;
