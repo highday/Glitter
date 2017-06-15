@@ -19,7 +19,8 @@ class LogCreateMember
     /**
      * Handle the event.
      *
-     * @param  MemberCreated  $event
+     * @param MemberCreated $event
+     *
      * @return void
      */
     public function handle(MemberCreated $event)
