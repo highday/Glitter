@@ -49,6 +49,7 @@ $route->group([
     $route->get('settings/roles', 'Setting\RoleController@search')->name('settings.roles.search');
     $route->get('settings/roles/edit/{role}', 'Setting\RoleController@edit')->name('settings.roles.edit');
     $route->post('settings/roles/edit/{role}', 'Setting\RoleController@save')->name('settings.roles.update');
+    $route->get('settings/audit', 'Setting\AuditController@log')->name('settings.audit.log');
 
     $route->get('switch/{id}', function ($store_id) {
         $member = Auth::guard('member')->user();

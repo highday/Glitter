@@ -2,6 +2,7 @@
 
 namespace Glitter\Eloquent\Models;
 
+use Glitter\Audit\Log;
 use Glitter\Eloquent\Relations\StoreCustomer;
 use Glitter\Eloquent\Relations\StoreMember;
 use Illuminate\Database\Eloquent\Model;
@@ -26,6 +27,11 @@ class Store extends Model
     public function members()
     {
         return $this->belongsToMany(Member::class, 'store_member')->using(StoreMember::class);
+    }
+
+    public function logs()
+    {
+        return $this->hasMany(Log::class);
     }
 
     public function roles()

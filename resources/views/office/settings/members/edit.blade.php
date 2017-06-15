@@ -21,17 +21,17 @@
                         </div>
                     </div>
                     <div class="list-group list-group-flush">
-                        <div class="list-group-item">
-                            <span class="small text-muted mr-auto">権限</span>
+                        <div class="list-group-item small">
+                            <span class="text-muted mr-auto">権限</span>
                             {{ $member->activeStoreRole->name }}
                         </div>
-                        <div class="list-group-item">
-                            <span class="small text-muted mr-auto">最終ログイン</span>
-                            {{ $member->activeStore->pivot->last_login_at }}
+                        <div class="list-group-item small">
+                            <span class="text-muted mr-auto">最終ログイン</span>
+                            {{ $member->activeStore->pivot->last_login_at->format('Y/m/d H:i') }}
                         </div>
-                        <div class="list-group-item">
-                            <span class="small text-muted mr-auto">パスワード変更</span>
-                            {{ $member->updated_at }}
+                        <div class="list-group-item small">
+                            <span class="text-muted mr-auto">パスワード変更</span>
+                            {{ $member->updated_at->format('Y/m/d H:i') }}
                         </div>
                     </div>
                 </div>
