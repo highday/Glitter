@@ -14,7 +14,7 @@ class MemberUpdated
     /**
      * Create a new event instance.
      *
-     * @param  \Glitter\Eloquent\Models\Member  $member
+     * @param \Glitter\Eloquent\Models\Member $member
      */
     public function __construct($member)
     {
