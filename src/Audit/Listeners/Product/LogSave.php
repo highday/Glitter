@@ -19,18 +19,21 @@ class LogSave
     /**
      * Handle the event.
      *
-     * @param  ProductSaved  $event
+     * @param ProductSaved $event
+     *
      * @return void
      */
     public function handle(ProductSaved $event)
     {
-        if (is_null($event->actor)) return;
+        if (is_null($event->actor)) {
+            return;
+        }
 
         $data = [
-            'ip' => request()->ip(),
-            'ua' => request()->header('User-Agent'),
+            'ip'         => request()->ip(),
+            'ua'         => request()->header('User-Agent'),
             'product_id' => $event->product->getKey(),
-            'dirty' => $event->product->getDirty(),
+            'dirty'      => $event->product->getDirty(),
         ];
 
         $event->actor->log('product.save', $data);

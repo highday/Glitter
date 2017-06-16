@@ -19,12 +19,15 @@ class LogCreate
     /**
      * Handle the event.
      *
-     * @param  MemberCreated  $event
+     * @param MemberCreated $event
+     *
      * @return void
      */
     public function handle(MemberCreated $event)
     {
-        if (is_null($event->actor)) return;
+        if (is_null($event->actor)) {
+            return;
+        }
 
         $data = [
             'ip' => request()->ip(),
