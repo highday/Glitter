@@ -5,13 +5,12 @@
     </div>
     <div class="store-nav-content">
         <ul class="nav flex-column">
-            <li class="nav-item">
+            {{-- <li class="nav-item">
                 <a class="nav-link{{ Request::is('office') ? ' active' : '' }}" href="{{ route('glitter.office.index') }}">
                     <i class="fa fa-home" aria-hidden="true"></i>
                     <div class="nav-label">ホーム</div>
-                    {{-- <span class="ml-auto notify"></span> --}}
                 </a>
-            </li>
+            </li> --}}
             <li class="nav-item">
                 <a class="nav-link{{ Request::is('office/orders*') ? ' active' : '' }}" href="{{ route('glitter.office.order.search') }}">
                     <i class="fa fa-inbox" aria-hidden="true"></i>

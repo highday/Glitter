@@ -6,7 +6,7 @@ $route->group([
     'middleware'  => ['auth:member', 'glitter.office'],
 ], function ($route) {
     $route->get('/', function () {
-        return view('glitter.office::index');
+        return redirect()->route('glitter.office.order.search');
     })->name('index');
 
     $route->get('account', 'AccountController@index')->name('account.index');
