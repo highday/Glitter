@@ -52,7 +52,7 @@ class Store extends Model
     {
         return $this->hasMany(Log::class);
     }
-  
+
     /**
      * @return HasMany|Builder
      */
