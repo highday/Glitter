@@ -8,6 +8,9 @@
     <form>
       <div class="btn-toolbar mb-3" role="toolbar">
           <div class="btn-group" role="group">
+                <a class="btn btn-primary" href="{{ route('glitter.office.product.new') }}">新規追加</a>
+          </div>
+          <div class="btn-group ml-3" role="group">
               <button type="button" class="btn btn-secondary dropdown-toggle" :disabled="count == 0" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                   <template v-if="mode == 'all'">全ページの商品を一括変更</template>
                   <template v-else>選択中の @{{ count }} 商品を一括変更</template>

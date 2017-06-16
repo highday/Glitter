@@ -30,8 +30,21 @@ $route->group([
         // $route->post('delete/{product}', 'EditController@destory')->name('delete');
         $route->get('variant/{variant}', 'VariantEditController@input')->name('variant.edit');
         $route->post('variant/{variant}', 'VariantEditController@save')->name('variant.update');
-        $route->get('transfers', 'SearchController@search')->name('transfer');
-        $route->get('collections', 'SearchController@search')->name('collection');
+
+        // コレクション
+        $route->group(['namespace' => 'Collection', 'prefix' => 'collections', 'as' => 'collection.'], function ($route) {
+            $route->get('/', 'SearchController@search')->name('search');
+        });
+
+        // 入荷
+        $route->group(['namespace' => 'Transfer', 'prefix' => 'transfers', 'as' => 'transfer.'], function ($route) {
+            $route->get('/', 'SearchController@search')->name('search');
+        });
+
+        // 在庫
+        $route->group(['namespace' => 'Inventory', 'prefix' => 'inventory', 'as' => 'inventory.'], function ($route) {
+            $route->get('/', 'SearchController@search')->name('search');
+        });
     });
 
     // 顧客リスト
@@ -69,7 +82,7 @@ $route->group([
     });
 
     $route->get('switch/{id}', function ($store_id) {
-        $member = Auth::guard('member')->user();
+        $member = auth('member')->user();
         $store = $member->switchable_stores->find($store_id);
         $message = [];
         if ($store) {

@@ -47,6 +47,10 @@ class RoleController extends Controller
 
     public function edit(Request $request, Role $role)
     {
+        if ($role->built_in) {
+            return redirect()->route('glitter.office.settings.roles.search')
+                ->withFlashMessage('ビルトインロールは変更できません。');
+        }
         return view('glitter.office::settings.roles.edit', compact('role'));
     }
 
