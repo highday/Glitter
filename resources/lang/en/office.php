@@ -43,6 +43,21 @@ return [
 
     ],
 
+    'customer' => [
+        'first_name' => 'First Name',
+        'last_name'  => 'Last Name',
+        'email'      => 'Mail Address',
+        'password'   => 'Password',
+
+        'delete_customer' => 'Delete Customer',
+    ],
+
+    'buttons' => [
+        'save'   => 'Save',
+        'edit'   => 'Edit',
+        'delete' => 'Delete',
+    ],
+
     'save' => [
         'success' => 'Saved!',
     ],

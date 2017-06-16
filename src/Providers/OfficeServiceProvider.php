@@ -2,10 +2,13 @@
 
 namespace Glitter\Providers;
 
+use Glitter\Contracts\Office\Finder\CustomerFinderGroup;
 use Glitter\Http\Middleware\Office\AccessRestrictionWithRemoteAddress;
 use Glitter\Http\Middleware\Office\RedirectIfMemberAuthenticated;
 use Glitter\Http\Middleware\Office\ShareFlashMessagesFromSession;
 use Glitter\Http\Middleware\Office\ShareVariables;
+use Glitter\Services\Office\Finder\Factory;
+use Glitter\Services\Office\Finder\FinderGroup;
 use Illuminate\Contracts\Routing\Registrar as Router;
 use Illuminate\Support\ServiceProvider;
 
@@ -42,6 +45,9 @@ class OfficeServiceProvider extends ServiceProvider
         $this->app->bind(\Glitter\Eloquent\Models\Store::class, function ($app) {
             return call_user_func($app['auth']->userResolver(), 'member')->activeStore;
         });
+
+        // Finder
+        $this->app->bind(CustomerFinderGroup::class, FinderGroup::factory('glitter-office.finder.customers'));
 
         $router->middlewareGroup('glitter.office', [
             ShareVariables::class,

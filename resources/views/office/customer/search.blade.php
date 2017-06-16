@@ -9,18 +9,13 @@
 @section('content')
 <div class="container-fluid d-flex flex-column">
     <ul class="nav nav-tabs mb-3">
-        <li class="nav-item">
-            <a class="nav-link active" href="#">すべて</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" href="#">メルマガ購読</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" href="#">リピート客</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" href="#">見込み客</a>
-        </li>
+        @foreach ($finderGroup as $finder)
+            <li class="nav-item">
+                <a class="nav-link{{ $finder->getName() === $preset ? ' active' : '' }}"
+                   href="{{ route('glitter.office.customer.search', ['preset' => $finder->getName()]) }}"
+                >{{ $finder->getLabel() }}</a>
+            </li>
+        @endforeach
     </ul>
     <list-table :page-keys="{{ json_encode($customers->modelKeys()) }}"></list-table>
 {{ $customers->appends(compact('keyword'))->links('glitter.office::partials.pagination') }}

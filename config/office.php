@@ -28,4 +28,12 @@ return [
 
     ],
 
+    'finder' => [
+        'customers' => [
+            \Glitter\Services\Office\Customer\Finder\All::class,
+            \Glitter\Services\Office\Customer\Finder\Mailmagazine::class,
+            \Glitter\Services\Office\Customer\Finder\Repeater::class,
+            \Glitter\Services\Office\Customer\Finder\Lead::class,
+        ],
+    ],
 ];

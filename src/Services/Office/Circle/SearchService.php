@@ -1,6 +1,6 @@
 <?php
 
-namespace Glitter\Services\Office\Customer;
+namespace Glitter\Services\Office\Circle;
 
 use Glitter\Eloquent\Models\Store;
 use Glitter\Services\Office\Finder\FinderItem;
@@ -28,7 +28,7 @@ class SearchService
     {
         $this->store = $store;
 
-        $this->query = $this->store->customers()->with('orders');
+        $this->query = $this->store->circles();
     }
 
     /**
@@ -38,8 +38,8 @@ class SearchService
     {
         if (!is_null($keyword) && $keyword != '') {
             $this->query->where(function (Builder $q) use ($keyword) {
-                $q->where('first_name', 'like', "%{$keyword}%")
-                  ->orWhere('last_name', 'like', "%{$keyword}%");
+                $q->where('name', 'like', "%{$keyword}%")
+                  ->orWhere('description', 'like', "%{$keyword}%");
             });
         }
     }
