@@ -51,6 +51,7 @@ class RoleController extends Controller
             return redirect()->route('glitter.office.settings.roles.search')
                 ->withFlashMessage('ビルトインロールは変更できません。');
         }
+
         return view('glitter.office::settings.roles.edit', compact('role'));
     }
 
