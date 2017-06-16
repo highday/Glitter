@@ -7,6 +7,9 @@
 <div>
     <form>
       <div class="btn-toolbar mb-3" role="toolbar">
+          <div class="btn-group" role="group">
+            <a href="{{ route('glitter.office.settings.roles.new') }}" class="btn btn-primary">新規追加</a>
+          </div>
           <div class="btn-group ml-auto" role="group">
               <div class="input-group">
                   <input type="search" class="form-control" name="keyword" value="{{ $keyword or '' }}" placeholder="キーワード検索">
@@ -21,21 +24,28 @@
         <table class="table table-data mb-0">
             <thead>
                 <tr>
-                    <th>権限</th>
-                    <th>概要</th>
+                    <th class="text-center">#</th>
+                    <th>ロール</th>
                     <th class="text-center">ポリシー</th>
                     <th class="text-center">メンバー</th>
                 </tr>
             </thead>
             <tbody>
-@foreach ($roles as $role)
+                @foreach ($roles as $role)
                 <tr>
-                    <td><a href="{{ route('glitter.office.settings.roles.edit', $role) }}">{{ $role->name }}</a></td>
-                    <td>{{ $role->description }}</td>
+                    <td class="text-center">{{ $role->getKey() }}</td>
+                    <td>
+                        @if ($role->built_in)
+                            {{ $role->name }}<br>
+                        @else
+                            <a href="{{ route('glitter.office.settings.roles.edit', $role) }}">{{ $role->name }}</a><br>
+                        @endif
+                        <small class="text-muted">{{ $role->description }}</small>
+                    </td>
                     <td class="text-center">{{ $role->policies->count() }}</td>
                     <td class="text-center">{{ $role->members->count() }}</td>
                 </tr>
-@endforeach
+                @endforeach
             </tbody>
         </table>
     </div>

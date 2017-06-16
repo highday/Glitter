@@ -37,18 +37,27 @@ class InstallCommand extends Command
 
         $role = \Glitter\Eloquent\Models\Role::firstOrCreate([
             'store_id'    => $store->getKey(),
-            'name'        => 'Owner',
-            'description' => 'Store account owner.',
+            'built_in'    => true,
+            'name'        => 'ストアオーナー',
+            'description' => 'ストアアカウントの所有者',
+        ]);
+
+        $role2 = \Glitter\Eloquent\Models\Role::firstOrCreate([
+            'store_id'    => $store->getKey(),
+            'built_in'    => false,
+            'name'        => 'ストアスタッフ',
+            'description' => '店員用アカウント',
         ]);
 
         $policy = \Glitter\Eloquent\Models\Policy::firstOrNew([
             'store_id'    => $store->getKey(),
-            'name'        => 'Glitter Admin',
-            'description' => 'Access to Glitter Admin.',
+            'name'        => 'バックオフィス',
+            'description' => 'バックオフィスにアクセス可能',
         ]);
         if (!$policy->exists) {
             $policy->save();
             $role->policies()->attach($policy);
+            $role2->policies()->attach($policy);
         }
 
         $member = \Glitter\Eloquent\Models\Member::firstOrNew([

@@ -2,19 +2,42 @@
 
 @section('title', 'ストア設定')
 
+@section('nav')
+@include('glitter.office::settings.nav')
+@stop
+
+@section('content')
+<div class="container-fluid">
+    <ul class="nav nav-tabs mb-3">
+        <li class="nav-item">
+            <a class="nav-link active" href="#">すべて</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="#">停止中</a>
+        </li>
+    </ul>
+    <list-table :page-keys="{{ json_encode($members->modelKeys()) }}"></list-table>
+</div>
+@endsection
+
 @section('scripts')
 <script type="text/x-template" id="list-table">
 <div>
     <form>
       <div class="btn-toolbar mb-3" role="toolbar">
           <div class="btn-group" role="group">
+            <a href="{{ route('glitter.office.settings.members.new') }}" class="btn btn-primary">新規追加</a>
+          </div>
+          <div class="btn-group ml-3" role="group">
               <button type="button" class="btn btn-secondary dropdown-toggle" :disabled="count == 0" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 メンバー @{{ count }}名を一括変更</template>
               </button>
               <div class="dropdown-menu">
 @foreach ($store->roles as $role)
-                  <a class="dropdown-item" href="#">権限を{{ $role->name }}に変更する</a>
+                  <a class="dropdown-item" href="#">権限を <strong>{{ $role->name }}</strong> に変更する</a>
 @endforeach
+                  <div class="dropdown-divider"></div>
+                  <a class="dropdown-item text-danger" href="#">停止する</a>
               </div>
           </div>
           <div class="btn-group ml-auto" role="group">
@@ -62,14 +85,4 @@
     </div>
 </div>
 </script>
-@endsection
-
-@section('nav')
-@include('glitter.office::settings.nav')
-@stop
-
-@section('content')
-<div class="container-fluid">
-    <list-table :page-keys="{{ json_encode($members->modelKeys()) }}"></list-table>
-</div>
 @endsection

@@ -2,14 +2,22 @@
 
 namespace Glitter\Eloquent\Models;
 
+use Glitter\Audit\Auditable;
 use Glitter\Eloquent\Relations\StoreMember;
+use Glitter\Events\MemberCreated;
+use Glitter\Events\MemberUpdated;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
 class Member extends Authenticatable
 {
-    use Notifiable, SoftDeletes;
+    use Auditable, Notifiable, SoftDeletes;
+
+    protected $events = [
+        'created' => MemberCreated::class,
+        'updated' => MemberUpdated::class,
+    ];
 
     protected $hidden = [
         'password',

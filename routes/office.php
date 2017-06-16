@@ -6,7 +6,7 @@ $route->group([
     'middleware'  => ['auth:member', 'glitter.office'],
 ], function ($route) {
     $route->get('/', function () {
-        return view('glitter.office::index');
+        return redirect()->route('glitter.office.order.search');
     })->name('index');
 
     $route->get('account', 'AccountController@index')->name('account.index');
@@ -30,8 +30,21 @@ $route->group([
         // $route->post('delete/{product}', 'EditController@destory')->name('delete');
         $route->get('variant/{variant}', 'VariantEditController@input')->name('variant.edit');
         $route->post('variant/{variant}', 'VariantEditController@save')->name('variant.update');
-        $route->get('transfers', 'SearchController@search')->name('transfer');
-        $route->get('collections', 'SearchController@search')->name('collection');
+
+        // コレクション
+        $route->group(['namespace' => 'Collection', 'prefix' => 'collections', 'as' => 'collection.'], function ($route) {
+            $route->get('/', 'SearchController@search')->name('search');
+        });
+
+        // 入荷
+        $route->group(['namespace' => 'Transfer', 'prefix' => 'transfers', 'as' => 'transfer.'], function ($route) {
+            $route->get('/', 'SearchController@search')->name('search');
+        });
+
+        // 在庫
+        $route->group(['namespace' => 'Inventory', 'prefix' => 'inventory', 'as' => 'inventory.'], function ($route) {
+            $route->get('/', 'SearchController@search')->name('search');
+        });
     });
 
     // 顧客リスト
@@ -43,15 +56,33 @@ $route->group([
 
     $route->get('settings', 'SettingsController@index')->name('settings.index');
     $route->post('settings', 'SettingsController@update_store')->name('settings.update_store');
-    $route->get('settings/members', 'Setting\MemberController@search')->name('settings.members.search');
-    $route->get('settings/members/edit/{member}', 'Setting\MemberController@edit')->name('settings.members.edit');
-    $route->post('settings/members/edit/{member}', 'Setting\MemberController@save')->name('settings.members.update');
-    $route->get('settings/roles', 'Setting\RoleController@search')->name('settings.roles.search');
-    $route->get('settings/roles/edit/{role}', 'Setting\RoleController@edit')->name('settings.roles.edit');
-    $route->post('settings/roles/edit/{role}', 'Setting\RoleController@save')->name('settings.roles.update');
+
+    // ストア設定
+    $route->group(['namespace' => 'Setting', 'prefix' => 'settings', 'as' => 'settings.'], function ($route) {
+        // メンバー
+        $route->group(['prefix' => 'members', 'as' => 'members.'], function ($route) {
+            $route->get('/', 'MemberController@search')->name('search');
+            $route->get('new', 'MemberController@new')->name('new');
+            $route->post('new', 'MemberController@store')->name('store');
+            $route->get('edit/{member}', 'MemberController@edit')->name('edit');
+            $route->post('edit/{member}', 'MemberController@update')->name('update');
+        });
+
+        // ロール
+        $route->group(['prefix' => 'roles', 'as' => 'roles.'], function ($route) {
+            $route->get('/', 'RoleController@search')->name('search');
+            $route->get('new', 'RoleController@new')->name('new');
+            $route->post('new', 'RoleController@store')->name('store');
+            $route->get('edit/{role}', 'RoleController@edit')->name('edit');
+            $route->post('edit/{role}', 'RoleController@update')->name('update');
+        });
+
+        // 監査ログ
+        $route->get('audit', 'AuditController@log')->name('audit.log');
+    });
 
     $route->get('switch/{id}', function ($store_id) {
-        $member = Auth::guard('member')->user();
+        $member = auth('member')->user();
         $store = $member->switchable_stores->find($store_id);
         $message = [];
         if ($store) {

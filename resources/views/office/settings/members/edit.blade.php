@@ -21,22 +21,21 @@
                         </div>
                     </div>
                     <div class="list-group list-group-flush">
-                        <div class="list-group-item">
-                            <span class="small text-muted mr-auto">権限</span>
+                        <div class="list-group-item small">
+                            <span class="text-muted mr-auto">権限</span>
                             {{ $member->activeStoreRole->name }}
                         </div>
-                        <div class="list-group-item">
-                            <span class="small text-muted mr-auto">最終ログイン</span>
-                            {{ $member->activeStore->pivot->last_login_at }}
+                        <div class="list-group-item small">
+                            <span class="text-muted mr-auto">最終ログイン</span>
+                            {{ $member->activeStore->pivot->last_login_at->format('Y/m/d H:i') }}
                         </div>
-                        <div class="list-group-item">
-                            <span class="small text-muted mr-auto">パスワード変更</span>
-                            {{ $member->updated_at }}
+                        <div class="list-group-item small">
+                            <span class="text-muted mr-auto">パスワード変更</span>
+                            {{ $member->updated_at->format('Y/m/d H:i') }}
                         </div>
                     </div>
                 </div>
                 <a href="#" class="btn btn-secondary btn-block mb-3">権限を変更</a>
-                <a href="#" class="btn btn-secondary btn-block mb-3">パスワード再発行</a>
                 <a href="#" class="btn btn-outline-danger btn-block mb-3">メンバーを停止</a>
             </div>
             <div class="col-lg-8">

@@ -13,6 +13,6 @@
         <li class="nav-item"><a class="nav-link disabled{{ Request::is('office/settings/delivery*') ? ' active' : '' }}" href="{{ route('glitter.office.settings.index') }}">配送</a></li>
         <li class="nav-item"><a class="nav-link disabled{{ Request::is('office/settings/tax*') ? ' active' : '' }}" href="{{ route('glitter.office.settings.index') }}">税率</a></li>
         <li class="nav-item"><a class="nav-link disabled{{ Request::is('office/settings/tradelaw*') ? ' active' : '' }}" href="{{ route('glitter.office.settings.index') }}">特定商取引法</a></li>
-        <li class="nav-item"><a class="nav-link disabled{{ Request::is('office/settings/audit-log*') ? ' active' : '' }}" href="{{ route('glitter.office.settings.index') }}">監査ログ</a></li>
+        <li class="nav-item"><a class="nav-link{{ Request::is('office/settings/audit*') ? ' active' : '' }}" href="{{ route('glitter.office.settings.audit.log') }}">監査ログ</a></li>
     </ul>
 </div>
