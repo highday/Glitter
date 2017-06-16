@@ -14,8 +14,7 @@ class CircleSearchController extends Controller
         Request $request,
         SearchService $service,
         CustomerFinderGroup $finderGroup
-    )
-    {
+    ) {
         // キーワードセット
         $keyword = $request->input('keyword', null);
         $service->setKeyword($keyword);

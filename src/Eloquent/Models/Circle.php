@@ -11,9 +11,8 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Notifications\Notifiable;
 
 /**
- * Class Circle
+ * Class Circle.
  *
- * @package Glitter\Eloquent\Models
  *
  * @property int    store_id
  * @property string name
