@@ -19,7 +19,7 @@
 
 @section('content')
     @include('glitter.office::partials.errors')
-    <form id="product_form" role="form" method="POST" action="{{ route('glitter.office.product.update', $customer->id) }}">
+    <form id="product_form" role="form" method="POST" action="{{ route('glitter.office.customer.update', $customer->id) }}">
         {{ csrf_field() }}
         <div class="container-fluid">
             <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
@@ -36,11 +36,11 @@
                     <div class="form-group{{ $errors->has('first_name') || $errors->has('last_name') ? ' has-danger' : '' }}">
                         <div class="mb-3 input-group input-group-lg">
                             @if (App::isLocale('ja'))
-                                <input type="text" name="name" value="{{ $customer->last_name }}" placeholder="{{ trans('glitter::office.customer.last_name') }}" class="form-control">
-                                <input type="text" name="name" value="{{ $customer->first_name }}" placeholder="{{ trans('glitter::office.customer.first_name') }}" class="form-control">
+                                <input type="text" name="last_name" value="{{ old('last_name', $customer->last_name) }}" placeholder="{{ trans('glitter::office.customer.last_name') }}" class="form-control">
+                                <input type="text" name="first_name" value="{{ old('first_name', $customer->first_name) }}" placeholder="{{ trans('glitter::office.customer.first_name') }}" class="form-control">
                             @else
-                                <input type="text" name="name" value="{{ $customer->first_name }}" placeholder="{{ trans('glitter::office.customer.first_name') }}" class="form-control">
-                                <input type="text" name="name" value="{{ $customer->last_name }}" placeholder="{{ trans('glitter::office.customer.last_name') }}" class="form-control">
+                                <input type="text" name="first_name" value="{{ old('first_name', $customer->first_name) }}" placeholder="{{ trans('glitter::office.customer.first_name') }}" class="form-control">
+                                <input type="text" name="last_name" value="{{ old('lst_name', $customer->last_name) }}" placeholder="{{ trans('glitter::office.customer.last_name') }}" class="form-control">
                             @endif
                         </div>
 
@@ -52,7 +52,7 @@
 
                     <div class="form-group{{ $errors->has('email') ? ' has-danger' : '' }}">
                         <div class="mb-3 input-group input-group-lg">
-                            <input type="text" name="email" value="{{ $customer->email }}" placeholder="{{ trans('glitter::office.customer.email') }}" class="form-control">
+                            <input type="text" name="email" value="{{ old('email', $customer->email) }}" placeholder="{{ trans('glitter::office.customer.email') }}" class="form-control">
                         </div>
 
                         @if ($errors->has('email'))

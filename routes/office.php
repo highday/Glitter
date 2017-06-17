@@ -50,6 +50,7 @@ $route->group([
     // 顧客リスト
     $route->group(['namespace' => 'Customer', 'prefix' => 'customers', 'as' => 'customer.'], function ($route) {
         $route->get('edit/{customer}', 'EditController@input')->name('edit');
+        $route->post('edit/{customer}', 'EditController@update')->name('update');
         $route->get('circle', 'CircleSearchController@search')->name('circle.search');
         $route->get('/{preset?}', 'SearchController@search')->name('search');
     });
