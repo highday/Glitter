@@ -13,9 +13,7 @@ use Illuminate\Validation\ValidationException;
 use Illuminate\View\View;
 
 /**
- * Class EditController
- *
- * @package Glitter\Http\Controllers\Office\Customer
+ * Class EditController.
  */
 class EditController extends Controller
 {
@@ -48,10 +46,8 @@ class EditController extends Controller
             return redirect()
                 ->back()
                 ->withFlashMessage([trans('glitter::office.save.success')]);
-
         } catch (ModelNotFoundException $e) {
             return view('glitter.office::errors.404');
-
         } catch (ValidationException $e) {
             return redirect()
                 ->back()
